@@ -43,4 +43,33 @@ public class CVDao extends DBUtil{
 		closeConnection(con);
 		return listCv;
 	}
+	
+	public List<Cv> listCvByManager(){
+		Connection con = null;
+		List<Cv> listCv = new ArrayList<Cv>();
+		try{
+			con = getConnection();
+			
+			String query = "SELECT * FROM Cv";
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Cv cv = new Cv();
+				
+				cv.setCvName(rs.getString("cvName"));
+				cv.setIdCv(rs.getInt("idCv"));
+				cv.setMemberId(rs.getInt("memberId"));
+				cv.setDeletedCv(rs.getInt("deletedCv"));
+					listCv.add(cv);
+			}
+			rs.close();
+			ps.close();
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		closeConnection(con);
+		return listCv;
+	}
 }

@@ -28,4 +28,7 @@ public class Facade {
 	public List<Cv> listCvbyMember(Member m){
 		return cvService.listCvbyMember(m);
 	}
+	public List<Cv> listCvbyManager(){
+		return cvService.listCvByManager();
+	}
 }

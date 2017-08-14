@@ -13,7 +13,8 @@
  
 <div class="container">
 	<div class="row">
-		<div class="col-md-2 col-lg-2"></div>
+	
+		<div class="col-md-2 col-lg-2"><h3>${requestScope["message"]}</h3></div>
 		<div class="col-md-8 col-lg-8">
 			<table class="table table-bordered">
 				<thead>

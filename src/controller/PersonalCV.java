@@ -31,7 +31,9 @@ public class PersonalCV extends HttpServlet {
 		m.setIdMember(1);
 		
 		request.setAttribute("listOfCv", facade.listCvbyMember(m));
-		
+		//if else eklenecek . managermi degilmi ona gore
+		// request.setAttribute("listOfCv", facade.listCvbyManager());
+
 		RequestDispatcher view = request.getRequestDispatcher("cvpage.jsp");
 		view.forward(request, response);
 	}

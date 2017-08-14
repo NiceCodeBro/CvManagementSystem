@@ -12,24 +12,6 @@
 <jsp:attribute name="body_area">
  
 <div class="container">
-<table class="table table-bordered">
-	<thead>
-		<tr>
-		<td align="center">CV İsmi</td>
-		<td align="center">CV Görüntüle</td>
-		<td align="center">CV Sil</td>
-		</tr>
-	</thead>
-	<tbody>
-    	<c:forEach items="${listOfCv}" var="cv">
-	    	<tr>
-	    		<td> ${cv.cvName}</td>
-	    		
-	    	</tr>
-   		</c:forEach>
-    	</tbody>
-</table>
-
 </div>
 
 
