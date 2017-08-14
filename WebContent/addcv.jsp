@@ -16,6 +16,12 @@
 <script
 			src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 
+		
+	<!--   -->
+	<link rel="stylesheet" href="css/bootstrap-tagsinput.css"> 
+	<script src="js/bootstrap-tagsinput.js"></script>
+
+
 	<!-- editor ile ilgili baslangıc 
 		http://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
 	
@@ -37,6 +43,8 @@
 			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link href="css/editor.css" type="text/css" rel="stylesheet" /> 
 		<!-- editor ile ilgili bitis  -->
+		
+		
 		<script>
 			$(function() {
 				$("#datepicker").datepicker({
@@ -462,6 +470,8 @@
 		</div>
 		  <!-- text editor bitis -->
 		
+		<!-- BABA BU KISIMDA ENTER DEYİNCE UPLOAD'A YÖNLENDİRİYOR. TAB İLE EKLENİYOR. -->
+<input type="text" value="C,C++,JAVA" data-role="tagsinput" />
 
           
           
@@ -624,7 +634,9 @@
 		  <!-- text editor bitis -->
 		
 
-          
+
+
+
           
           
 
