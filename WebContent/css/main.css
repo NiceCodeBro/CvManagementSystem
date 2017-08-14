@@ -7,7 +7,7 @@
 }
 .stepwizard {
     display: table;
-    width: 50%;
+    width: 80%;
     position: relative;
 }
 .stepwizard-step button[disabled] {
