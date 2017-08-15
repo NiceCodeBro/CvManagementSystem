@@ -7,6 +7,7 @@ import java.util.List;
 import dao.CVDao;
 import model.Cv;
 import model.Member;
+import modelContent.CvContent;
 
 public class Facade {
 
@@ -23,6 +24,10 @@ public class Facade {
 			instance = new Facade();
 		}
 		return instance;
+	}
+	
+	public boolean addCv(CvContent c,Member m){
+		return cvService.addCv(c, m);
 	}
 	
 	public List<Cv> listCvbyMember(Member m){

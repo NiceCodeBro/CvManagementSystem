@@ -9,10 +9,49 @@ import com.mysql.jdbc.PreparedStatement;
 
 import model.Cv;
 import model.Member;
+import modelContent.CvContent;
 import util.DBUtil;
 
 public class CVDao extends DBUtil{
 
+	public boolean addCv(CvContent c,Member m){
+		Connection con = null;
+		int lastInsertId;
+		
+		try{
+			con = getConnection();
+			int memberId = m.getIdMember();
+			
+			String query = "INSERT INTO Cv(memberId,cvName,deletedCv) VALUES(?,?,?)";
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, memberId);
+				ps.setString(2, c.getPersonal().getCvName());
+				ps.setInt(3, 0);
+			int isInsert = ps.executeUpdate();
+			lastInsertId = (int) ps.getLastInsertID();
+			
+			query = "INSERT INTO Content(cvId,titleId,content) VALUES(?,?,?)";
+			ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, lastInsertId );
+				ps.setInt(2, 8);
+				ps.setString(3, c.getPersonal().getPersonalName());
+			ps.executeUpdate();
+			
+			
+			ps.close();
+			
+			
+			return true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		closeConnection(con);
+		return false;
+		
+		
+	}
+	
 	public List<Cv> listCvbyMember(Member m){
 		Connection con = null;
 		List<Cv> listCv = new ArrayList<Cv>();
