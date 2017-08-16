@@ -23,7 +23,9 @@
 		http://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
 	
 	 -->
-<!-- test -->
+
+
+<!-- Deneme -->
 
 
 		
