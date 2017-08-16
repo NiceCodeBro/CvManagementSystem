@@ -38,11 +38,11 @@ public class FileUploadHandler extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	Member m = new Member();
-		m.setIdMember(1);
+    		Member m = new Member();
+    			m.setIdMember(1);
     	
-    	CvContent c = setCv(request);
-    	facade.addCv(c, m);
+    		CvContent c = setCv(request);
+    		facade.addCv(c, m);
  
     	
     	//uploadImage(request);
@@ -52,7 +52,7 @@ public class FileUploadHandler extends HttpServlet {
     }
     public CvContent setCv(HttpServletRequest request) throws UnsupportedEncodingException{
     	request.setCharacterEncoding("UTF-8");
-    	
+    	System.out.println("hello");
     //Personal Kısmı için veri çekimi
     	String cvName = request.getParameter("cvName");
     	String personalName = request.getParameter("personalName");
