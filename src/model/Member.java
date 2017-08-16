@@ -5,7 +5,7 @@ public class Member {
 	private int idMember;
 	private String memberName;
 	private String memberPass;
-	
+
 	public int getIdMember() {
 		return idMember;
 	}
