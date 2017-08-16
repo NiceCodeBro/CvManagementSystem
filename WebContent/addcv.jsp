@@ -208,15 +208,15 @@
 			          </div>
 			          	<div> 
 			          	<label class="control-label">Marital Status</label>
-							<label class="custom-control radio">
-						  <input id="radio1" name="personalMaritalStatus" type="radio" class="custom-control-input">
-						  <span class="custom-control-indicator"></span>
-						  <span class="custom-control-description">Married</span>
-						</label>
-						<label class="custom-control radio">
-						  <input id="radio2" name="personalMaritalStatus" type="radio" class="custom-control-input">
+							<label class="custom-control radio active">
+						  <input checked="" id="radio1" value="Single" name="personalMaritalStatus" type="radio" class="custom-control-input">
 						  <span class="custom-control-indicator"></span>
 						  <span class="custom-control-description">Single</span>
+						</label>
+						<label class="custom-control radio">
+						  <input id="radio2" value="Married" name="personalMaritalStatus" type="radio" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Married</span>
 						</label>
 						</div>
 			                    <!-- Photo upload section -->

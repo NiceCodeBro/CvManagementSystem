@@ -38,18 +38,22 @@ public class FileUploadHandler extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    		Member m = new Member();
+    	request.setCharacterEncoding("UTF-8");	
+    	
+    	Member m = new Member();
     			m.setIdMember(1);
     	
-    		CvContent c = setCv(request);
+    	CvContent c = setCv(request);
     		facade.addCv(c, m);
     	
     	
     	//uploadImage(request);
     
-    	//request.getRequestDispatcher("/index.jsp").forward(request, response);
+    	request.getRequestDispatcher("/index.jsp").forward(request, response);
      
     }
+    
+    
     public CvContent setCv(HttpServletRequest request) throws UnsupportedEncodingException{
     	request.setCharacterEncoding("UTF-8");
     	System.out.println("hello");

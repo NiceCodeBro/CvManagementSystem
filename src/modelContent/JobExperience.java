@@ -6,6 +6,8 @@ public class JobExperience {
 	private String[] jobStartDate;
 	private String[] jobEndDate;
 	private String[] jobDescription;
+	private int jobNumber;
+	
 	
 	public String[] getJobCompanyName() {
 		return jobCompanyName;
@@ -37,6 +39,11 @@ public class JobExperience {
 	public void setJobDescription(String[] jobDescription) {
 		this.jobDescription = jobDescription;
 	}
+	public int jobNumber() {
+		return jobCompanyName.length;
+	}
+
+	
 	
 	
 	
