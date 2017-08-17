@@ -24,7 +24,10 @@ public class CVDao extends DBUtil{
 		
 		try{
 			con = getConnection();
+			System.out.println("DAO: Connection sağlandı.");
+			
 			int memberId = m.getIdMember();
+			System.out.println("DAO: Üye ID'si alındı: "+ memberId);
 			
 			//Cv ekleme
 			String query = "INSERT INTO Cv(memberId,cvName,deletedCv) VALUES(?,?,?)";
@@ -37,37 +40,83 @@ public class CVDao extends DBUtil{
 			//Eklenen Cvnin ID si
 			cvId = (int) ps.getLastInsertID();
 			
+			System.out.println("DAO: CV tablosuna CV bilgisi eklendi.CV ID: "+ cvId );
+			
 			//Personal Info Ekleme
-			insertCvtoDB(cvId, 8, c.getPersonal().getPersonalName());
-			insertCvtoDB(cvId, 29, c.getPersonal().getPersonalTitle());
-			insertCvtoDB(cvId, 10,c.getPersonal().getPersonalObjectives());
-			insertCvtoDB(cvId, 4, c.getPersonal().getPersonalDateofBirth());
-			insertCvtoDB(cvId, 28,c.getPersonal().getPersonalCellPhone());
-			insertCvtoDB(cvId, 11, c.getPersonal().getPersonalOfficePhone());
-			insertCvtoDB(cvId, 13, c.getPersonal().getPersonalAddress());
-			insertCvtoDB(cvId, 5, c.getPersonal().getPersonalMaritalStatus());
-			insertCvtoDB(cvId, 9,c.getPersonal().getPersonalPhoto());
+			insertContentDB(cvId, 8, c.getPersonal().getPersonalName());
+			insertContentDB(cvId, 29, c.getPersonal().getPersonalTitle());
+			insertContentDB(cvId, 10,c.getPersonal().getPersonalObjectives());
+			insertContentDB(cvId, 4, c.getPersonal().getPersonalDateofBirth());
+			insertContentDB(cvId, 28,c.getPersonal().getPersonalCellPhone());
+			insertContentDB(cvId, 11, c.getPersonal().getPersonalOfficePhone());
+			insertContentDB(cvId, 13, c.getPersonal().getPersonalAddress());
+			insertContentDB(cvId, 5, c.getPersonal().getPersonalMaritalStatus());
+			insertContentDB(cvId, 9,c.getPersonal().getPersonalPhoto());
+			
+			System.out.println("DAO: Personal Info bilgisi Content tablosuna eklendi ");
 			
 			//Job Experience ekleme String[] ifade olduğu için loop yapısı kullanıldı
 			int numberofJob = c.getJobExperience().jobNumber();
 			
 			for (loopSize=0;loopSize<numberofJob;loopSize++){
-				insertCvtoDB(cvId, 14, c.getJobExperience().getJobCompanyName()[loopSize]);
-				insertCvtoDB(cvId, 15, c.getJobExperience().getJobTitle()[loopSize]);
-				insertCvtoDB(cvId, 16, c.getJobExperience().getJobStartDate()[loopSize]);
-				insertCvtoDB(cvId, 30, c.getJobExperience().getJobEndDate()[loopSize]);
-				insertCvtoDB(cvId, 17, c.getJobExperience().getJobDescription()[loopSize]);
+				insertContentDB(cvId, 14, c.getJobExperience().getJobCompanyName()[loopSize]);
+				insertContentDB(cvId, 15, c.getJobExperience().getJobTitle()[loopSize]);
+				insertContentDB(cvId, 16, c.getJobExperience().getJobStartDate()[loopSize]);
+				insertContentDB(cvId, 30, c.getJobExperience().getJobEndDate()[loopSize]);
+				insertContentDB(cvId, 17, c.getJobExperience().getJobDescription()[loopSize]);
+				
+			}
+			System.out.println("DAO: Job Experience bilgisi Content tablosuna eklendi");
+			//Education Kısmı
+			int numberofEdu = c.getEducation().eduNumber();
+			
+			for (loopSize=0;loopSize<numberofEdu;loopSize++){
+				insertContentDB(cvId, 6, c.getEducation().getEduSchoolName()[loopSize]);
+				insertContentDB(cvId, 7, c.getEducation().getEduSchoolDepartman()[loopSize]);
+				insertContentDB(cvId, 36, c.getEducation().getEduStartDate()[loopSize]);
+				insertContentDB(cvId, 37, c.getEducation().getEduEndDate()[loopSize]);
+				insertContentDB(cvId, 38, c.getEducation().getEduDescription()[loopSize]);
 				
 			}
 			
-
+			System.out.println("DAO: Education bilgisi Content tablosuna eklendi");
+			//Projects kısmı
+			insertContentDB(cvId, 31,c.getProject().getProjectDescription());
 			
 			
+			System.out.println("DAO: Projects bilgisi Content tablosuna eklendi");
+			//Foreign Lang. kısmı
+			int numberofForeign = c.getForeign().foreignNumber();
 			
+			for (loopSize=0;loopSize<numberofForeign;loopSize++){
+				insertContentDB(cvId, 20, c.getForeign().getForeignName()[loopSize]);
+				insertContentDB(cvId, 32, c.getForeign().getForeignLevel()[loopSize]);	
+			}
 			
+			System.out.println("DAO: Foreign Language bilgisi Content tablosuna eklendi");
+			
+			//Skills kısmı
+			insertContentDB(cvId, 39,c.getSkill().getSkillDescription());
+			
+			System.out.println("DAO: Skills bilgisi Content tablosuna eklendi");
+			//Courses kısmı
+			insertContentDB(cvId, 33,c.getCourses().getCoursesDescription());
+			
+			System.out.println("DAO: Courses bilgisi Content tablosuna eklendi");
+			
+			//Certificate kısmı
+			insertContentDB(cvId, 34,c.getCertificate().getCertificateDescription());
+			
+			System.out.println("DAO: Certificate bilgisi Content tablosuna eklendi");
+			
+			//Publication kısmı
+			insertContentDB(cvId, 35,c.getPublication().getPublicationDescription());
+			
+			System.out.println("DAO: Publication bilgisi Content tablosuna eklendi");
 			
 			ps.close();
-			
+			closeConnection(con);
+			System.out.println("DAO: PreparedStatement kapatıldı");
 			
 			return true;
 			
@@ -75,13 +124,14 @@ public class CVDao extends DBUtil{
 			e.printStackTrace();
 		}
 		closeConnection(con);
+		System.out.println("DAO: Connection kapatıldı.");
 		return false;
 		
 		
 	}
 	
 	//insert işlemlerinde kullanılmak üzere hazırlandı
-	public void insertCvtoDB(int cvId,int titleId,String c){
+	public void insertContentDB(int cvId,int titleId,String c){
 		try{
 			con = getConnection();
 			String query = "INSERT INTO Content(cvId,titleId,content) VALUES(?,?,?)";

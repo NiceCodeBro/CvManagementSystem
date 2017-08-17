@@ -16,9 +16,17 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import model.Member;
+import model.MemberSingleton;
+import modelContent.Certificate;
+import modelContent.Courses;
 import modelContent.CvContent;
+import modelContent.Education;
+import modelContent.ForeignLanguage;
 import modelContent.JobExperience;
 import modelContent.Personal;
+import modelContent.Project;
+import modelContent.Publication;
+import modelContent.Skill;
 import service.Facade;
 
 /**
@@ -34,17 +42,18 @@ public class FileUploadHandler extends HttpServlet {
 	private final String UPLOAD_DIRECTORY = "/";
   
 	private Facade facade = Facade.getInstance();
+	private MemberSingleton member = MemberSingleton.getInstance();
 	
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	request.setCharacterEncoding("UTF-8");	
-    	
     	Member m = new Member();
-    			m.setIdMember(1);
+    	m.setIdMember(member.getId());
+    	m.setMemberName(member.getUsername());
     	
     	CvContent c = setCv(request);
-    		facade.addCv(c, m);
+    		facade.addCv(c,m);
     	
     	
     	//uploadImage(request);
@@ -56,7 +65,7 @@ public class FileUploadHandler extends HttpServlet {
     
     public CvContent setCv(HttpServletRequest request) throws UnsupportedEncodingException{
     	request.setCharacterEncoding("UTF-8");
-    	System.out.println("hello");
+    	System.out.println("Bilgiler servlete işlenmek üzere geldi");
     //Personal Kısmı için veri çekimi
     	String cvName = request.getParameter("cvName");
     	String personalName = request.getParameter("personalName");
@@ -78,9 +87,75 @@ public class FileUploadHandler extends HttpServlet {
     	String[] jobStartDate = request.getParameterValues("jobStartDate");
     	String[] jobEndDate = request.getParameterValues("jobEndDate");
     	String[] jobDescription = request.getParameterValues("jobDescription");
- 
+  
+    //Education Kısmı için veri çekimi
+    	
+    	String[] eduSchoolName = request.getParameterValues("eduSchoolName");
+    	String[] eduSchoolDepartman = request.getParameterValues("eduSchoolDepartman");
+    	String[] eduStartDate = request.getParameterValues("eduStartDate");
+    	String[] eduEndDate = request.getParameterValues("eduEndDate");
+    	//String[] eduContinue = request.getParameterValues("eduContinue");
+    	String[] eduDescription = request.getParameterValues("eduDescription");
+    
+    //Projects kısmı için veri çekimi
+    	String projectDescription = request.getParameter("projectDescription");
+    	
+    //Foreign Lang. kısmı için veri çekimi	
+    	String[] foreignName = request.getParameterValues("foreignName");
+    	String[] foreignLevel = request.getParameterValues("foreignLevel");
+    	
+    	
+    //Skills kısmı için veri çekimi
+    	String skillDescription = request.getParameter("skillDescription");
+    	
+    
+    //Courses kısmı için veri çekimi
+    	String coursesDescription = request.getParameter("coursesDescription");
+    	
+    //Certificate kısmı için veri çekimi
+    	String certificateDescription = request.getParameter("certificateDescription");
+    	
+    //Publication kısmı için veri çekimi
+    	String publicationDescription = request.getParameter("publicationDescription");
+
+    	
     	
     	CvContent content = new CvContent();
+    	
+    	Publication pub = new Publication();
+			pub.setPublicationDescription(publicationDescription);
+		
+    	Certificate cer = new Certificate();
+    		cer.setCertificateDescription(certificateDescription);
+			
+		Courses cour = new Courses();
+    		cour.setCoursesDescription(coursesDescription);
+    	
+    	Skill skill = new Skill();
+    		skill.setSkillDescription(skillDescription);
+    	
+    	ForeignLanguage foreign = new ForeignLanguage();
+    		foreign.setForeignName(foreignName);
+    		foreign.setForeignLevel(foreignLevel);
+    	
+    	Project pro = new Project();
+    		pro.setProjectDescription(projectDescription);
+    	
+    	Education edu = new Education();
+    		edu.setEduSchoolName(eduSchoolName);
+    		edu.setEduSchoolDepartman(eduSchoolDepartman);
+    		edu.setEduStartDate(eduStartDate);
+    		edu.setEduEndDate(eduEndDate);
+    		//edu.setEduContinue(eduContinue);
+    		edu.setEduDescription(eduDescription);
+    	
+    	JobExperience job = new JobExperience();
+			job.setJobCompanyName(jobCompanyName);
+			job.setJobTitle(jobTitle);
+			job.setJobStartDate(jobStartDate);
+			job.setJobEndDate(jobEndDate);
+			job.setJobDescription(jobDescription);
+		
     	Personal per = new Personal();
     		per.setCvName(cvName);
     		per.setPersonalName(personalName);
@@ -93,19 +168,22 @@ public class FileUploadHandler extends HttpServlet {
     		per.setPersonalMaritalStatus(personalMaritalStatus);
     		per.setPersonalPhoto(personalPhoto);
     		
-    	JobExperience job = new JobExperience();
-    		job.setJobCompanyName(jobCompanyName);
-    		job.setJobTitle(jobTitle);
-    		job.setJobStartDate(jobStartDate);
-    		job.setJobEndDate(jobEndDate);
-    		job.setJobDescription(jobDescription);
+    	
     	
     		//Geri kalan bölümlerde aynı şekilde öncelikle modelContent altında class oluştulup öyle eklenecek.
     	
     	
     	content.setPersonal(per);
     	content.setJobExperience(job);
+    	content.setEducation(edu);
+    	content.setProject(pro);
+    	content.setForeign(foreign);
+    	content.setSkill(skill);
+    	content.setCourses(cour);
+    	content.setCertificate(cer);
+    	content.setPublication(pub);
     	
+    	System.out.println("Bilgiler servlette işlendi DAO ya gönderildi");
     	return content;
     	
     	

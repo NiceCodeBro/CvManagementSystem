@@ -58,12 +58,13 @@
 
 	            $("#addCheckboxEdu").click(function (e) {
 	                e.preventDefault();
-	                $("#ayracEdu").append('<div class="col-md-12"> <div id="educationInf"> <div class="form-group"> <label class="control-label">School Name</label> <input name="schoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">School Departman</label> <input name="schoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Education Date</label> <div class="input-group input-daterange"> <input name="jobStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="jobEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <input type="checkbox" name="continuity"> Continues <br> <div class="form-group"> <label class="control-label">Description</label> <textarea name="jobDescription" class="form-control" placeholder="Enter description" ></textarea> </div> </div> </div></div><hr id="ayracEdu" style="width: 100%;margin-bottom:15px;color: black; height: 1px; background-color:black;" />');
-	                	            });
+	                $("#ayracEdu").append('<div class="col-md-12"> <div id="educationInf"> <div class="form-group"> <label class="control-label">School Name</label> <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">School Departman</label> <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Education Date</label> <div class="input-group input-daterange"> <input name="eduStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="eduEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea> </div> </div> </div> <hr id="ayracEdu" style="width: 100%; color: black; height: 1px; background-color:black;" />');
+	                	                	            });
 	            $("#addCheckboxForeign").click(function (e) {
 	                e.preventDefault();
-	                $("#ayracForeign").append('<div class="row"><div class="col-md-12"><div class="col-md-6"> <div class="form-group"> <input maxlength="45" type="text" class="form-control" placeholder="Enter language you know." /> </div> </div> <div class="col-md-6"> <select class="form-control" name="foreignLevel"> <option>Beginning</option> <option>Intermediate</option> <option>Good</option> <option>Advanced</option> </select> </div> </div> <hr id="ayracForeign" style="width: 100%; margin-bottom:15px;color: black; height: 1px; background-color:black;" />');
-	                	            });
+	                $("#ayracForeign").append('<div class="col-md-12"> <h3> Foreign Languages </h3> <!-- ekleme butonu --> <div class="col-md-6"> <div class="form-group"> <input name="foreignName" maxlength="45" type="text" class="form-control" placeholder="Enter language you know." /> </div> </div> <div class="col-md-6"> <select class="form-control" name="foreignLevel"> <option>Beginning</option> <option>Intermediate</option> <option>Good</option> <option>Advanced</option> </select> </div> </div> <hr id="ayracForeign" style="width: 100%; color: black; height: 1px; background-color:black;" />');
+
+	                  });
 
 	            $("#checkList").on("click", "#removeCheckbox", function (e) { 
 	                e.preventDefault();
@@ -289,27 +290,27 @@
           <div id="educationInf">
 	          <div class="form-group">
 	            <label class="control-label">School Name</label>
-	            <input name="schoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
+	            <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
 	          </div>
 	          
 	          <div class="form-group">
 	            <label class="control-label">School Departman</label>
-	            <input name="schoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
+	            <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
 	          </div>
 	          
 	           <div class="form-group">
 	            <label class="control-label">Education Date</label>							
 				<div class="input-group input-daterange">
-				    <input name="jobStartDate" type="text" class="form-control" value="2012-04-05">
+				    <input name="eduStartDate" type="text" class="form-control" value="2012-04-05">
 				    <div class="input-group-addon">to</div>
-				    <input name="jobEndDate" type="text" class="form-control" value="2012-04-19">
+				    <input name="eduEndDate" type="text" class="form-control" value="2012-04-19">
 				</div>												
 	          </div>
-	          <input  type="checkbox" name="continuity"> Continues <br>
+<!-- 	          <input  type="checkbox" name="eduContinue"> Continues <br> -->
 	          
 	          <div class="form-group">
 	            <label class="control-label">Description</label>
-	            <textarea name="jobDescription" class="form-control" placeholder="Enter description" ></textarea>
+	            <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea>
 	          </div>
           </div>					
         </div>
@@ -339,7 +340,7 @@
         <div class="col-md-12">
           <h3> Projects </h3>
           	<div class="form-group">
-				<textarea name="jobDescription" class="form-control" placeholder="Enter names of projects you finished." ></textarea>
+				<textarea name="projectDescription" class="form-control" placeholder="Enter names of projects you finished." ></textarea>
 			</div>  
 
 		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
@@ -365,7 +366,7 @@
 	          	<!-- ekleme butonu -->
 	          <div class="col-md-6">
 		          <div class="form-group">
-		            <input maxlength="45" type="text" class="form-control"
+		            <input name="foreignName" maxlength="45" type="text" class="form-control"
 											placeholder="Enter language you know." />
 		          </div>
 		      </div>
@@ -396,7 +397,7 @@
         <div class="col-md-12">
           <h3> Skills </h3>
   		
-  		<input type="text" name="test" value="Write Skill and press Enter" data-role="tagsinput" />
+  		<input type="text" name="skillDescription" value="Write Skill and press Enter" data-role="tagsinput" />
         </div>
         <button style="margin-top:15px;" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
       </div>
@@ -409,13 +410,14 @@
     	
     	
     	
-    	<!-- KURS-SEMINER START -->
+    	<!-- Courses And Seminars START -->
+    	
 	   <div class="row setup-content" id="step-8">
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
           <h3> Courses And Seminars </h3>
 			<div class="form-group">
-	         	 <textarea name="jobDescription" class="form-control" placeholder="Enter courses and seminars you completed. " ></textarea>
+	         	 <textarea name="coursesDescription" class="form-control" placeholder="Enter courses and seminars you completed. " ></textarea>
 			</div>          
 		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
         </div>
@@ -423,17 +425,18 @@
       
     </div>
     
-    	<!--  KURS-SEMINER  END -->
+    	<!--  Courses And Seminars  END -->
     	
     	
     	
-    	<!-- SERTİFİKA START -->
+    	<!-- Certificate START -->
+    	
 	   <div class="row setup-content" id="step-9">
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
           <h3> Certificates </h3>
 			<div class="form-group">
-				<textarea name="jobDescription" class="form-control" placeholder="Enter certificates you have. " ></textarea>
+				<textarea name="certificateDescription" class="form-control" placeholder="Enter certificates you have. " ></textarea>
 			</div>    
 		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
         </div>
@@ -441,20 +444,20 @@
       
     </div>
     
-    	<!--  SERTİFİKA  END -->
+    	<!--  Certificate  END -->
     	
     	
     	
     	
     	
         	
-    	<!-- YAYINLAR START -->
+    	<!-- Publication START -->
 	   <div class="row setup-content" id="step-10">
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
           <h3> Publications </h3>
 			<div class="form-group">
-				<textarea name="jobDescription" class="form-control" placeholder="Enter publications you have." ></textarea>
+				<textarea name="publicationDescription" class="form-control" placeholder="Enter publications you have." ></textarea>
 			</div>    
 		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
         </div>
@@ -462,7 +465,7 @@
       
     </div>
     
-    	<!--  YAYINLAR  END -->
+    	<!--  Publication  END -->
     
     
 	  
