@@ -9,6 +9,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import model.Cv;
 import model.Member;
+import model.MemberSingleton;
 import modelContent.CvContent;
 import util.DBUtil;
 
@@ -95,16 +96,15 @@ public class CVDao extends DBUtil{
 		
 	}
 	
-	public List<Cv> listCvbyMember(Member m){
+	public List<Cv> listCvbyMember(){
 		Connection con = null;
 		List<Cv> listCv = new ArrayList<Cv>();
 		try{
 			con = getConnection();
-			int memberId = m.getIdMember();
 			
 			String query = "SELECT * FROM Cv WHERE memberId = ? AND deletedCv = 0";
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
-			ps.setInt(1, memberId);
+			ps.setInt(1, MemberSingleton.getInstance().getId());
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				Cv cv = new Cv();
@@ -152,5 +152,44 @@ public class CVDao extends DBUtil{
 		}
 		closeConnection(con);
 		return listCv;
+	}
+	
+	public void deleteCvByRole(int cvId)
+	{
+		Connection con = null;
+		
+		if(MemberSingleton.getInstance().getRole().equals("Member"))
+		{
+			try
+			{
+				con = getConnection();
+				String query = "UPDATE Cv SET deletedCv = '1' WHERE idCv = ? ";
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+				ps.executeUpdate();
+			    ps.close();
+
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else if(MemberSingleton.getInstance().getRole().equals("Manager"))
+		{
+			try
+			{
+				con = getConnection();
+				String query = "DELETE FROM Cv WHERE idCv=?";
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+				ps.executeUpdate();
+			    ps.close();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 }

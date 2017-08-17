@@ -33,8 +33,8 @@ public class Facade {
 		return cvService.addCv(c, m);
 	}
 	
-	public List<Cv> listCvbyMember(Member m){
-		return cvService.listCvbyMember(m);
+	public List<Cv> listCvbyMember(){
+		return cvService.listCvbyMember();
 	}
 	public List<Cv> listCvbyManager(){
 		return cvService.listCvByManager();
@@ -45,5 +45,9 @@ public class Facade {
 			return true;
 		else
 			return false;
+	}
+	public void deleteCvByRole(int cvId)
+	{
+		cvService.deleteCvByRole(cvId);
 	}
 }

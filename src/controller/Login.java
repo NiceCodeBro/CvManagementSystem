@@ -1,12 +1,15 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.MemberSingleton;
 import service.Facade;
 
 /**
@@ -42,9 +45,16 @@ public class Login extends HttpServlet {
          String pass = request.getParameter("LoginPassword");
          
          if(facade.loginCheck(username, pass))
+         {
         	 System.out.println("giriş başarılı");
+        	 System.out.println(MemberSingleton.getInstance().getId() + " " + MemberSingleton.getInstance().getUsername() + " " +  MemberSingleton.getInstance().getPassword() + " " + MemberSingleton.getInstance().getRole() ) ;
+     		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+    		view.forward(request, response);
+         }
          else
         	 System.out.println("giriş başarısız");
+         
+         
          
 
          

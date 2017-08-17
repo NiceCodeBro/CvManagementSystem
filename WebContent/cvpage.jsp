@@ -29,7 +29,13 @@
 				    	<tr>
 				    		<td class="col-md-6"> ${cv.cvName}</td>
 				    		<td class="col-md-3"><button type="button" class="btn btn-block btn-primary">Görüntüle</button></td>
-				    		<td class="col-md-3"><button type="button" class="btn btn-block btn-danger">Sil</button></td>
+				    		<td class="col-md-3">
+				    			<form action="index.jsp" method = "get">
+				    				<input type = "hidden" name = "action" value = "deleteCv">
+				    				<input type = "hidden" name = "willDeletedCvId" value = "${cv.idCv}" >
+				    				<input type = "submit" class = "btn btn-block btn-danger" value = "Sil">
+				    			</form>
+				    		</td>
 				    	</tr>
 			   		</c:forEach>
 			    	</tbody>

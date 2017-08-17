@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import model.Member;
+import model.MemberSingleton;
 import service.Facade;
 
 
@@ -27,15 +28,32 @@ public class PersonalCV extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member m = new Member();
-		m.setIdMember(1);
 		
-		request.setAttribute("listOfCv", facade.listCvbyMember(m));
-		//if else eklenecek . managermi degilmi ona gore
-		// request.setAttribute("listOfCv", facade.listCvbyManager());
+		String action = request.getParameter( "action" );
+		if(action == null)
+		{				
+			if(MemberSingleton.getInstance().getRole().equals("Member"))
+			{
+				request.setAttribute("listOfCv", facade.listCvbyMember());
+			}
+			else
+			{	
+				request.setAttribute("listOfCv", facade.listCvbyManager());
+			}
+				RequestDispatcher view = request.getRequestDispatcher("cvpage.jsp");
+				view.forward(request, response);		
+			}
+		else
+		{
+			if(action.equals("deleteCv"))
+			{				
+				int idCv = Integer.parseInt(request.getParameter("willDeletedCvId"));
+				facade.deleteCvByRole(idCv);
+				response.sendRedirect("index.jsp");
+			}
+	
+		}
 
-		RequestDispatcher view = request.getRequestDispatcher("cvpage.jsp");
-		view.forward(request, response);
 	}
 
 
