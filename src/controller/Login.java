@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.MemberSingleton;
 import service.Facade;
@@ -46,6 +47,10 @@ public class Login extends HttpServlet {
          
          if(facade.loginCheck(username, pass))
          {
+        	 HttpSession sesion = request.getSession(true);
+        	 sesion.putValue("isLoggedIn", "true");
+        	 sesion.setMaxInactiveInterval(20*60);
+        	 
         	 System.out.println("giriş başarılı");
         	 System.out.println(MemberSingleton.getInstance().getId() + " " + MemberSingleton.getInstance().getUsername() + " " +  MemberSingleton.getInstance().getPassword() + " " + MemberSingleton.getInstance().getRole() ) ;
      		RequestDispatcher view = request.getRequestDispatcher("index.jsp");

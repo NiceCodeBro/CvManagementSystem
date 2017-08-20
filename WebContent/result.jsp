@@ -8,6 +8,15 @@
     </head>
  
     <body> 
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+    
+    	<%
+		if(session.getAttribute("isLoggedIn")!="true") {
+		%>
+			<c:redirect url="login.jsp"/>	<%
+		}%>
+    
+    
         <div id="result">
             <h3>${requestScope["message"]}</h3>
         </div>

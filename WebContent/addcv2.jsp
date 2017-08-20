@@ -1,38 +1,37 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery-easywizard.js"></script>
 	
-<t:simple_layout title="CV Ekle">
-
-	<jsp:attribute name="head_area">
-<meta charset="utf-8">
-<link href="css/main.css" rel="stylesheet" type="text/css">
-<script src="js/jquery-easywizard.js"></script>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-
-<link href="css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css">
-<script src="js/bootstrap-tagsinput.js"></script>
-
-	<!--   -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 	
-
-
-	<!-- editor ile ilgili baslangıc 
-		http://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
+	<link href="css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css">
+	<script src="js/bootstrap-tagsinput.js"></script>
 	
-	 -->
-
-
-<!-- Deneme -->
-
-
+		<!--   -->
 		
-		<!-- editor ile ilgili bitis  -->
+	
+	
+		<!-- editor ile ilgili baslangıc 
+			http://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
 		
+		 -->
+	
+	
+	<!-- Deneme -->
+	
+	
+				
 		
 		<script>
 			$(function() {
@@ -86,12 +85,13 @@
 
 		</script>
 
-</jsp:attribute>
 
-
-
-	<jsp:attribute name="body_area">
-
+</head>
+<body>
+	<%
+		String website = "KOD5";
+		String konu = "Declaration Tag";
+	 %>
 
 	
 	<div class="container">
@@ -339,161 +339,158 @@
     
     
     
-    
-    <!-- PROJECTS START -->
-	   <div class="row setup-content" id="step-5">
-      <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-          <h3> Projects </h3>
-          	<div class="form-group">
-				<textarea name="projectDescription" class="form-control" placeholder="Enter names of projects you finished." ></textarea>
-			</div>  
-
-		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-        </div>
-      </div>
-      
-    </div>
-    
-    	<!-- PROJECTS END -->
-    	
-    	
-    	
-    	
-    	
-    
-        
-    <!-- Foreign Lang START -->
-	   <div class="row setup-content" id="step-6">
-      <div class="col-xs-6 col-md-offset-3">
-	        <button id="addCheckboxForeign" class="btn btn-success">+</button>
+	    
+	    <!-- PROJECTS START -->
+		   <div class="row setup-content" id="step-5">
+	      <div class="col-xs-6 col-md-offset-3">
 	        <div class="col-md-12">
-	          <h3> Foreign Languages </h3>
-	          	<!-- ekleme butonu -->
-	          <div class="col-md-6">
-		          <div class="form-group">
-		            <input name="foreignName" maxlength="45" type="text" class="form-control"
-											placeholder="Enter language you know." />
-		          </div>
-		      </div>
-		      <div class="col-md-6">
-		         <select class="form-control" name="foreignLevel">
-					  <option>Beginning</option>
-					  <option>Intermediate</option>
-					  <option>Good</option>
-					  <option>Advanced</option>
-				</select>
-	          </div>
+	          <h3> Projects </h3>
+	          	<div class="form-group">
+					<textarea name="projectDescription" class="form-control" placeholder="Enter names of projects you finished." ></textarea>
+				</div>  
 	
-			</div> 
-				<hr id="ayracForeign" style="width: 100%; color: black; height: 1px; background-color:black;" />    
-			
 			<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-		</div>
-        </div>
-      
-    
-    	<!--  Foreign Lang  END -->
-    	
-    	
-    	
- <!-- SKILLS START -->
-	   <div class="row setup-content" id="step-7">
-      <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-          <h3> Skills </h3>
-  		
-  		<input type="text" name="skillDescription" value="Write Skill and press Enter" data-role="tagsinput" />
-        </div>
-        <button style="margin-top:15px;" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-      </div>
-      
-    </div>
-    
-    	<!--  SKILLS  END -->
-    	
-    	
-    	
-    	
-    	
-    	<!-- Courses And Seminars START -->
-    	
-	   <div class="row setup-content" id="step-8">
-      <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-          <h3> Courses And Seminars </h3>
-			<div class="form-group">
-	         	 <textarea name="coursesDescription" class="form-control" placeholder="Enter courses and seminars you completed. " ></textarea>
-			</div>          
-		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-        </div>
-      </div>
-      
-    </div>
-    
-    	<!--  Courses And Seminars  END -->
-    	
-    	
-    	
-    	<!-- Certificate START -->
-    	
-	   <div class="row setup-content" id="step-9">
-      <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-          <h3> Certificates </h3>
-			<div class="form-group">
-				<textarea name="certificateDescription" class="form-control" placeholder="Enter certificates you have. " ></textarea>
-			</div>    
-		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-        </div>
-      </div>
-      
-    </div>
-    
-    	<!--  Certificate  END -->
-    	
-    	
-    	
-    	
-    	
-        	
-    	<!-- Publication START -->
-	   <div class="row setup-content" id="step-10">
-      <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-          <h3> Publications </h3>
-			<div class="form-group">
-				<textarea name="publicationDescription" class="form-control" placeholder="Enter publications you have." ></textarea>
-			</div>    
-		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-        </div>
-      </div>
-      
-    </div>
-    
-    	<!--  Publication  END -->
-    
-    
-	  
-    <div class="row setup-content" id="step-11">
-      <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-          <h3> Step 10</h3>
-          <input class="btn btn-success btn-lg pull-right" type="submit">Submit</input>
-        </div>
-      </div>
-    </div>
-    
-
-	  
-	  
-  </form>
-  
-
+	        </div>
+	      </div>
+	      
+	    </div>
+	    
+	    	<!-- PROJECTS END -->
+	    	
+	    	
+	    	
+	    	
+	    	
+	    
+	        
+	    <!-- Foreign Lang START -->
+		   <div class="row setup-content" id="step-6">
+	      <div class="col-xs-6 col-md-offset-3">
+		        <button id="addCheckboxForeign" class="btn btn-success">+</button>
+		        <div class="col-md-12">
+		          <h3> Foreign Languages </h3>
+		          	<!-- ekleme butonu -->
+		          <div class="col-md-6">
+			          <div class="form-group">
+			            <input name="foreignName" maxlength="45" type="text" class="form-control"
+												placeholder="Enter language you know." />
+			          </div>
+			      </div>
+			      <div class="col-md-6">
+			         <select class="form-control" name="foreignLevel">
+						  <option>Beginning</option>
+						  <option>Intermediate</option>
+						  <option>Good</option>
+						  <option>Advanced</option>
+					</select>
+		          </div>
 		
-</div>
-
-
-</jsp:attribute>
-
-</t:simple_layout>
+				</div> 
+					<hr id="ayracForeign" style="width: 100%; color: black; height: 1px; background-color:black;" />    
+				
+				<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+			</div>
+	        </div>
+	      
+	    
+	    	<!--  Foreign Lang  END -->
+	    	
+	    	
+	    	
+	 <!-- SKILLS START -->
+		   <div class="row setup-content" id="step-7">
+	      <div class="col-xs-6 col-md-offset-3">
+	        <div class="col-md-12">
+	          <h3> Skills </h3>
+	  		
+	  		<input type="text" name="skillDescription" value="Write Skill and press Enter" data-role="tagsinput" />
+	        </div>
+	        <button style="margin-top:15px;" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+	      </div>
+	      
+	    </div>
+	    
+	    	<!--  SKILLS  END -->
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	<!-- Courses And Seminars START -->
+	    	
+		   <div class="row setup-content" id="step-8">
+	      <div class="col-xs-6 col-md-offset-3">
+	        <div class="col-md-12">
+	          <h3> Courses And Seminars </h3>
+				<div class="form-group">
+		         	 <textarea name="coursesDescription" class="form-control" placeholder="Enter courses and seminars you completed. " ></textarea>
+				</div>          
+			<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	    
+	    	<!--  Courses And Seminars  END -->
+	    	
+	    	
+	    	
+	    	<!-- Certificate START -->
+	    	
+		   <div class="row setup-content" id="step-9">
+	      <div class="col-xs-6 col-md-offset-3">
+	        <div class="col-md-12">
+	          <h3> Certificates </h3>
+				<div class="form-group">
+					<textarea name="certificateDescription" class="form-control" placeholder="Enter certificates you have. " ></textarea>
+				</div>    
+			<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	    
+	    	<!--  Certificate  END -->
+	    	
+	    	
+	    	
+	    	
+	    	
+	        	
+	    	<!-- Publication START -->
+		   <div class="row setup-content" id="step-10">
+	      <div class="col-xs-6 col-md-offset-3">
+	        <div class="col-md-12">
+	          <h3> Publications </h3>
+				<div class="form-group">
+					<textarea name="publicationDescription" class="form-control" placeholder="Enter publications you have." ></textarea>
+				</div>    
+			<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	    
+	    	<!--  Publication  END -->
+	    
+	    
+		  
+	    <div class="row setup-content" id="step-11">
+	      <div class="col-xs-6 col-md-offset-3">
+	        <div class="col-md-12">
+	          <h3> Step 10</h3>
+	          <input class="btn btn-success btn-lg pull-right" type="submit">Submit</input>
+	        </div>
+	      </div>
+	    </div>
+	    
+	
+		  
+		  
+	  </form>
+	  
+	
+			
+	</div>
+</body>
+</html>
