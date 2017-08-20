@@ -9,30 +9,11 @@
 	<jsp:attribute name="head_area">
 <meta charset="utf-8">
 <link href="css/main.css" rel="stylesheet" type="text/css">
-<script src="js/jquery-easywizard.js"></script>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-
+<link href="css/datepicker.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css">
-<script src="js/bootstrap-tagsinput.js"></script>
-
-	<!--   -->
-	
 
 
-	<!-- editor ile ilgili baslangıc 
-		http://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
-	
-	 -->
 
-
-<!-- Deneme -->
-
-
-		
-		<!-- editor ile ilgili bitis  -->
-		
 		
 		<script>
 			$(function() {
@@ -478,7 +459,7 @@
     <div class="row setup-content" id="step-11">
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
-          <h3> Step 10</h3>
+          <h3> Step 11</h3>
           <input class="btn btn-success btn-lg pull-right" type="submit">Submit</input>
         </div>
       </div>
@@ -493,6 +474,9 @@
 		
 </div>
 
+<script src="js/jquery-easywizard.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-tagsinput.js"></script>
 
 </jsp:attribute>
 

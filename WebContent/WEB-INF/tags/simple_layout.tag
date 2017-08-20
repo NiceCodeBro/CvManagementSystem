@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <%@tag description="Simple Template" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
  
 <%@attribute name="title"%>
 <%@attribute name="head_area" fragment="true" %>
 <%@attribute name="body_area" fragment="true" %>
  
+ <%
+	 response.setHeader("Cache-Control","no-cache");
+	  response.setHeader("Cache-Control","no-store");
+	  response.setHeader("Pragma","no-cache");
+	  response.setDateHeader ("Expires", 0);
+	if(request.getSession().getValue("isLoggedIn")!="true") {
+	%>
+		<c:redirect url="login.jsp"/>	<%
+	}
+	
+	%>
+	
 <html>
  <head>
  <title>${title}</title>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
      <jsp:invoke fragment="head_area"/>
  </head>
  <body>

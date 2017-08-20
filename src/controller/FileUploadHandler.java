@@ -3,13 +3,19 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -39,7 +45,6 @@ public class FileUploadHandler extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "/";
   
 	private Facade facade = Facade.getInstance();
 	private MemberSingleton member = MemberSingleton.getInstance();
@@ -48,15 +53,17 @@ public class FileUploadHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	request.setCharacterEncoding("UTF-8");	
+    	
     	Member m = new Member();
     	m.setIdMember(member.getId());
     	m.setMemberName(member.getUsername());
+    	m.setMemberPass(member.getPassword());
     	
     	CvContent c = setCv(request);
     		facade.addCv(c,m);
     	
     	
-    	//uploadImage(request);
+    	
     
     	request.getRequestDispatcher("/index.jsp").forward(request, response);
      
@@ -76,7 +83,12 @@ public class FileUploadHandler extends HttpServlet {
     	String personalOfficePhone = request.getParameter("personalOfficePhone");
     	String personalAddress = request.getParameter("personalAddress");
     	String personalMaritalStatus = request.getParameter("personalMaritalStatus");
-    	String personalPhoto = "";
+    	String personalPhoto = null;
+    	String pp = uploadImage(request, member.getId());
+    	personalPhoto = pp;
+
+
+    	
     //Job Kısmı için veri çekimi
     	
     	//Kaç tane iş yeri girilmiş sayısını verir
@@ -188,31 +200,42 @@ public class FileUploadHandler extends HttpServlet {
     	
     	
     }
+  
     
-    public void uploadImage(HttpServletRequest request){
-    	if(ServletFileUpload.isMultipartContent(request)){
-            try {
-                @SuppressWarnings("unchecked")
-				List<FileItem> multiparts = new ServletFileUpload(
+    
+    @SuppressWarnings("unchecked")
+	public String uploadImage(HttpServletRequest request,int memberId){
+    		
+    		if(ServletFileUpload.isMultipartContent(request)){
+    			
+    		String name = null;
+    		DateFormat dateFormat;
+    		Date date;
+    		try{
+			List<FileItem> multiparts = new ServletFileUpload(
                                          new DiskFileItemFactory()).parseRequest(request);
-              
-                for(FileItem item : multiparts){
-                    if(!item.isFormField()){
-                        String name = new File(item.getName()).getName();
-                        item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
+                dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                date = new Date();
+                for (FileItem item : multiparts) {
+                	if(!item.isFormField()){
+                        
+                        name = String.valueOf(memberId)+dateFormat.format(date)+"."+item.getContentType().substring(6);
+                        item.write( new File(request.getContextPath() + File.separator + name));
+                    }else{
+                    System.out.println("sikinti4");
                     }
-                }
-                System.out.println(multiparts.iterator().next().getName());
-               //File uploaded successfully
-               request.setAttribute("message", "File Uploaded Successfully");
-            } catch (Exception ex) {
-               request.setAttribute("message", "File Upload Failed due to " + ex);
-            }          
+				}
          
-        }else{
-            request.setAttribute("message",
-                                 "Sorry this Servlet only handles file upload request");
-        }
+                System.out.println("sikinti5");
+                //File uploaded successfully
+                return request.getContextPath() + File.separator + name;
+    		}catch(Exception e){
+        		e.printStackTrace();
+        	}
+    	}
+			return null;
+    	
+    	
     }
   
 }

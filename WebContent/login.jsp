@@ -20,7 +20,7 @@
 	  response.setHeader("Cache-Control","no-store");
 	  response.setHeader("Pragma","no-cache");
 	  response.setDateHeader ("Expires", 0);
-	if(session.getAttribute("isLoggedIn")=="true") {
+	if(request.getSession().getValue("isLoggedIn")=="true") {
 	%>
 		<c:redirect url="index.jsp"/>	<%
 	}%>
