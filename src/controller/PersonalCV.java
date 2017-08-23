@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import CvView.CreatePdf;
 import model.Member;
 import model.MemberSingleton;
 import service.Facade;
@@ -49,6 +49,12 @@ public class PersonalCV extends HttpServlet {
 			{				
 				int idCv = Integer.parseInt(request.getParameter("willDeletedCvId"));
 				facade.deleteCvByRole(idCv);
+				response.sendRedirect("index.jsp");
+			}
+			else if (action.equals("viewCv"))
+			{
+				int idCv = Integer.parseInt(request.getParameter("willViewedCvId"));
+				CreatePdf.createPDF(facade.getCvContetn(idCv));
 				response.sendRedirect("index.jsp");
 			}
 	

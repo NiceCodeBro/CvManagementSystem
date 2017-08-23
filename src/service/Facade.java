@@ -50,4 +50,9 @@ public class Facade {
 	{
 		cvService.deleteCvByRole(cvId);
 	}
+	
+	public CvView.CvContent getCvContetn(int cvId)
+	{
+		return cvService.getCvContetn(cvId);
+	}
 }

@@ -384,7 +384,7 @@
         <div class="col-md-12">
           <h3> Skills </h3>
   		
-  		<input type="text" name="skillDescription" value="Write Skill and press Enter" data-role="tagsinput" />
+  		<input type="text" name="skillDescription" value="" data-role="tagsinput" />
         </div>
         <button style="margin-top:15px;" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
       </div>

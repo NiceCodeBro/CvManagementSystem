@@ -31,7 +31,13 @@
 			    	<c:forEach items="${listOfCv}" var="cv">
 				    	<tr>
 				    		<td class="col-md-6"> ${cv.cvName}</td>
-				    		<td class="col-md-3"><button type="button" class="btn btn-block btn-primary">Görüntüle</button></td>
+				    		<td class="col-md-3">
+				    			<form action="index.jsp" method = "get">
+				    				<input type = "hidden" name = "action" value = "viewCv">
+				    				<input type = "hidden" name = "willViewedCvId" value = "${cv.idCv}" >
+				    				<input type = "submit" class = "btn btn-block btn-primary" value = "Görüntüle">
+				    			</form>
+				    		</td>
 				    		<td class="col-md-3">
 				    			<form action="index.jsp" method = "get">
 				    				<input type = "hidden" name = "action" value = "deleteCv">
