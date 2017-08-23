@@ -2,12 +2,15 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.SimpleFormatter;
 
 import javax.servlet.ServletException;
@@ -61,16 +64,13 @@ public class FileUploadHandler extends HttpServlet {
     	
     	CvContent c = setCv(request);
     		facade.addCv(c,m);
-    	
-    	
-    	
-    
+
     	request.getRequestDispatcher("/index.jsp").forward(request, response);
      
     }
     
     
-    public CvContent setCv(HttpServletRequest request) throws UnsupportedEncodingException{
+    public CvContent setCv(HttpServletRequest request) throws IOException, IllegalStateException, ServletException{
     	request.setCharacterEncoding("UTF-8");
     	System.out.println("Bilgiler servlete işlenmek üzere geldi");
     //Personal Kısmı için veri çekimi
@@ -83,10 +83,7 @@ public class FileUploadHandler extends HttpServlet {
     	String personalOfficePhone = request.getParameter("personalOfficePhone");
     	String personalAddress = request.getParameter("personalAddress");
     	String personalMaritalStatus = request.getParameter("personalMaritalStatus");
-    	String personalPhoto = null;
-    	String pp = uploadImage(request, member.getId());
-    	personalPhoto = pp;
-
+    	String personalPhoto = getValue(request);
 
     	
     //Job Kısmı için veri çekimi
@@ -200,42 +197,32 @@ public class FileUploadHandler extends HttpServlet {
     	
     	
     }
-  
     
-    
-    @SuppressWarnings("unchecked")
-	public String uploadImage(HttpServletRequest request,int memberId){
-    		
-    		if(ServletFileUpload.isMultipartContent(request)){
-    			
-    		String name = null;
-    		DateFormat dateFormat;
-    		Date date;
-    		try{
-			List<FileItem> multiparts = new ServletFileUpload(
-                                         new DiskFileItemFactory()).parseRequest(request);
-                dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                date = new Date();
-                for (FileItem item : multiparts) {
-                	if(!item.isFormField()){
-                        
-                        name = String.valueOf(memberId)+dateFormat.format(date)+"."+item.getContentType().substring(6);
-                        item.write( new File(request.getContextPath() + File.separator + name));
-                    }else{
-                    System.out.println("sikinti4");
-                    }
-				}
-         
-                System.out.println("sikinti5");
-                //File uploaded successfully
-                return request.getContextPath() + File.separator + name;
-    		}catch(Exception e){
-        		e.printStackTrace();
-        	}
+    //getParamterer yerine
+    public String getValue(HttpServletRequest request) throws IllegalStateException, IOException, ServletException{
+    	String name = null;
+    	DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date date = new Date();
+		try{
+	
+    	Part part = request.getPart("file");
+    	InputStream fileContent = part.getInputStream();
+    	
+    	name = String.valueOf(member.getId())+dateFormat.format(date)+"."+part.getContentType().substring(6);
+    	File dir = new File("/profilePhoto");
+    	if(!dir.exists()){
+    		dir.mkdir();
     	}
-			return null;
+    	File file = new File(new File("/profilePhoto"), name);
     	
+    	 Files.copy(fileContent, file.toPath());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
     	
+    	return request.getContextPath() + File.separator + name;
     }
+    
+
   
 }
