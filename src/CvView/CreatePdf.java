@@ -36,9 +36,13 @@ public class CreatePdf {
 	        document.add(new Paragraph(" "));
 		    document.add(new Paragraph(" "));
 			
+		    PdfPCell emptyCell= new PdfPCell();
+		    emptyCell.setBorder(Rectangle.NO_BORDER);
+		    
+		    
 			PdfPTable table = new PdfPTable(2);
 	        table.setWidthPercentage(100);
-	        table.setWidths(new int[]{1, 2});
+	        table.setWidths(new int[]{1, 3});
 	        table.addCell(createImageCell("photo.jpg"));
 	        table.addCell(textOfEntryPart(content.getPersonal()));
 	        document.add(table);
@@ -46,90 +50,129 @@ public class CreatePdf {
 	        document.add(new Chunk(new DottedLineSeparator())); 
 	        
 	        //personal info
-	        PdfPTable table2 = new PdfPTable(2);
+	        PdfPTable table2 = new PdfPTable(3);	
 	        table2.setWidthPercentage(100);
-	        table2.setWidths(new int[]{1, 2});
+	        table2.setWidths(new int[]{2,1,9});
 	        table2.addCell(iconFixing("pinfo.png"));
+	        table2.addCell(emptyCell);
 	        table2.addCell(personalInfo(content.getPersonal()));
 	        document.add(table2);
 	        
-	        document.add(new Chunk(new DottedLineSeparator()));
+	        
 	        
 	        //job experience
-	        PdfPTable table3 = new PdfPTable(2);
-	        table3.setWidthPercentage(100);
-	        table3.setWidths(new int[]{1, 2});
-	        table3.addCell(iconFixing("pinfo.png"));
-	        table3.addCell(jopExperience(content.getJobExperience()));
-	        document.add(table3);
+	        if(content.getJobExperience().getJobCompanyName().size() > 0)
+	        {
+	        	document.add(new Chunk(new DottedLineSeparator()));
+	        	PdfPTable table3 = new PdfPTable(3);
+				table3.setWidthPercentage(100);
+				table3.setWidths(new int[]{2,1,9});
+				table3.addCell(iconFixing("pinfo.png"));
+		        table3.addCell(emptyCell);
+		        table3.addCell(jopExperience(content.getJobExperience()));
+		        document.add(table3);	
+	        }
 	        
-	        document.add(new Chunk(new DottedLineSeparator())); 
-	        document.add(new Paragraph(" ")); 
-	        document.add(new Paragraph(" ")); 
-
 	        
+	        
+	       	        
 	        //job education
-	        PdfPTable table4 = new PdfPTable(2);
-	        table4.setWidthPercentage(100);
-	        table4.setWidths(new int[]{1, 2});
-	        table4.addCell(iconFixing("pinfo.png"));
-	        table4.addCell(education(content.getEducation()));
-	        document.add(table4);
-	        
-	        document.add(new Chunk(new DottedLineSeparator())); 
-	        
-	      //foreign language
-	        PdfPTable table5 = new PdfPTable(2);
-	        table5.setWidthPercentage(100);
-	        table5.setWidths(new int[]{1, 2});
-	        table5.addCell(iconFixing("pinfo.png"));
-	        table5.addCell(foreignLanguage(content.getForeign()));
-	        document.add(table5);
+	        if(content.getEducation().getEduSchoolName().size() > 0)
+	        {
+	        	document.add(new Chunk(new DottedLineSeparator())); 
+	        	PdfPTable table4 = new PdfPTable(3);
+				table4.setWidthPercentage(100);
+				table4.setWidths(new int[]{2,1,9});
+		        table4.addCell(iconFixing("pinfo.png"));
+		        table4.addCell(emptyCell);
+		        table4.addCell(education(content.getEducation()));
+		        document.add(table4);	
+	        }
 	        
 	        
+	        document.add(new Paragraph(" "));document.add(new Paragraph(" "));document.add(new Paragraph(" "));
+	      
+	        //foreign language
+	        if(content.getForeign().getForeignName().size() > 0)
+	        {
+	        	document.add(new Chunk(new DottedLineSeparator())); 
+	        	PdfPTable table5 = new PdfPTable(3);
+				table5.setWidthPercentage(100);
+				table5.setWidths(new int[]{2,1,9});
+	 	        table5.addCell(iconFixing("pinfo.png"));
+	 	        table5.addCell(emptyCell);
+	 	        table5.addCell(foreignLanguage(content.getForeign()));
+	 	        document.add(table5); 	
+	        }
+	       
 	        
-			document.add(new Chunk(new DottedLineSeparator())); 
+	        
+	        
+			
 			
 		  //Skills
-			PdfPTable table6 = new PdfPTable(2);
-			table6.setWidthPercentage(100);
-			table6.setWidths(new int[]{1, 2});
-			table6.addCell(iconFixing("pinfo.png"));
-			table6.addCell(skills(content.getSkill()));
-			document.add(table6);
-			
-			document.add(new Chunk(new DottedLineSeparator())); 
-
-		  //cources and seminers
-			PdfPTable table7 = new PdfPTable(2);
-			table7.setWidthPercentage(100);
-			table7.setWidths(new int[]{1, 2});
-			table7.addCell(iconFixing("pinfo.png"));
-			table7.addCell(coursesAndSeminars(content.getCourses()));
-			document.add(table7);
-			
-			
-			document.add(new Chunk(new DottedLineSeparator())); 
-			
-		  //Certificate
-			PdfPTable table8 = new PdfPTable(2);
-			table8.setWidthPercentage(100);
-			table8.setWidths(new int[]{1, 2});
-			table8.addCell(iconFixing("pinfo.png"));
-			table8.addCell(certificate(content.getCertificate()));
-			document.add(table8);
-			
-		
-			document.add(new Chunk(new DottedLineSeparator())); 
-			
-		  //Publications
-			PdfPTable table9 = new PdfPTable(2);
-			table9.setWidthPercentage(100);
-			table9.setWidths(new int[]{1, 2});
-			table9.addCell(iconFixing("pinfo.png"));
-			table9.addCell(publications(content.getPublication()));
-			document.add(table9);
+	        if(!content.getSkill().getSkillDescription().equals(""))
+	        {
+	        	document.add(new Chunk(new DottedLineSeparator())); 
+		        PdfPTable table6 = new PdfPTable(3);
+				table6.setWidthPercentage(100);
+				table6.setWidths(new int[]{2,1,9});
+				table6.addCell(iconFixing("pinfo.png"));
+				table6.addCell(emptyCell);
+				table6.addCell(skills(content.getSkill()));
+				document.add(table6);	
+	        }
 	        
+			
+			
+
+		  
+			//cources and seminers
+			if(!content.getCourses().getCoursesDescription().equals(""))
+			{
+				document.add(new Chunk(new DottedLineSeparator())); 
+				PdfPTable table7 = new PdfPTable(3);
+				table7.setWidthPercentage(100);
+				table7.setWidths(new int[]{2,1, 9});
+				table7.addCell(iconFixing("pinfo.png"));
+				table7.addCell(emptyCell);
+				table7.addCell(coursesAndSeminars(content.getCourses()));
+				
+				document.add(table7);	
+			}
+			
+			
+
+			
+			//Certificate
+			if(!content.getCertificate().getCertificateDescription().equals(""))
+			{
+				document.add(new Chunk(new DottedLineSeparator())); 
+				  
+				PdfPTable table8 = new PdfPTable(3);
+				table8.setWidthPercentage(100);
+				table8.setWidths(new int[]{2,1,9});
+				table8.addCell(iconFixing("pinfo.png"));
+				table8.addCell(emptyCell);
+				table8.addCell(certificate(content.getCertificate()));
+				document.add(table8);	
+			}
+			
+			  //Publications
+			if(!content.getPublication().getPublicationDescription().equals(""))
+			{
+				document.add(new Chunk(new DottedLineSeparator())); 
+				
+				PdfPTable table9 = new PdfPTable(3);
+				table9.setWidthPercentage(100);
+				table9.setWidths(new int[]{2,1,9});
+				table9.addCell(iconFixing("pinfo.png"));
+				table9.addCell(emptyCell);
+				table9.addCell(publications(content.getPublication()));
+				document.add(table9);
+		        
+			}
+	
 	        
 	        document.close();
 	        System.out.println("Done");
@@ -190,8 +233,17 @@ public class CreatePdf {
 	
 	public static PdfPCell iconFixing(String path) throws DocumentException, IOException {
         Image img = Image.getInstance(path);
+       
+         img.scaleAbsolute(30f, 30f);
+        
+       // img.scaleToFit(1700, 1000);
+        //img.setAbsolutePosition(0, 0);
         PdfPCell cell = new PdfPCell(img, true);
-        cell.setFixedHeight(100);
+        //cell.setFixedHeight(70);
+        //cell.setRightIndent(100 );
+       // cell.setPaddingTop(50);
+        
+        
         cell.setBorder(Rectangle.NO_BORDER);
         return cell;
     }
@@ -205,13 +257,17 @@ public class CreatePdf {
             String[] contents = new String[] {jopEx.getJobCompanyName().get(i),jopEx.getJobTitle().get(i),jopEx.getJobStartDate().get(i),
             								jopEx.getJobStartDate().get(i),jopEx.getJobDescription().get(i)};            
             
-			Phrase phrase = new Phrase();	
-			phrase.add( new Chunk(contents[0], new Font(FontFamily.HELVETICA, 16,Font.BOLD)));
-			phrase.add( new Chunk("\n" + contents[1] + " " + contents[2] + " - " + contents[3], new Font(FontFamily.HELVETICA, 13,Font.NORMAL)));
-			phrase.add( new Chunk("\n" + contents[4], new Font(FontFamily.HELVETICA, 14,Font.NORMAL)));
-	        cell.addElement(phrase);            
-	
-	        cell.addElement(new Paragraph(" "));
+            if(!contents[0].equals(""))
+            {
+            	Phrase phrase = new Phrase();	
+    			phrase.add( new Chunk(contents[0], new Font(FontFamily.HELVETICA, 16,Font.BOLD)));
+    			phrase.add( new Chunk("\n" + contents[1] + " " + contents[2] + " - " + contents[3], new Font(FontFamily.HELVETICA, 13,Font.NORMAL)));
+    			phrase.add( new Chunk("\n" + contents[4], new Font(FontFamily.HELVETICA, 14,Font.NORMAL)));
+    	        cell.addElement(phrase);            
+    	
+    	        cell.addElement(new Paragraph(" "));	
+            }
+			
         }
    
         
@@ -256,8 +312,6 @@ public class CreatePdf {
 			phrase.add( new Chunk(contents[0] + ": " , new Font(FontFamily.HELVETICA, 14,Font.BOLD)));
 			phrase.add( new Chunk(contents[1], new Font(FontFamily.HELVETICA, 14,Font.NORMAL)));
 	        cell.addElement(phrase);            
-	
-	        cell.addElement(new Paragraph(" "));
         }
    
         
