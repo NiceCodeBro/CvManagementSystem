@@ -1,5 +1,7 @@
 package modelContent;
 
+import java.util.Arrays;
+
 public class JobExperience {
 	private String[] jobCompanyName;
 	private String[] jobTitle;
@@ -40,7 +42,28 @@ public class JobExperience {
 		this.jobDescription = jobDescription;
 	}
 	public int jobNumber() {
+		if(jobCompanyName == null){
+			return 0;
+		}
 		return jobCompanyName.length;
+	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("JobExperience [jobCompanyName=");
+		builder.append(Arrays.toString(jobCompanyName));
+		builder.append(", jobTitle=");
+		builder.append(Arrays.toString(jobTitle));
+		builder.append(", jobStartDate=");
+		builder.append(Arrays.toString(jobStartDate));
+		builder.append(", jobEndDate=");
+		builder.append(Arrays.toString(jobEndDate));
+		builder.append(", jobDescription=");
+		builder.append(Arrays.toString(jobDescription));
+		builder.append(", jobNumber=");
+		builder.append(jobNumber);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	

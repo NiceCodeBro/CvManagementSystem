@@ -40,7 +40,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.jsp">Brand</a>
+      <a class="navbar-brand" href="index.jsp">CV Yönetim</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

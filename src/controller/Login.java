@@ -40,6 +40,7 @@ public class Login extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 String username = request.getParameter("LoginUsername");
@@ -53,8 +54,7 @@ public class Login extends HttpServlet {
         	 
         	 System.out.println("giriş başarılı");
         	 System.out.println(MemberSingleton.getInstance().getId() + " " + MemberSingleton.getInstance().getUsername() + " " +  MemberSingleton.getInstance().getPassword() + " " + MemberSingleton.getInstance().getRole() ) ;
-     		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-    		view.forward(request, response);
+     		request.getRequestDispatcher("login.jsp").forward(request, response);
          }
          else
         	 System.out.println("giriş başarısız");

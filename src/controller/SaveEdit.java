@@ -3,27 +3,17 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
-import java.util.logging.SimpleFormatter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import model.Member;
 import model.MemberSingleton;
@@ -40,38 +30,53 @@ import modelContent.Skill;
 import service.Facade;
 
 /**
- * Servlet implementation class FileUploadHandler
+ * Servlet implementation class SaveEdit
  */
-@WebServlet("/upload")
+@WebServlet("/SaveEdit")
 @javax.servlet.annotation.MultipartConfig
-public class FileUploadHandler extends HttpServlet {
-    /**
-	 * 
-	 */
+public class SaveEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
+	
 	private Facade facade = Facade.getInstance();
 	private MemberSingleton member = MemberSingleton.getInstance();
+       
+    
+    public SaveEdit() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 	
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    	request.setCharacterEncoding("UTF-8");	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");	
     	
     	Member m = new Member();
     	m.setIdMember(member.getId());
     	m.setMemberName(member.getUsername());
     	m.setMemberPass(member.getPassword());
     	
+    	String Id= request.getParameter("cvNum");
+    	Integer cvId = Integer.valueOf(Id);
+    	try{
     	CvContent c = setCv(request);
     		facade.addCv(c,m);
-    		System.out.println("Cv ekleme başarılı.");
-    response.sendRedirect("index.jsp");
-     
-    }
-    
-    
-    public CvContent setCv(HttpServletRequest request) throws IOException, IllegalStateException, ServletException{
+    		System.out.println("Servlet SaveEdit: Cv ekleme başarılı.");
+    		
+        	facade.deleteCvforUpdate(cvId);
+        	System.out.println("Servlet SaveEdit: Eski cv'yi silme başarılı.");
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    		response.sendRedirect("index.jsp");
+		
+	}
+	
+	public CvContent setCv(HttpServletRequest request) throws IOException, IllegalStateException, ServletException{
     	request.setCharacterEncoding("UTF-8");
     	System.out.println("Bilgiler servlete işlenmek üzere geldi");
     //Personal Kısmı için veri çekimi
@@ -204,27 +209,31 @@ public class FileUploadHandler extends HttpServlet {
     	String name = null;
     	DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
-		try{
-	
+		String oldPhoto = request.getParameter("oldPhoto");
+		
     	Part part = request.getPart("file");
-    	InputStream fileContent = part.getInputStream();
     	
-    	name = String.valueOf(member.getId())+dateFormat.format(date)+"."+part.getContentType().substring(6);
-    	
-    	File dir = new File(request.getRealPath("")+"/profilePhoto");
-    	if(!dir.exists()){
-    		dir.mkdir();
-    	}
-    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
-    	
-    	 Files.copy(fileContent, file.toPath());
-		}catch(Exception e){
-			e.printStackTrace();
+    	if(part.getContentType().contains("image")){
+    		try{
+    			InputStream fileContent = part.getInputStream();
+    	    	
+    	    	name = String.valueOf(member.getId())+dateFormat.format(date)+"."+part.getContentType().substring(6);
+    	    	
+    	    	File dir = new File(request.getRealPath("")+"/profilePhoto");
+    	    	if(!dir.exists()){
+    	    		dir.mkdir();
+    	    	}
+    	    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
+    	    	
+    	    	 Files.copy(fileContent, file.toPath());
+    			}catch(Exception e){
+    				e.printStackTrace();
+    			}
+    	    	return "profilePhoto" + File.separator + name;
+		}else{
+			return oldPhoto;
 		}
-    	System.out.println(request.getRealPath("")+"/profilePhoto" + File.separator + name);
-    	return "profilePhoto" + File.separator + name;
-    }
+    	
+	}
     
-
-  
 }

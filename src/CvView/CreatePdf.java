@@ -31,9 +31,7 @@ public class CreatePdf {
 			PdfWriter w = PdfWriter.getInstance(document, new FileOutputStream("sample1.pdf"));
 			
 			document.open();
-	        System.out.println(w.getVerticalPosition(false) + " " + w.getVerticalPosition(true));
-
-			Image img2 = Image.getInstance("32bitResume3.png");
+			Image img2 = Image.getInstance("photo.jpg");
 			img2.scaleAbsolute(180f, 32f);
 			img2.setAlignment(Image.MIDDLE);
 	        document.add(img2);
@@ -57,13 +55,9 @@ public class CreatePdf {
 	        //personal info
 	        PdfPTable table2 = new PdfPTable(2);	
 	        table2.setWidthPercentage(100);
-			table2.setWidths(new int[]{7,17});
-			
-			PdfPCell cell = new PdfPCell();
-			cell.addElement(new Phrase(new Chunk("PERSONAL INFO",new Font(FontFamily.HELVETICA, 14, Font.NORMAL))));
-			cell.setBorder(Rectangle.NO_BORDER);
-			
-			table2.addCell(cell);
+	        table2.setWidths(new int[]{2,1,9});
+	        table2.addCell(iconFixing("photo.jpg"));
+	        table2.addCell(emptyCell);
 	        table2.addCell(personalInfo(content.getPersonal()));
 	        document.add(table2);
 	        document.add(new Chunk(new DottedLineSeparator())); 
@@ -75,13 +69,9 @@ public class CreatePdf {
 	        {
 	        	PdfPTable table3 = new PdfPTable(2);
 				table3.setWidthPercentage(100);
-				table3.setWidths(new int[]{7,17});
-				
-				PdfPCell cell3 = new PdfPCell();
-				cell3.addElement(new Phrase(new Chunk("JOP EXPERIENCE",new Font(FontFamily.HELVETICA, 14, Font.NORMAL))));
-				cell3.setBorder(Rectangle.NO_BORDER);
-				
-				table3.addCell(cell3);
+				table3.setWidths(new int[]{2,1,9});
+				table3.addCell(iconFixing("photo.jpg"));
+		        table3.addCell(emptyCell);
 		        table3.addCell(jopExperience(content.getJobExperience()));
 		        document.add(table3);	
 		        document.add(new Chunk(new DottedLineSeparator())); 
@@ -96,13 +86,9 @@ public class CreatePdf {
 	        {
 	        	PdfPTable table4 = new PdfPTable(2);
 				table4.setWidthPercentage(100);
-				table4.setWidths(new int[]{7,17});
-				
-				PdfPCell cell4 = new PdfPCell();
-				cell4.addElement(new Phrase(new Chunk("EDUCATION",new Font(FontFamily.HELVETICA, 14, Font.NORMAL))));
-				cell4.setBorder(Rectangle.NO_BORDER);
-				
-				table4.addCell(cell4);
+				table4.setWidths(new int[]{2,1,9});
+		        table4.addCell(iconFixing("photo.jpg"));
+		        table4.addCell(emptyCell);
 		        table4.addCell(education(content.getEducation()));
 		        document.add(table4);	
 		        document.add(new Chunk(new DottedLineSeparator())); 
@@ -120,13 +106,9 @@ public class CreatePdf {
 	        {
 	        	PdfPTable table5 = new PdfPTable(2);
 				table5.setWidthPercentage(100);
-				table5.setWidths(new int[]{7,17});
-				
-				PdfPCell cell5 = new PdfPCell();
-				cell5.addElement(new Phrase(new Chunk("FOREIGN LANGUAGE",new Font(FontFamily.HELVETICA, 14, Font.NORMAL))));
-				cell5.setBorder(Rectangle.NO_BORDER);
-				
-				table5.addCell(cell5);
+				table5.setWidths(new int[]{2,1,9});
+	 	        table5.addCell(iconFixing("photo.jpg"));
+	 	        table5.addCell(emptyCell);
 	 	        table5.addCell(foreignLanguage(content.getForeign()));
 	 	        document.add(table5); 	
 	 	       document.add(new Chunk(new DottedLineSeparator())); 
@@ -140,13 +122,9 @@ public class CreatePdf {
 	        {
 		        PdfPTable table6 = new PdfPTable(2);
 				table6.setWidthPercentage(100);
-				table6.setWidths(new int[]{7,17});
-				
-				PdfPCell cell6 = new PdfPCell();
-				cell6.addElement(new Phrase(new Chunk("SKILLS",new Font(FontFamily.HELVETICA, 14, Font.NORMAL))));
-				cell6.setBorder(Rectangle.NO_BORDER);
-				
-				table6.addCell(cell6);
+				table6.setWidths(new int[]{2,1,9});
+				table6.addCell(iconFixing("photo.jpg"));
+				table6.addCell(emptyCell);
 				table6.addCell(skills(content.getSkill()));
 				document.add(table6);	
 				document.add(new Chunk(new DottedLineSeparator())); 
@@ -163,13 +141,9 @@ public class CreatePdf {
 				
 				PdfPTable table7 = new PdfPTable(2);
 				table7.setWidthPercentage(100);
-				table7.setWidths(new int[]{7,17});
-				
-				PdfPCell cell7 = new PdfPCell();
-				cell7.addElement(new Phrase(new Chunk("COURCES SEMINERS",new Font(FontFamily.HELVETICA, 14, Font.NORMAL))));
-				cell7.setBorder(Rectangle.NO_BORDER);
-				
-				table7.addCell(cell7);
+				table7.setWidths(new int[]{2,1, 9});
+				table7.addCell(iconFixing("photo.jpg"));
+				table7.addCell(emptyCell);
 				table7.addCell(coursesAndSeminars(content.getCourses()));
 				
 				document.add(table7);	
@@ -185,13 +159,9 @@ public class CreatePdf {
 				  
 				PdfPTable table8 = new PdfPTable(2);
 				table8.setWidthPercentage(100);
-				table8.setWidths(new int[]{7,17});
-				
-				PdfPCell cell8 = new PdfPCell();
-				cell8.addElement(new Phrase(new Chunk("CERTIFICATES",new Font(FontFamily.HELVETICA, 14, Font.NORMAL))));
-				cell8.setBorder(Rectangle.NO_BORDER);
-				
-				table8.addCell(cell8);
+				table8.setWidths(new int[]{2,1,9});
+				table8.addCell(iconFixing("photo.jpg"));
+				table8.addCell(emptyCell);
 				table8.addCell(certificate(content.getCertificate()));
 				document.add(table8);	
 				document.add(new Chunk(new DottedLineSeparator())); 
@@ -203,13 +173,9 @@ public class CreatePdf {
 				
 				PdfPTable table9 = new PdfPTable(2);
 				table9.setWidthPercentage(100);
-				table9.setWidths(new int[]{7,17});
-				
-				PdfPCell cell9 = new PdfPCell();
-				cell9.addElement(new Phrase(new Chunk("PUBLICATIONS",new Font(FontFamily.HELVETICA, 14, Font.NORMAL))));
-				cell9.setBorder(Rectangle.NO_BORDER);
-				
-				table9.addCell(cell9);
+				table9.setWidths(new int[]{2,1,9});
+				table9.addCell(iconFixing("photo.jpg"));
+				table9.addCell(emptyCell);
 				table9.addCell(publications(content.getPublication()));
 				document.add(table9);
 				document.add(new Chunk(new DottedLineSeparator())); 

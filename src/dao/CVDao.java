@@ -192,6 +192,339 @@ public class CVDao extends DBUtil{
 	}
 	
 	
+	public CvContent getCvforUpdate(int cvId,Member m){
+		Connection con = null;
+		CvContent c = new CvContent();
+		String query="";
+		PreparedStatement ps=null;
+		ResultSet rs = null;
+		int toplamKayit;
+		try{
+			System.out.println("DAO: Connection açıldı.");
+			con = getConnection();
+			
+			//Personal Start
+			Personal per = new  Personal();
+			
+			query = "SELECT * FROM Cv WHERE idCv = ?";
+			ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+			rs = ps.executeQuery();
+			rs.absolute(1);
+			per.setCvName(rs.getString("cvName"));
+			
+			//Personal Info 
+			query = "SELECT * FROM Content WHERE cvId = ? AND (titleId = 8 OR titleId = 29 OR titleId = 10 OR"
+					+ " titleId = 4 OR titleId = 28 OR titleId = 11 OR titleId = 13 OR titleId = 5 OR titleId = 9)";
+			ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+			rs = ps.executeQuery();
+			
+			
+			
+				rs.absolute(1);
+				per.setPersonalName(rs.getString("content"));
+				rs.absolute(2);
+				per.setPersonalTitle(rs.getString("content"));
+				rs.absolute(3);
+				per.setPersonalObjectives(rs.getString("content"));
+				rs.absolute(4);
+				per.setPersonalDateofBirth(rs.getString("content"));
+				rs.absolute(5);
+				per.setPersonalCellPhone(rs.getString("content"));
+				rs.absolute(6);
+				per.setPersonalOfficePhone(rs.getString("content"));
+				rs.absolute(7);
+				per.setPersonalAddress(rs.getString("content"));
+				rs.absolute(8);
+				per.setPersonalMaritalStatus(rs.getString("content"));
+				rs.absolute(9);
+				per.setPersonalPhoto(rs.getString("content"));
+			
+			//Job Experiences End
+				
+			//Job Experiences Start
+				
+			List<JobExperienceUp> list = new ArrayList<JobExperienceUp>();
+			
+			query = "SELECT * FROM Content WHERE cvId = ? AND (titleId=14 OR titleId=15 OR titleId=16 OR titleId=30 OR titleId=17)";
+			ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+				
+			rs = ps.executeQuery();
+			
+			
+			rs.last();
+			toplamKayit= rs.getRow();
+			rs.beforeFirst();
+			
+			if(toplamKayit>5){
+				int w = toplamKayit;
+				int i,temp=1,k=1,s=1;
+				int cons=1;
+				do{
+					JobExperienceUp job = new JobExperienceUp();
+					for(i = temp; i<=5*k;i++){
+						rs.absolute(i);
+						if(i==s){
+							job.setJobCompanyName(rs.getString("content"));
+						}else if(i == s + 1){
+							job.setJobTitle(rs.getString("content"));
+						}else if(i == s + 2){
+							job.setJobStartDate(rs.getString("content"));
+						}else if(i == s + 3){
+							job.setJobEndDate(rs.getString("content"));
+						}else if(i == s + 4){
+							job.setJobDescription(rs.getString("content"));
+						}
+						temp++;
+						
+					}
+					s = temp;
+					
+					k++;
+				w = w - 5;
+				list.add(job);
+				}while(w>0);
+					
+			
+				
+			}else{
+				int lessFive = 1;
+				JobExperienceUp job = new JobExperienceUp();
+				while(rs.next()){
+					if(lessFive == 1){
+						job.setJobCompanyName(rs.getString("content"));
+					}else if(lessFive == 2){
+						job.setJobTitle(rs.getString("content"));
+					}else if(lessFive == 3){
+						job.setJobStartDate(rs.getString("content"));
+					}else if(lessFive == 4){
+						job.setJobEndDate(rs.getString("content"));
+					}else if(lessFive == 5){
+						job.setJobDescription(rs.getString("content"));
+					}
+					lessFive++;
+				}
+				list.add(job);
+			}
+			
+			//Job Experiences End
+			
+			//Education Start
+			List<EducationUp> listEdu = new ArrayList<EducationUp>();
+			
+			query = "SELECT * FROM Content WHERE cvId = ? AND (titleId=6 OR titleId=7 OR titleId=36 OR titleId=37 OR titleId=38)";
+			ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+				
+			rs = ps.executeQuery();
+			
+			
+			rs.last();
+			toplamKayit= rs.getRow();
+			rs.beforeFirst();
+			
+			if(toplamKayit>5){
+				int w = toplamKayit;
+				int i,temp=1,k=1,s=1;
+				do{
+					EducationUp edu = new EducationUp();
+					for(i = temp; i<=5*k;i++){
+						rs.absolute(i);
+						if(i==s){
+							edu.setEduSchoolName(rs.getString("content"));
+						}else if(i == s + 1){
+							edu.setEduSchoolDepartman(rs.getString("content"));
+						}else if(i == s + 2){
+							edu.setEduStartDate(rs.getString("content"));
+						}else if(i == s + 3){
+							edu.setEduEndDate(rs.getString("content"));
+						}else if(i == s + 4){
+							edu.setEduDescription(rs.getString("content"));
+						}
+						temp++;
+						
+					}
+					s = temp;
+					
+					k++;
+				w = w - 5;
+				listEdu.add(edu);
+				
+				}while(w>0);
+					
+			
+				
+			}else{
+				int lessFive = 1;
+				EducationUp edu = new EducationUp();
+				while(rs.next()){
+					if(lessFive == 1){
+						edu.setEduSchoolName(rs.getString("content"));
+					}else if(lessFive == 2){
+						edu.setEduSchoolDepartman(rs.getString("content"));
+					}else if(lessFive == 3){
+						edu.setEduStartDate(rs.getString("content"));
+					}else if(lessFive == 4){
+						edu.setEduEndDate(rs.getString("content"));
+					}else if(lessFive == 5){
+						edu.setEduDescription(rs.getString("content"));
+					}
+					lessFive++;
+				}
+				listEdu.add(edu);
+			}
+			
+			//Education End
+			
+			//Project Start
+			
+			query = "SELECT * FROM Content WHERE cvId = ? AND titleId = 31";
+			ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+			rs = ps.executeQuery();
+			
+			
+			Project pro = new  Project();
+				rs.absolute(1);
+				pro.setProjectDescription(rs.getString("content"));
+
+				
+			
+			//Project End
+				
+			//Foreign Language Start
+				
+				List<ForeignLanguageUp> listLang = new ArrayList<ForeignLanguageUp>();
+				
+				query = "SELECT * FROM Content WHERE cvId = ? AND (titleId=20 OR titleId=32)";
+				ps = (PreparedStatement) con.prepareStatement(query);
+					ps.setInt(1, cvId);
+					
+				rs = ps.executeQuery();
+				
+				
+				rs.last();
+				toplamKayit= rs.getRow();
+				rs.beforeFirst();
+				
+				if(toplamKayit>2){
+					int w = toplamKayit;
+					int i,temp=1,k=1,s=1;
+					do{
+						ForeignLanguageUp lang = new ForeignLanguageUp();
+						for(i = temp; i<=2*k;i++){
+							rs.absolute(i);
+							if(i==s){
+								lang.setForeignName(rs.getString("content"));
+							}else if(i == s + 1){
+								lang.setForeignLevel(rs.getString("content"));
+							}
+							temp++;
+							
+						}
+						s = temp;
+						
+						k++;
+					w = w - 2;
+					listLang.add(lang);
+					
+					}while(w>0);
+						
+				
+					
+				}else{
+					int lessTwo = 1;
+					ForeignLanguageUp lang = new ForeignLanguageUp();
+					while(rs.next()){
+						if(lessTwo == 1){
+							lang.setForeignName(rs.getString("content"));
+						}else if(lessTwo == 2){
+							lang.setForeignLevel(rs.getString("content"));
+						}
+						lessTwo++;
+					}
+					listLang.add(lang);
+				}
+				
+				
+			//Foreign Language End
+				
+			//Skills Start
+				
+				query = "SELECT * FROM Content WHERE cvId = ? AND titleId = 39";
+				ps = (PreparedStatement) con.prepareStatement(query);
+					ps.setInt(1, cvId);
+				rs = ps.executeQuery();
+				
+				
+				Skill skill = new  Skill();
+					rs.absolute(1);
+					skill.setSkillDescription(rs.getString("content"));
+				
+			//Skills End
+					
+			//Courses Start
+				query = "SELECT * FROM Content WHERE cvId = ? AND titleId = 33";
+				ps = (PreparedStatement) con.prepareStatement(query);
+					ps.setInt(1, cvId);
+				rs = ps.executeQuery();
+					
+					
+				Courses course = new  Courses();
+					rs.absolute(1);
+					course.setCoursesDescription(rs.getString("content"));	
+					
+					
+			//Courses End
+					
+			//Certificate Start			
+				query = "SELECT * FROM Content WHERE cvId = ? AND titleId = 34";
+				ps = (PreparedStatement) con.prepareStatement(query);
+					ps.setInt(1, cvId);
+					rs = ps.executeQuery();
+	
+				Certificate cer = new Certificate();
+					rs.absolute(1);
+					cer.setCertificateDescription(rs.getString("content"));
+					
+			
+			//Certificate End
+					
+			//Publication Start
+			query = "SELECT * FROM Content WHERE cvId = ? AND titleId = 35";
+			ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+				rs = ps.executeQuery();
+
+				Publication pub = new Publication();
+				rs.absolute(1);
+				pub.setPublicationDescription(rs.getString("content"));
+					
+			//Publication End
+					
+			c.setPersonal(per);
+			c.setJobExperiences(list);
+			c.setEducations(listEdu);
+			c.setProject(pro);
+			c.setForeigns(listLang);
+			c.setSkill(skill);
+			c.setCourses(course);
+			c.setCertificate(cer);
+			c.setPublication(pub);
+			
+			
+			ps.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		closeConnection(con);
+		System.out.println("DAO: Connection kapatıldı.");
+		return c;
+		
+	}
 	
 	public boolean addCv(CvContent c,Member m){
 		Connection con = null;
@@ -416,5 +749,24 @@ public class CVDao extends DBUtil{
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	
+	public boolean deleteCvforUpdate(int cvId)
+	{
+		Connection con = null;
+		try{
+				con = getConnection();
+				String query = "DELETE FROM Cv WHERE idCv=?";
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+				ps.setInt(1, cvId);
+				ps.executeUpdate();
+			    ps.close();
+			    return true;
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		return false;
+		
 	}
 }

@@ -76,6 +76,16 @@ public class Personal {
 	public void setPersonalPhoto(String personalPhoto) {
 		this.personalPhoto = personalPhoto;
 	}
+	@Override
+	public String toString() {
+		return "Personal [cvName=" + cvName + ", personalName=" + personalName + ", personalTitle=" + personalTitle
+				+ ", personalObjectives=" + personalObjectives + ", personalDateofBirth=" + personalDateofBirth
+				+ ", personalCellPhone=" + personalCellPhone + ", personalOfficePhone=" + personalOfficePhone
+				+ ", personalAddress=" + personalAddress + ", personalMaritalStatus=" + personalMaritalStatus
+				+ ", personalPhoto=" + personalPhoto + "]";
+	}
+	
+	
 	
 	
 	

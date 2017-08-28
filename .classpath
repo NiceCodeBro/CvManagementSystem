@@ -13,34 +13,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itextpdf-5.4.0.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-barcodes-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-barcodes-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-barcodes-7.0.2-sources.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-font-asian-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-font-asian-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-forms-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-forms-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-forms-7.0.2-sources.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-hyph-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-hyph-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-io-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-io-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-io-7.0.2-sources.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-kernel-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-kernel-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-kernel-7.0.2-sources.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-layout-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-layout-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-layout-7.0.2-sources.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-pdfa-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-pdfa-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-pdfa-7.0.2-sources.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-pdftest-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-pdftest-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-pdftest-7.0.2-sources.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-sign-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-sign-7.0.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/msd/Downloads/itext7-7.0.2/itext7-sign-7.0.2-sources.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

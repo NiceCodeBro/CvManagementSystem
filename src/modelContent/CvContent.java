@@ -1,5 +1,7 @@
 package modelContent;
 
+import java.util.List;
+
 public class CvContent {
 
 	private Personal personal;
@@ -11,6 +13,10 @@ public class CvContent {
 	private Courses courses;
 	private Certificate certificate;
 	private Publication publication;
+	
+	private List<JobExperienceUp> jobExperiences;
+	private List<EducationUp> educations;
+	private List<ForeignLanguageUp> foreigns;
 	
 	
 	public Personal getPersonal() {
@@ -66,6 +72,24 @@ public class CvContent {
 	}
 	public void setPublication(Publication publication) {
 		this.publication = publication;
+	}
+	public List<JobExperienceUp> getJobExperiences() {
+		return jobExperiences;
+	}
+	public void setJobExperiences(List<JobExperienceUp> list) {
+		this.jobExperiences = list;
+	}
+	public List<EducationUp> getEducations() {
+		return educations;
+	}
+	public void setEducations(List<EducationUp> educations) {
+		this.educations = educations;
+	}
+	public List<ForeignLanguageUp> getForeigns() {
+		return foreigns;
+	}
+	public void setForeigns(List<ForeignLanguageUp> foreigns) {
+		this.foreigns = foreigns;
 	}
 	
 	

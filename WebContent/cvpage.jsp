@@ -17,7 +17,7 @@
 <div class="container">
 	<div class="row">
 	
-		<div class="col-md-2 col-lg-2"><h3>${requestScope["message"]}</h3></div>
+		<div class="col-md-2 col-lg-2"></div>
 		<div class="col-md-8 col-lg-8">
 			<table class="table table-bordered">
 				<thead>
@@ -25,24 +25,32 @@
 					<td align="center">CV İsmi</td>
 					<td align="center">CV Görüntüle</td>
 					<td align="center">CV Sil</td>
+					<td align="center">CV Düzenle</td>
 					</tr>
 				</thead>
 				<tbody>
 			    	<c:forEach items="${listOfCv}" var="cv">
 				    	<tr>
 				    		<td class="col-md-6"> ${cv.cvName}</td>
-				    		<td class="col-md-3">
+				    		<td class="col-md-2">
 				    			<form action="index.jsp" method = "get">
 				    				<input type = "hidden" name = "action" value = "viewCv">
 				    				<input type = "hidden" name = "willViewedCvId" value = "${cv.idCv}" >
 				    				<input type = "submit" class = "btn btn-block btn-primary" value = "Görüntüle">
 				    			</form>
 				    		</td>
-				    		<td class="col-md-3">
+				    		<td class="col-md-2">
 				    			<form action="index.jsp" method = "get">
 				    				<input type = "hidden" name = "action" value = "deleteCv">
 				    				<input type = "hidden" name = "willDeletedCvId" value = "${cv.idCv}" >
 				    				<input type = "submit" class = "btn btn-block btn-danger" value = "Sil">
+				    			</form>
+				    		</td>
+				    		<td class="col-md-2">
+				    			<form action="Edit" method = "post">
+				    				<input type = "hidden" name = "action" value = "updateCv">
+				    				<input type = "hidden" name = "updateCvId" value = "${cv.idCv}" >
+				    				<input type = "submit" class = "btn btn-block btn-primary" value = "Düzenle">
 				    			</form>
 				    		</td>
 				    	</tr>

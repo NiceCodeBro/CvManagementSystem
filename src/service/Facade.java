@@ -29,6 +29,10 @@ public class Facade {
 		return instance;
 	}
 	
+	public CvContent getCvforUpdate(int cvId,Member m){
+		return cvService.getCvforUpdate(cvId, m);
+	}
+	
 	public boolean addCv(CvContent c,Member m){
 		return cvService.addCv(c, m);
 	}
@@ -49,6 +53,9 @@ public class Facade {
 	public void deleteCvByRole(int cvId)
 	{
 		cvService.deleteCvByRole(cvId);
+	}
+	public boolean deleteCvforUpdate(int cvId){
+		return cvService.deleteCvforUpdate(cvId);
 	}
 	
 	public CvView.CvContent getCvContetn(int cvId)
