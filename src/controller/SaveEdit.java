@@ -13,10 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import model.Member;
-import model.MemberSingleton;
 import modelContent.Certificate;
 import modelContent.Courses;
 import modelContent.CvContent;
@@ -38,14 +38,24 @@ public class SaveEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private Facade facade = Facade.getInstance();
-	private MemberSingleton member = MemberSingleton.getInstance();
+	//private MemberSingleton member = MemberSingleton.getInstance();
        
     
     public SaveEdit() {
         super();
         // TODO Auto-generated constructor stub
     }
-
+	private Member getLoggedMemberInf(HttpSession session)
+	{
+		Member member = new Member();
+		member.setMemberName((String)session.getAttribute("loggedUserName"));  
+		member.setMemberPass((String)session.getAttribute("loggedPassword"));
+		member.setRole((String)session.getAttribute("loggedMemberRole"));
+		member.setStatus(true);
+		member.setIdMember( (Integer)session.getAttribute("loggedMemberId"));
+	
+		return member;
+	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -55,11 +65,8 @@ public class SaveEdit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");	
     	
-    	Member m = new Member();
-    	m.setIdMember(member.getId());
-    	m.setMemberName(member.getUsername());
-    	m.setMemberPass(member.getPassword());
-    	
+    	Member m = getLoggedMemberInf(request.getSession(true));
+
     	String Id= request.getParameter("cvNum");
     	Integer cvId = Integer.valueOf(Id);
     	try{
@@ -210,14 +217,14 @@ public class SaveEdit extends HttpServlet {
     	DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
 		String oldPhoto = request.getParameter("oldPhoto");
-		
+    	Member m = getLoggedMemberInf(request.getSession(false));
     	Part part = request.getPart("file");
     	
     	if(part.getContentType().contains("image")){
     		try{
     			InputStream fileContent = part.getInputStream();
     	    	
-    	    	name = String.valueOf(member.getId())+dateFormat.format(date)+"."+part.getContentType().substring(6);
+    	    	name = String.valueOf(m.getIdMember())+dateFormat.format(date)+"."+part.getContentType().substring(6);
     	    	
     	    	File dir = new File(request.getRealPath("")+"/profilePhoto");
     	    	if(!dir.exists()){

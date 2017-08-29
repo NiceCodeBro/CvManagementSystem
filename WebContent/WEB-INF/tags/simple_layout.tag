@@ -22,8 +22,23 @@
  <head>
  <title>${title}</title>
 <script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery.js"></script>
+
 <script src="js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<script src="js/jquery.dataTables.min.js"></script>
+
+<script src="js/dataTables.bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/buttons.bootstrap.min.css"/>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#cvTable').DataTable();
+		} );
+</script>
      <jsp:invoke fragment="head_area"/>
  </head>
  <body>

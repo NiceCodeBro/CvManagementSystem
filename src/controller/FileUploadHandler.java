@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
@@ -26,7 +27,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import model.Member;
-import model.MemberSingleton;
 import modelContent.Certificate;
 import modelContent.Courses;
 import modelContent.CvContent;
@@ -51,18 +51,31 @@ public class FileUploadHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	private Facade facade = Facade.getInstance();
-	private MemberSingleton member = MemberSingleton.getInstance();
+	//private MemberSingleton member = MemberSingleton.getInstance();
+
+	private Member getLoggedMemberInf(HttpSession session)
+	{
+		Member member = new Member();
+		member.setMemberName((String)session.getAttribute("loggedUserName"));  
+		member.setMemberPass((String)session.getAttribute("loggedPassword"));
+		member.setRole((String)session.getAttribute("loggedMemberRole"));
+		member.setStatus(true);
+		member.setIdMember( (Integer)session.getAttribute("loggedMemberId"));
+	
+		return member;
+	}
 	
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	request.setCharacterEncoding("UTF-8");	
     	
-    	Member m = new Member();
-    	m.setIdMember(member.getId());
-    	m.setMemberName(member.getUsername());
-    	m.setMemberPass(member.getPassword());
+    	Member m = getLoggedMemberInf(request.getSession(false));
     	
+//    	m.setIdMember(member.getId());
+//    	m.setMemberName(member.getUsername());
+//    	m.setMemberPass(member.getPassword());
+//    	
     	CvContent c = setCv(request);
     		facade.addCv(c,m);
     		System.out.println("Cv ekleme başarılı.");
@@ -84,8 +97,9 @@ public class FileUploadHandler extends HttpServlet {
     	String personalOfficePhone = request.getParameter("personalOfficePhone");
     	String personalAddress = request.getParameter("personalAddress");
     	String personalMaritalStatus = request.getParameter("personalMaritalStatus");
+    	System.out.println("xxx1");
     	String personalPhoto = getValue(request);
-
+    	System.out.println("xxx2");
     	
     //Job Kısmı için veri çekimi
     	
@@ -204,20 +218,21 @@ public class FileUploadHandler extends HttpServlet {
     	String name = null;
     	DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
+		Member member = getLoggedMemberInf(request.getSession(false));
 		try{
 	
-    	Part part = request.getPart("file");
-    	InputStream fileContent = part.getInputStream();
-    	
-    	name = String.valueOf(member.getId())+dateFormat.format(date)+"."+part.getContentType().substring(6);
-    	
-    	File dir = new File(request.getRealPath("")+"/profilePhoto");
-    	if(!dir.exists()){
-    		dir.mkdir();
-    	}
-    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
-    	
-    	 Files.copy(fileContent, file.toPath());
+	    	Part part = request.getPart("file");
+	    	InputStream fileContent = part.getInputStream();
+	    
+	    	name = String.valueOf(member.getIdMember())+dateFormat.format(date)+"."+part.getContentType().substring(6);
+	    	
+	    	File dir = new File(request.getRealPath("")+"/profilePhoto");
+	    	if(!dir.exists()){
+	    		dir.mkdir();
+	    	}
+	    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
+	    	
+	    	Files.copy(fileContent, file.toPath());
 		}catch(Exception e){
 			e.printStackTrace();
 		}

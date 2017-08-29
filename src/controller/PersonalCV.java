@@ -1,12 +1,7 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,21 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.HttpSession;
 
 import CvView.CreatePdf;
 import model.Member;
-import model.MemberSingleton;
-import modelContent.Certificate;
-import modelContent.Courses;
-import modelContent.CvContent;
-import modelContent.Education;
-import modelContent.ForeignLanguage;
-import modelContent.JobExperience;
-import modelContent.Personal;
-import modelContent.Project;
-import modelContent.Publication;
-import modelContent.Skill;
+
 import service.Facade;
 
 
@@ -37,21 +22,35 @@ public class PersonalCV extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private Facade facade = Facade.getInstance();
-	private MemberSingleton member = MemberSingleton.getInstance();
+//	private MemberSingleton member = MemberSingleton.getInstance();
 	
     public PersonalCV() {
         super();
         // TODO Auto-generated constructor stub
     }
+	private Member getLoggedMemberInf(HttpSession session)
+	{
+		Member member = new Member();
+		member.setMemberName((String)session.getAttribute("loggedUserName"));  
+		member.setMemberPass((String)session.getAttribute("loggedPassword"));
+		member.setRole((String)session.getAttribute("loggedMemberRole"));
+		member.setStatus(true);
+		member.setIdMember( (Integer)session.getAttribute("loggedMemberId"));
+   	 System.out.println(member.getMemberName() + " " + member.getMemberPass() + " " + member.getRole());
 
+		return member;
+	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter( "action" );
+		Member member = getLoggedMemberInf(request.getSession(true));
+
 		if(action == null)
 		{	
-			if(MemberSingleton.getInstance().getRole().equals("Member"))
+			
+			if(member.getRole().equals("Member"))
 			{
-				request.setAttribute("listOfCv", facade.listCvbyMember());
+				request.setAttribute("listOfCv", facade.listCvbyMember(member));
 			}
 			else
 			{	
@@ -65,7 +64,7 @@ public class PersonalCV extends HttpServlet {
 			if(action.equals("deleteCv"))
 			{				
 				int idCv = Integer.parseInt(request.getParameter("willDeletedCvId"));
-				facade.deleteCvByRole(idCv);
+				facade.deleteCvByRole(idCv,member);
 				response.sendRedirect("index.jsp");
 			}
 			else if (action.equals("viewCv"))

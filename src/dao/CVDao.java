@@ -3,6 +3,8 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +15,6 @@ import com.mysql.jdbc.PreparedStatement;
 import model.Cv;
 import model.Information;
 import model.Member;
-import model.MemberSingleton;
 
 import modelContent.*;
 import util.DBUtil;
@@ -23,8 +24,11 @@ public class CVDao extends DBUtil{
 	Connection con = null;
 	PreparedStatement ps;
 	
+	Member member;
+	
 
-	public CvView.CvContent getCvContetn(int cvId)
+
+	public CvView.CvContent getCvContent(int cvId)
 	{
 		CvView.CvContent cvContent = new CvView.CvContent();
 		Connection con = null;
@@ -107,6 +111,7 @@ public class CVDao extends DBUtil{
 						personal.setPersonalCellPhone(content);
 					else if(allInf.get(i).getTitle().equals("Personal Info Title"))
 						personal.setPersonalTitle(content);
+			
 				}
 				else if(allInf.get(i).getParentId().equals("2"))
 				{
@@ -537,12 +542,18 @@ public class CVDao extends DBUtil{
 			int memberId = m.getIdMember();
 			System.out.println("DAO: Üye ID'si alındı: "+ memberId);
 			
+			
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			LocalDate localDate = LocalDate.now();
+			
 			//Cv ekleme
-			String query = "INSERT INTO Cv(memberId,cvName,deletedCv) VALUES(?,?,?)";
+			String query = "INSERT INTO Cv(memberId,cvName,deletedCv,cvAddDate) VALUES(?,?,?,?)";
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 				ps.setInt(1, memberId);
 				ps.setString(2, c.getPersonal().getCvName());
 				ps.setInt(3, 0);
+				ps.setString(4, dtf.format(localDate));
 			int isInsert = ps.executeUpdate();
 			
 			//Eklenen Cvnin ID si
@@ -559,8 +570,14 @@ public class CVDao extends DBUtil{
 			insertContentDB(cvId, 11, c.getPersonal().getPersonalOfficePhone());
 			insertContentDB(cvId, 13, c.getPersonal().getPersonalAddress());
 			insertContentDB(cvId, 5, c.getPersonal().getPersonalMaritalStatus());
-			insertContentDB(cvId, 9,c.getPersonal().getPersonalPhoto());
 			
+			if(c.getPersonal().getPersonalPhoto().contains("ation"))
+				insertContentDB(cvId, 9,"");
+			else
+				insertContentDB(cvId, 9,c.getPersonal().getPersonalPhoto());
+
+			
+
 			System.out.println("DAO: Personal Info bilgisi Content tablosuna eklendi ");
 			
 			//Job Experience ekleme String[] ifade olduğu için loop yapısı kullanıldı
@@ -654,22 +671,25 @@ public class CVDao extends DBUtil{
 		
 	}
 	
-	public List<Cv> listCvbyMember(){
+	public List<Cv> listCvbyMember(Member member){
 		Connection con = null;
 		List<Cv> listCv = new ArrayList<Cv>();
 		try{
 			con = getConnection();
 			
-			String query = "SELECT * FROM Cv WHERE memberId = ? AND deletedCv = 0";
+			String query = "SELECT Member.memberName,Member.role, Cv.cvName ,Cv.idCv,Cv.memberId, Cv.deletedCv, Cv.cvAddDate FROM Cv JOIN Member WHERE memberId = ? AND deletedCv = 0 and memberId = Member.idMember";
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
-			ps.setInt(1, MemberSingleton.getInstance().getId());
+			ps.setInt(1, member.getIdMember());
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				Cv cv = new Cv();
+				cv.setOwnerUsername(rs.getString("memberName"));
+				cv.setOwnerRole(rs.getString("role"));
 				cv.setCvName(rs.getString("cvName"));
 				cv.setIdCv(rs.getInt("idCv"));
 				cv.setMemberId(rs.getInt("memberId"));
 				cv.setDeletedCv(rs.getInt("deletedCv"));
+				cv.setAddDate(rs.getString("cvAddDate"));
 					listCv.add(cv);
 			}
 			rs.close();
@@ -689,16 +709,19 @@ public class CVDao extends DBUtil{
 		try{
 			con = getConnection();
 			
-			String query = "SELECT * FROM Cv";
+			//String query = "SELECT * FROM Cv";
+			String query = "SELECT Member.memberName,Member.role, Cv.cvName ,Cv.idCv,Cv.memberId,Cv.deletedCv, Cv.cvAddDate FROM CvSystem.Cv JOIN CvSystem.Member on Cv.memberId = Member.idMember";
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				Cv cv = new Cv();
-				
+				cv.setOwnerUsername(rs.getString("memberName"));
+				cv.setOwnerRole(rs.getString("role"));
 				cv.setCvName(rs.getString("cvName"));
 				cv.setIdCv(rs.getInt("idCv"));
 				cv.setMemberId(rs.getInt("memberId"));
 				cv.setDeletedCv(rs.getInt("deletedCv"));
+				cv.setAddDate(rs.getString("cvAddDate"));
 					listCv.add(cv);
 			}
 			rs.close();
@@ -712,11 +735,11 @@ public class CVDao extends DBUtil{
 		return listCv;
 	}
 	
-	public void deleteCvByRole(int cvId)
+	public void deleteCvByRole(int cvId, Member member)
 	{
 		Connection con = null;
 		
-		if(MemberSingleton.getInstance().getRole().equals("Member"))
+		if(member.getRole().equals("Member"))
 		{
 			try
 			{
@@ -733,7 +756,7 @@ public class CVDao extends DBUtil{
 				e.printStackTrace();
 			}
 		}
-		else if(MemberSingleton.getInstance().getRole().equals("Manager"))
+		else if(member.getRole().equals("Manager"))
 		{
 			try
 			{

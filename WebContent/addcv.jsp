@@ -207,12 +207,12 @@
 						  <span class="custom-control-description">Married</span>
 						</label>
 						</div>
-			                    <!-- Photo upload section -->
-			          
-						             <!-- image-preview-filename input [CUT FROM HERE]-->
+						
+			             <!-- Photo upload section -->
+						 <!-- image-preview-filename input [CUT FROM HERE]-->
 			           <div class="form-group">
 			            <label class="control-label">Profil Resmi</label>
-			             <input type="file" name="file" class="form-control" />
+			             <input type="file" name="file" class="form-control" value="" />
 			          </div>
 								
 				

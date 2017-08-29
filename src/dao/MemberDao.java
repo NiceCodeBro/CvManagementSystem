@@ -5,15 +5,16 @@ import java.sql.ResultSet;
 
 import com.mysql.jdbc.PreparedStatement;
 
-import model.MemberSingleton;
+import model.Member;
 import util.DBUtil;
 
 public class MemberDao extends DBUtil{
 	
-	public int loginCheck(String loginUserName, String loginPassword)
+	public Member getMemberInf(String loginUserName, String loginPassword)
 	{
 		Connection con = null;
-		MemberSingleton member = MemberSingleton.getInstance();
+		//MemberSingleton member = MemberSingleton.getInstance();
+		Member member = new Member();
 		int id=0;
 		String username="";
 		String pass = "";
@@ -36,23 +37,25 @@ public class MemberDao extends DBUtil{
 			
 			if(username.equals(loginUserName) && pass.equals(loginPassword)) //if success
 			{
-				member.setId(id);
-				member.setUsername(username);
-				member.setPassword(pass);
+				member.setIdMember(id);
+				member.setMemberName(username);
+				member.setMemberPass(pass);
 				member.setRole(role);
-				
-				return 0;
+				member.setStatus(true);
+				return member;
 			}
 			else 	//invalid username or password
 			{
-				return -1;
+				member.setStatus(false);
+				return member;
 			}
 			
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			member.setStatus(false);
 		}
-		return 0;
+		return member;
 	}
 }

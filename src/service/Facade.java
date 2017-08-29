@@ -37,22 +37,20 @@ public class Facade {
 		return cvService.addCv(c, m);
 	}
 	
-	public List<Cv> listCvbyMember(){
-		return cvService.listCvbyMember();
+	public List<Cv> listCvbyMember(Member member){
+		return cvService.listCvbyMember(member);
 	}
 	public List<Cv> listCvbyManager(){
 		return cvService.listCvByManager();
 	}
-	public boolean loginCheck(String loginUserName, String loginPassword)
+	public Member getMemberInf(String loginUserName, String loginPassword)
 	{
-		if(memberService.loginCheck(loginUserName, loginPassword) == 0)
-			return true;
-		else
-			return false;
+		return memberService.getMemberInf(loginUserName, loginPassword) ;
 	}
-	public void deleteCvByRole(int cvId)
+
+	public void deleteCvByRole(int cvId, Member member)
 	{
-		cvService.deleteCvByRole(cvId);
+		cvService.deleteCvByRole(cvId, member);
 	}
 	public boolean deleteCvforUpdate(int cvId){
 		return cvService.deleteCvforUpdate(cvId);
@@ -60,6 +58,6 @@ public class Facade {
 	
 	public CvView.CvContent getCvContetn(int cvId)
 	{
-		return cvService.getCvContetn(cvId);
+		return cvService.getCvContent(cvId);
 	}
 }

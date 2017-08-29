@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
@@ -26,7 +27,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import model.Member;
-import model.MemberSingleton;
 import modelContent.Certificate;
 import modelContent.Courses;
 import modelContent.CvContent;
@@ -51,7 +51,7 @@ public class EditCv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	private Facade facade = Facade.getInstance();
-	private MemberSingleton member = MemberSingleton.getInstance();
+	//private MemberSingleton member = MemberSingleton.getInstance();
 	
 	
 	
@@ -66,6 +66,7 @@ public class EditCv extends HttpServlet {
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+		
     	if(request.getParameter("action")!=null){
 			String cvId = request.getParameter("updateCvId");
 			Member m = new Member();
@@ -79,10 +80,8 @@ public class EditCv extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("editcv.jsp");
 			view.forward(request, response);
      
-    }
-    
-    
-    
+    	}
+
 	}
   
 }

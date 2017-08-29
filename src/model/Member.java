@@ -5,6 +5,8 @@ public class Member {
 	private int idMember;
 	private String memberName;
 	private String memberPass;
+	private String role="";
+	private boolean status=false;
 
 	public int getIdMember() {
 		return idMember;
@@ -24,6 +26,22 @@ public class Member {
 	public void setMemberPass(String memberPass) {
 		this.memberPass = memberPass;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 	
 	
+	public String toString()
+	{
+		return idMember + " " + memberName + " " + memberPass + " " + role;
+	}
 }

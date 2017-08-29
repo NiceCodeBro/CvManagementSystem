@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
-import model.MemberSingleton;
+import model.Member;
 import service.Facade;
 
 /**
@@ -45,15 +46,22 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		 String username = request.getParameter("LoginUsername");
          String pass = request.getParameter("LoginPassword");
-         
-         if(facade.loginCheck(username, pass))
+
+         Member member = facade.getMemberInf(username, pass);
+ 		
+         if(member.isStatus())
          {
         	 HttpSession sesion = request.getSession(true);
-        	 sesion.putValue("isLoggedIn", "true");
-        	 sesion.setMaxInactiveInterval(20*60);
+        	 sesion.setAttribute("isLoggedIn", "true");
+        	 sesion.setAttribute("loggedUserName", member.getMemberName());
+        	 sesion.setAttribute("loggedPassword", member.getMemberPass());
+        	 sesion.setAttribute("loggedMemberId", member.getIdMember());
+        	 sesion.setAttribute("loggedMemberRole", member.getRole());
         	 
+        	// sesion.setMaxInactiveInterval(20*60);
+        	 System.out.println(member.getMemberName() + " " + member.getMemberPass() + " " + member.getRole());
         	 System.out.println("giriş başarılı");
-        	 System.out.println(MemberSingleton.getInstance().getId() + " " + MemberSingleton.getInstance().getUsername() + " " +  MemberSingleton.getInstance().getPassword() + " " + MemberSingleton.getInstance().getRole() ) ;
+        	// System.out.println(MemberSingleton.getInstance().getId() + " " + MemberSingleton.getInstance().getUsername() + " " +  MemberSingleton.getInstance().getPassword() + " " + MemberSingleton.getInstance().getRole() ) ;
      		request.getRequestDispatcher("login.jsp").forward(request, response);
          }
          else
