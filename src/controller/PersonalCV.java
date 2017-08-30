@@ -31,13 +31,14 @@ public class PersonalCV extends HttpServlet {
 	private Member getLoggedMemberInf(HttpSession session)
 	{
 		Member member = new Member();
-		member.setMemberName((String)session.getAttribute("loggedUserName"));  
-		member.setMemberPass((String)session.getAttribute("loggedPassword"));
-		member.setRole((String)session.getAttribute("loggedMemberRole"));
-		member.setStatus(true);
-		member.setIdMember( (Integer)session.getAttribute("loggedMemberId"));
-   	 System.out.println(member.getMemberName() + " " + member.getMemberPass() + " " + member.getRole());
-
+		if(session.getAttribute("isLoggedIn") == "true"){
+			
+			member.setMemberName((String)session.getAttribute("loggedUserName"));  
+			member.setMemberPass((String)session.getAttribute("loggedPassword"));
+			member.setRole((String)session.getAttribute("loggedMemberRole"));
+			member.setIdMember( (Integer)session.getAttribute("loggedMemberId"));
+	   	 System.out.println(member.getMemberName() + " " + member.getMemberPass() + " " + member.getRole());
+		}
 		return member;
 	}
 	
