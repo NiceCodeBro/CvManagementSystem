@@ -90,7 +90,7 @@
 	
 	<div class="container">
 	  
-		<div class="stepwizard col-md-offset-2">
+		<div class="stepwizard col-md-offset-1">
 		    <div class="stepwizard-row setup-panel">
 		      
 		       <div class="stepwizard-step">
@@ -98,52 +98,52 @@
 		        <p>CV</p>
 		      </div>
 		         <div class="stepwizard-step">
-		        <a href="#step-1" type="button" class="btn btn-default btn-circle">2</a>
+		        <a href="#step-1" type="button" disabled="disabled" class="btn btn-default btn-circle">2</a>
 		        <p>Personal Info</p>
 		      </div>
 		      
 		      <div class="stepwizard-step">
-		        <a href="#step-3" type="button" class="btn btn-default btn-circle">3</a>
+		        <a href="#step-3" type="button" disabled="disabled" class="btn btn-default btn-circle">3</a>
 		        <p>Job Experience</p>
 		      </div>
 		      
 		      <div class="stepwizard-step">
-		        <a href="#step-4" type="button" class="btn btn-default btn-circle">4</a>
+		        <a href="#step-4" type="button" disabled="disabled" class="btn btn-default btn-circle">4</a>
 		        <p>Education</p>
 		      </div>
 		      
 		       <div class="stepwizard-step">
-		        <a href="#step-5" type="button" class="btn btn-default btn-circle">5</a>
+		        <a href="#step-5" type="button" disabled="disabled" class="btn btn-default btn-circle">5</a>
 		        <p>Projects</p>
 		      </div>
 		      
 		      <div class="stepwizard-step">
-		        <a href="#step-6" type="button" class="btn btn-default btn-circle">6</a>
+		        <a href="#step-6" type="button" disabled="disabled" class="btn btn-default btn-circle">6</a>
 		        <p>Foreign Languages</p>
 		      </div>
 		      
 		             <div class="stepwizard-step">
-		        <a href="#step-7" type="button" class="btn btn-default btn-circle">7</a>
+		        <a href="#step-7" type="button"  disabled="disabled"class="btn btn-default btn-circle">7</a>
 		        <p>Skills</p>
 		      </div>
 		      
 		             <div class="stepwizard-step">
-		        <a href="#step-8" type="button" class="btn btn-default btn-circle">8</a>
+		        <a href="#step-8" type="button" disabled="disabled" class="btn btn-default btn-circle">8</a>
 		        <p>Courses And Seminars</p>
 		      </div>
 		      
 		             <div class="stepwizard-step">
-		        <a href="#step-9" type="button" class="btn btn-default btn-circle">9</a>
+		        <a href="#step-9" type="button" disabled="disabled" class="btn btn-default btn-circle">9</a>
 		        <p>Certificates</p>
 		      </div>
 		      
 		             <div class="stepwizard-step">
-		        <a href="#step-10" type="button" class="btn btn-default btn-circle">10</a>
+		        <a href="#step-10" type="button" disabled="disabled" class="btn btn-default btn-circle">10</a>
 		        <p>Publications</p>
 		      </div>
 		      
 		             <div class="stepwizard-step">
-		        <a href="#step-11" type="button" class="btn btn-default btn-circle">11</a>
+		        <a href="#step-11" type="button" disabled="disabled" class="btn btn-default btn-circle">11</a>
 		        <p>Submit</p>
 		      </div>
 		      
@@ -159,7 +159,7 @@
 			          <h3>CV</h3>
 			           <div class="form-group">
 			            <label class="control-label">CV Name</label>
-			            <input name="cvName" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter CV Name" /> 
+			            <input name="cvName" required maxlength="45" type="text" class="form-control" placeholder="Enter CV Name" /> 
 			          </div>
 			          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
 			        </div>
@@ -184,28 +184,32 @@
 			          
 			          <div class="form-group">
 			            <label class="control-label">Name</label>
-			            <input name="personalName" maxlength="45" type="text" class="form-control" placeholder="Enter Name" /> 
+			            <input name="personalName" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Name" /> 
+			          </div>
+			          <div class="form-group">
+			            <label class="control-label">Mail</label>
+			            <input name="personalMail" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Mail Adress" /> 
 			          </div>
 			            <div class="form-group">
 			              <label class="control-label">Title</label>
-			            <input name="personalTitle" maxlength="45" type="text" class="form-control" placeholder="Enter Your Title. (Like Software Developer)" /> 
+			            <input name="personalTitle" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Your Title. (Like Software Developer)" /> 
 			          </div>
 			          <div class="form-group">
 			            <label class="control-label">Objectives</label>
-			            <textarea name="personalObjectives" class="form-control" placeholder="An objective is a short statement that clarifies your goals."></textarea>
+			            <textarea name="personalObjectives" required="required" class="form-control" placeholder="An objective is a short statement that clarifies your goals."></textarea>
 			          </div>
 			          
 			           <div class="form-group">
 			              <label class="control-label">Date Of Birth</label>
 			            	<div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-					    		<input name="personalDateofBirth" class="form-control" type="text" maxlength="10" />
+					    		<input name="personalDateofBirth" required="required" class="form-control" type="text" maxlength="10" />
 					    		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 			          </div>
 			          
 			          <div class="form-group">
 			            <label class="control-label">Cell Phone</label>
-			            <input name="personalCellPhone" max="11" type="text" class="form-control" placeholder="Enter your cell phone.">
+			            <input name="personalCellPhone" required="required" max="11" type="text" class="form-control" placeholder="Enter your cell phone.">
 			          </div>
 			          
 			         <div class="form-group">
@@ -215,7 +219,7 @@
 			          
 			           <div class="form-group">
 			            <label class="control-label">Adress</label>
-			            <textarea name="personalAddress" class="form-control" placeholder="Enter your adress."></textarea>
+			            <textarea name="personalAddress" required="required" class="form-control" placeholder="Enter your adress."></textarea>
 			          </div>
 			          	<div> 
 			          	<label class="control-label">Marital Status</label>
@@ -300,20 +304,20 @@
 	          <div id="educationInf">
 		          <div class="form-group">
 		            <label class="control-label">School Name</label>
-		            <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
+		            <input name="eduSchoolName" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
 		          </div>
 		          
 		          <div class="form-group">
 		            <label class="control-label">School Departman</label>
-		            <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
+		            <input name="eduSchoolDepartman" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
 		          </div>
 		          
 		           <div class="form-group">
 		            <label class="control-label">Education Date</label>							
 					<div class="input-group input-daterange">
-					    <input name="eduStartDate" type="text" class="form-control" value="2012-04-05">
+					    <input name="eduStartDate" required="required" type="text" class="form-control" value="2012-04-05">
 					    <div class="input-group-addon">to</div>
-					    <input name="eduEndDate" type="text" class="form-control" value="2012-04-19">
+					    <input name="eduEndDate" required="required" type="text" class="form-control" value="2012-04-19">
 					</div>												
 		          </div>
 		          
@@ -378,12 +382,12 @@
 		          	<!-- ekleme butonu -->
 		          <div class="col-md-6">
 			          <div class="form-group">
-			            <input name="foreignName" maxlength="45" type="text" class="form-control"
+			            <input name="foreignName" required="required" maxlength="45" type="text" class="form-control"
 												placeholder="Enter language you know." />
 			          </div>
 			      </div>
 			      <div class="col-md-6">
-			         <select class="form-control" name="foreignLevel">
+			         <select class="form-control" required="required" name="foreignLevel">
 						  <option>Beginning</option>
 						  <option>Intermediate</option>
 						  <option>Good</option>
@@ -410,7 +414,7 @@
         <div class="col-md-12">
           <h3> Skills </h3>
   		
-  		<input type="text" name="skillDescription" value="" data-role="tagsinput" />
+  		<input type="text" name="skillDescription" required="required" value="" data-role="tagsinput" />
         </div>
         <button style="margin-top:15px;" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
       </div>

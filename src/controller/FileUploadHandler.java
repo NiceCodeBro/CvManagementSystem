@@ -97,6 +97,7 @@ public class FileUploadHandler extends HttpServlet {
     	String personalOfficePhone = request.getParameter("personalOfficePhone");
     	String personalAddress = request.getParameter("personalAddress");
     	String personalMaritalStatus = request.getParameter("personalMaritalStatus");
+    	String personalMail = request.getParameter("personalMail");
     	System.out.println("xxx1");
     	String personalPhoto = getValue(request);
     	System.out.println("xxx2");
@@ -191,6 +192,7 @@ public class FileUploadHandler extends HttpServlet {
     		per.setPersonalAddress(personalAddress);
     		per.setPersonalMaritalStatus(personalMaritalStatus);
     		per.setPersonalPhoto(personalPhoto);
+    		per.setPersonalMail(personalMail);
     		
     	
     	
@@ -219,22 +221,30 @@ public class FileUploadHandler extends HttpServlet {
     	DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
 		Member member = getLoggedMemberInf(request.getSession(false));
-		try{
-	
-	    	Part part = request.getPart("file");
-	    	InputStream fileContent = part.getInputStream();
-	    
-	    	name = String.valueOf(member.getIdMember())+dateFormat.format(date)+"."+part.getContentType().substring(6);
-	    	
-	    	File dir = new File(request.getRealPath("")+"/profilePhoto");
-	    	if(!dir.exists()){
-	    		dir.mkdir();
-	    	}
-	    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
-	    	
-	    	Files.copy(fileContent, file.toPath());
-		}catch(Exception e){
-			e.printStackTrace();
+		
+		Part part = request.getPart("file");
+		
+		if(part.getContentType().contains("image")){
+			try{
+		    	
+		    		InputStream fileContent = part.getInputStream();
+			    	
+			    	name = String.valueOf(member.getIdMember())+dateFormat.format(date)+"."+part.getContentType().substring(6);
+			    	
+			    	File dir = new File(request.getRealPath("")+"/profilePhoto");
+			    	if(!dir.exists()){
+			    		dir.mkdir();
+			    	}
+			    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
+			    	
+			    	Files.copy(fileContent, file.toPath());
+		    	
+		    	
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else{
+			return "";
 		}
     	System.out.println(request.getRealPath("")+"/profilePhoto" + File.separator + name);
     	return "profilePhoto" + File.separator + name;

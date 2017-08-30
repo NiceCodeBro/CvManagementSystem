@@ -29,8 +29,8 @@ public class Facade {
 		return instance;
 	}
 	
-	public CvContent getCvforUpdate(int cvId,Member m){
-		return cvService.getCvforUpdate(cvId, m);
+	public CvContent getCvforUpdate(int cvId){
+		return cvService.getCvforUpdate(cvId);
 	}
 	
 	public boolean addCv(CvContent c,Member m){

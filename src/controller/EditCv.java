@@ -53,7 +53,17 @@ public class EditCv extends HttpServlet {
 	private Facade facade = Facade.getInstance();
 	//private MemberSingleton member = MemberSingleton.getInstance();
 	
+	private Member getLoggedMemberInf(HttpSession session)
+	{
+		Member member = new Member();
+		member.setMemberName((String)session.getAttribute("loggedUserName"));  
+		member.setMemberPass((String)session.getAttribute("loggedPassword"));
+		member.setRole((String)session.getAttribute("loggedMemberRole"));
+		member.setStatus(true);
+		member.setIdMember( (Integer)session.getAttribute("loggedMemberId"));
 	
+		return member;
+	}
 	
     @Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,15 +76,13 @@ public class EditCv extends HttpServlet {
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		
+		Member m = getLoggedMemberInf(request.getSession(true));
     	if(request.getParameter("action")!=null){
 			String cvId = request.getParameter("updateCvId");
-			Member m = new Member();
-			m.setIdMember(1);
 			
 			CvContent c = new CvContent();
 			
-			c = facade.getCvforUpdate(Integer.valueOf(cvId),m);
+			c = facade.getCvforUpdate(Integer.valueOf(cvId));
 			request.setAttribute("cvContent", c);
 			request.setAttribute("cvNum", cvId);
 			RequestDispatcher view = request.getRequestDispatcher("editcv.jsp");

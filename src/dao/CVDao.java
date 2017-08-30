@@ -197,7 +197,7 @@ public class CVDao extends DBUtil{
 	}
 	
 	
-	public CvContent getCvforUpdate(int cvId,Member m){
+	public CvContent getCvforUpdate(int cvId){
 		Connection con = null;
 		CvContent c = new CvContent();
 		String query="";
@@ -220,7 +220,7 @@ public class CVDao extends DBUtil{
 			
 			//Personal Info 
 			query = "SELECT * FROM Content WHERE cvId = ? AND (titleId = 8 OR titleId = 29 OR titleId = 10 OR"
-					+ " titleId = 4 OR titleId = 28 OR titleId = 11 OR titleId = 13 OR titleId = 5 OR titleId = 9)";
+					+ " titleId = 4 OR titleId = 28 OR titleId = 11 OR titleId = 13 OR titleId = 5 OR titleId = 9 OR titleId=40)";
 			ps = (PreparedStatement) con.prepareStatement(query);
 				ps.setInt(1, cvId);
 			rs = ps.executeQuery();
@@ -245,6 +245,8 @@ public class CVDao extends DBUtil{
 				per.setPersonalMaritalStatus(rs.getString("content"));
 				rs.absolute(9);
 				per.setPersonalPhoto(rs.getString("content"));
+				rs.absolute(10);
+				per.setPersonalMail(rs.getString("content"));
 			
 			//Job Experiences End
 				
@@ -570,6 +572,7 @@ public class CVDao extends DBUtil{
 			insertContentDB(cvId, 11, c.getPersonal().getPersonalOfficePhone());
 			insertContentDB(cvId, 13, c.getPersonal().getPersonalAddress());
 			insertContentDB(cvId, 5, c.getPersonal().getPersonalMaritalStatus());
+			insertContentDB(cvId, 40, c.getPersonal().getPersonalMail());
 			
 			if(c.getPersonal().getPersonalPhoto().contains("ation"))
 				insertContentDB(cvId, 9,"");

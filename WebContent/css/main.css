@@ -1,14 +1,13 @@
-
-
 .stepwizard-step p {
     margin-top: 10px;
+    width:80px;
 }
 .stepwizard-row {
     display: table-row;
 }
 .stepwizard {
     display: table;
-    width: 80%;
+    width: 90%;
     position: relative;
 }
 .stepwizard-step button[disabled] {
@@ -29,6 +28,7 @@
     display: table-cell;
     text-align: center;
     position: relative;
+    padding-right:15px;
 }
 .btn-circle {
     width: 30px;
@@ -39,8 +39,6 @@
     line-height: 1.428571429;
     border-radius: 15px;
 }
-
-
 
 .image-preview-input {
     position: relative;

@@ -45,6 +45,7 @@ public class JobExperience {
 		if(jobCompanyName == null){
 			return 0;
 		}
+		System.out.println(jobCompanyName.length);
 		return jobCompanyName.length;
 	}
 	@Override

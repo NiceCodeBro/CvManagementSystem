@@ -90,7 +90,7 @@
 	
 	<div class="container">
 	  
-		<div class="stepwizard col-md-offset-2">
+		<div class="stepwizard col-md-offset-1">
 		    <div class="stepwizard-row setup-panel">
 		      
 		       <div class="stepwizard-step">
@@ -186,6 +186,10 @@
 			          <div class="form-group">
 			            <label class="control-label">Name</label>
 			            <input name="personalName" value="${cvContent.personal.personalName}" maxlength="45" type="text" class="form-control" placeholder="Enter Name" /> 
+			          </div>
+			          <div class="form-group">
+			            <label class="control-label">Mail</label>
+			            <input name="personalMail" value="${cvContent.personal.personalMail}" maxlength="45" type="text" class="form-control" placeholder="Enter Mail Adress" /> 
 			          </div>
 			            <div class="form-group">
 			              <label class="control-label">Title</label>

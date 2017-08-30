@@ -72,10 +72,10 @@ public class SaveEdit extends HttpServlet {
     	try{
     	CvContent c = setCv(request);
     		facade.addCv(c,m);
-    		System.out.println("Servlet SaveEdit: Cv ekleme başarılı.");
+    		System.out.println("  Servlet SaveEdit: Cv ekleme başarılı.");
     		
         	facade.deleteCvforUpdate(cvId);
-        	System.out.println("Servlet SaveEdit: Eski cv'yi silme başarılı.");
+        	System.out.println("  Servlet SaveEdit: Eski cv'yi silme başarılı.");
     	}catch(Exception e){
     		e.printStackTrace();
     	}
@@ -96,6 +96,7 @@ public class SaveEdit extends HttpServlet {
     	String personalOfficePhone = request.getParameter("personalOfficePhone");
     	String personalAddress = request.getParameter("personalAddress");
     	String personalMaritalStatus = request.getParameter("personalMaritalStatus");
+    	String personalMail = request.getParameter("personalMail");
     	String personalPhoto = getValue(request);
 
     	
@@ -189,6 +190,7 @@ public class SaveEdit extends HttpServlet {
     		per.setPersonalAddress(personalAddress);
     		per.setPersonalMaritalStatus(personalMaritalStatus);
     		per.setPersonalPhoto(personalPhoto);
+    		per.setPersonalMail(personalMail);
     		
     	
     	

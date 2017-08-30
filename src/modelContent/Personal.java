@@ -13,6 +13,7 @@ public class Personal {
 	private String personalAddress;
 	private String personalMaritalStatus;
 	private String personalPhoto;
+	private String personalMail;
 	
 	
 	
@@ -75,7 +76,16 @@ public class Personal {
 	}
 	public void setPersonalPhoto(String personalPhoto) {
 		this.personalPhoto = personalPhoto;
+		
 	}
+	
+	public String getPersonalMail() {
+		return personalMail;
+	}
+	public void setPersonalMail(String personalMail) {
+		this.personalMail = personalMail;
+	}
+	
 	@Override
 	public String toString() {
 		return "Personal [cvName=" + cvName + ", personalName=" + personalName + ", personalTitle=" + personalTitle
