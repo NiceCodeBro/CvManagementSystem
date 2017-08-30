@@ -12,10 +12,20 @@
 <link href="css/datepicker.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css">
 
-
+<style>
+#imagePreview {
+    width: 180px;
+    height: 180px;
+    background-position: center center;
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+    background-image:url("${cvContent.personal.personalPhoto}");
+}
+</style>
 
 		
-		<script>
+		<script type="text/javascript">
 			$(function() {
 				$("#datepicker").datepicker({
 					autoclose : true,
@@ -36,25 +46,27 @@
 	            var checkCount = 1;
 	            $("#addCheckboxJob").click(function (e) {
 	                e.preventDefault();
-	                $("#ayracJob").append('<div class="col-md-12"><div id="isDeneyimi"><div class="form-group"><label class="control-label">Company Name</label><input name="jobCompanyName" maxlength="45" type="text" class="form-control"placeholder="Enter Company Name" /></div><div class="form-group"><label class="control-label">Title</label><input name="jobTitle" maxlength="45" type="text" class="form-control"placeholder="Enter Title" /></div><div class="form-group"><label class="control-label">Working Date</label><div class="input-group input-daterange"><input name="jobStartDate" type="text" class="form-control" value="2012-04-05"><div class="input-group-addon">to</div><input name="jobEndDate" type="text" class="form-control" value="2012-04-19"></div></div><div class="form-group"><label class="control-label">Açıklama</label><textarea name="jobDescription" class="form-control" placeholder="Açıklama"></textarea></div></div></div><hr id="ayracJob" style="width: 100%;margin-bottom:15px;color: black; height: 1px; background-color:black;" />');
+	                $("#ayracJob").append('<div class="row"> <div class="col-md-12"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> <div id="isDeneyimi"> <div class="form-group"> <label class="control-label">Company Name</label> <input name="jobCompanyName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">Title</label> <input name="jobTitle" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Working Date</label> <div class="input-group input-daterange"> <input name="jobStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="jobEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="jobDescription" class="form-control" placeholder="Açıklama" ></textarea> </div> </div> </div> </div>');
 	            });
 
 	            $("#addCheckboxEdu").click(function (e) {
 	                e.preventDefault();
-	                $("#ayracEdu").append('<div class="col-md-12"> <div id="educationInf"> <div class="form-group"> <label class="control-label">School Name</label> <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">School Departman</label> <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Education Date</label> <div class="input-group input-daterange"> <input name="eduStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="eduEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea> </div> </div> </div> <hr id="ayracEdu" style="width: 100%; color: black; height: 1px; background-color:black;" />');
-	                	                	            });
+	                $("#ayracEdu").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <div id="educationInf"> <div class="form-group"> <label class="control-label">School Name</label> <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">School Departman</label> <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Education Date</label> <div class="input-group input-daterange"> <input name="eduStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="eduEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea> </div> </div> </div> </div> <div id="ayracEdu"></div>');  });
 	            $("#addCheckboxForeign").click(function (e) {
 	                e.preventDefault();
-	                $("#ayracForeign").append('<div class="col-md-12"> <!-- ekleme butonu --> <div class="col-md-6"> <div class="form-group"> <input name="foreignName" maxlength="45" type="text" class="form-control" placeholder="Enter language you know." /> </div> </div> <div class="col-md-6"> <select class="form-control" name="foreignLevel"> <option>Beginning</option> <option>Intermediate</option> <option>Good</option> <option>Advanced</option> </select> </div> </div> <hr id="ayracForeign" style="width: 100%; color: black; height: 1px; background-color:black;" />');
-
-	                  });
+	                $("#ayracForeign").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <!-- ekleme butonu --> <div class="col-md-6"> <div class="form-group"> <input name="foreignName" maxlength="45" type="text" class="form-control" placeholder="Enter language you know." /> </div> </div> <div class="col-md-6"> <select class="form-control" name="foreignLevel"> <option>Beginning</option> <option>Intermediate</option> <option>Good</option> <option>Advanced</option> </select> </div> </div> </div> <div id="ayracForeign"></div>'); });
+	            $('body').on('click', '.remove', function(){
+	                $(this).closest('.col-md-12').remove();
+	            });
 
 	            $("#checkList").on("click", "#removeCheckbox", function (e) { 
 	                e.preventDefault();
 	                $(this).parent('div').remove();
 	                checkCount--;
 	            });
+	            
 	        });
+	        
 
 
 			$('#tokenfield').tokenfield({
@@ -65,6 +77,7 @@
 				  showAutocompleteOnFocus: true
 				});
 
+			
 		</script>
 
 </jsp:attribute>
@@ -160,6 +173,16 @@
 			      <div class="col-xs-6 col-md-offset-3">
 			        <div class="col-md-12">
 			          <h3> Personal Info</h3>
+			          
+			           <!-- Photo upload section -->
+					 <!-- image-preview-filename input [CUT FROM HERE]-->
+			           <div class="form-group">
+			            <label class="control-label">Profil Resmi</label>
+			            </br>
+			             <div id="imagePreview" class="img-responsive" alt="profile photo">.</div> 
+			             <input type="hidden" name="oldPhoto" value="${cvContent.personal.personalPhoto}">
+			             <input type="file" id="file" name="file" class="form-control" />
+			          </div>
 			          <div class="form-group">
 			            <label class="control-label">Name</label>
 			            <input name="personalName" value="${cvContent.personal.personalName}" maxlength="45" type="text" class="form-control" placeholder="Enter Name" /> 
@@ -218,15 +241,7 @@
 						  <span class="custom-control-description">Married</span>
 						</label>
 						</div>
-			                    <!-- Photo upload section -->
-			          
-						             <!-- image-preview-filename input [CUT FROM HERE]-->
-			           <div class="form-group">
-			            <label class="control-label">Profil Resmi</label>
-			             <img src="${cvContent.personal.personalPhoto}" class="img-responsive" alt="profile photo" width="250" height="200"> 
-			             <input type="hidden" name="oldPhoto" value="${cvContent.personal.personalPhoto}">
-			             <input type="file" name="file" class="form-control" />
-			          </div>
+			                  
 								
 				
 			          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
@@ -241,11 +256,19 @@
     <div class="row setup-content" id="step-3">
       <div class="col-xs-6 col-md-offset-3" id="jobExperience">
 	<!-- ekleme butonu -->
-        <button id="addCheckboxJob" class="btn btn-success">+</button>
+        <div class="form-group">
+      		<button id="addCheckboxJob" class="btn btn-success">+</button>
+      	</div>
         
 <c:forEach items="${cvContent.jobExperiences}" var="job">
- 		<div class="col-md-12">  
-          <div id="isDeneyimi">
+ 		<div class="row">
+	        <div class="col-md-12">  
+	            <div class="form-group">
+			        <div class="col-md-offset-11">
+			        	<button href="javascript:;" class="remove btn btn-danger">-</button>
+			        </div> 
+		        </div>
+	          <div id="isDeneyimi">
 	          <div class="form-group">
 	            <label class="control-label">Company Name</label>
 	            <input name="jobCompanyName" value="${job.jobCompanyName}" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
@@ -268,10 +291,11 @@
 	          <div class="form-group">
 	            <label class="control-label">Description</label>
 	            <textarea name="jobDescription"  class="form-control" placeholder="Açıklama" >${job.jobDescription}</textarea>
-	          </div>
-          </div>					
-        </div>
-        <hr id="ayracJob" style="width: 100%; color: black; height: 1px; background-color:black;" />
+	           </div>
+	          </div>					
+	        </div>
+       </div>
+        <div id="ayracJob"></div>
 </c:forEach>
         
          <div class="col-md-12">
@@ -289,9 +313,17 @@
       
       	<!-- ekleme butonu -->
       <h3> Education </h3>
-      <button id="addCheckboxEdu" class="btn btn-success">+</button>
+       <div class="form-group">
+      	<button id="addCheckboxEdu" class="btn btn-success">+</button>
+      </div>
         <c:forEach items="${cvContent.educations}" var="edu">
-	        <div class="col-md-12">
+	        <div class="row">
+		      <div class="col-md-12">  
+		      <div class="form-group">
+			        <div class="col-md-offset-11">
+			        	<button href="javascript:;" class="remove btn btn-danger">-</button>
+			        </div> 
+		        </div>
 	          <div id="educationInf">
 		          <div class="form-group">
 		            <label class="control-label">School Name</label>
@@ -316,10 +348,11 @@
 		          <div class="form-group">
 		            <label class="control-label">Description</label>
 		            <textarea name="eduDescription" class="form-control" placeholder="Enter description" >${edu.eduDescription}</textarea>
-		          </div>
+		         </div>
 	          </div>					
 	        </div>
-	        <hr id="ayracEdu" style="width: 100%; color: black; height: 1px; background-color:black;" />
+	      </div>
+        <div id="ayracEdu"></div>
          </c:forEach>
 
          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button> 
@@ -366,11 +399,17 @@
 	   <div class="row setup-content" id="step-6">
       <div class="col-xs-6 col-md-offset-3">
       <h3> Foreign Languages </h3>
-	        <button id="addCheckboxForeign" class="btn btn-success">+</button>
+	       <div class="form-group">
+	        	<button id="addCheckboxForeign" class="btn btn-success">+</button>
+	        </div>
 	      <c:forEach items="${cvContent.foreigns}" var="foreign">
-	        <div class="col-md-12">
-	          
-	          	<!-- ekleme butonu -->
+	         <div class="row">
+		      <div class="col-md-12">  
+		       <div class="form-group">
+			        <div class="col-md-offset-11">
+			        	<button href="javascript:;" class="remove btn btn-danger">-</button>
+			        </div> 
+		        </div>
 	          <div class="col-md-6">
 		          <div class="form-group">
 		            <input name="foreignName" value="${foreign.foreignName}" maxlength="45" type="text" class="form-control"
@@ -401,9 +440,10 @@
 					  >Advanced</option>
 				</select>
 	          </div>
-	
-			</div> 
-				<hr id="ayracForeign" style="width: 100%; color: black; height: 1px; background-color:black;" />    
+		
+				</div> 
+			</div>
+			<div id="ayracForeign"></div>     
 		</c:forEach>
 			<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
 		</div>
@@ -509,6 +549,25 @@
 
 		
 </div>
+
+<script type="text/javascript">
+$(function() {
+    $("#file").on("change", function()
+    {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function(){ // set image data as background of div
+                $("#imagePreview").css("background-image", "url("+this.result+")");
+            }
+        }
+    });
+});
+</script>
 
 <script src="js/jquery-easywizard.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
