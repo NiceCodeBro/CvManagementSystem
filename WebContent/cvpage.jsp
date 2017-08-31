@@ -27,7 +27,7 @@
 					<tr>
 					<td align="center">Owner</td>
 					<td align="center">Owner Role</td>
-					<td align="center">Owner Name</td>
+					<td align="center">Cv Name</td>
 					<td align="center">View Cv</td>
 					<td align="center">Edit Cv</td>
 					<td align="center">Delete Cv</td>
@@ -38,7 +38,7 @@
 					<tr>
 					<td align="center">Owner</td>
 					<td align="center">Owner Role</td>
-					<td align="center">Owner Name</td>
+					<td align="center">Cv Name</td>
 					<td align="center">View Cv</td>
 					<td align="center">Edit Cv</td>
 					<td align="center">Delete Cv</td>
@@ -48,32 +48,32 @@
 				<tbody>
 			    	<c:forEach items="${listOfCv}" var="cv">
 				    	<tr>
-				    		<td class="col-md-2"> ${cv.ownerUsername}</td>
-				    		<td class="col-md-1"> ${cv.ownerRole}</td>
-				    		<td class="col-md-2"> ${cv.cvName}</td>
-				    		<td class="col-md-2">
+				    		<td align="center" class="col-md-2"> ${cv.ownerUsername}</td>
+				    		<td align="center" class="col-md-1"> ${cv.ownerRole}</td>
+				    		<td align="center" class="col-md-2"> ${cv.cvName}</td>
+				    		<td align="center" class="col-md-2">
 				    			 <form action="index.jsp" method = "get"> 
 				    				 <input type = "hidden" name = "action" value = "viewCv">
 				    				<input type = "hidden" name = "willViewedCvId" value = "${cv.idCv}" >
-				    				<input type = "submit" class = "btn btn-block btn-primary" value = "Görüntüle"> 				    			
+				    				<input type = "submit" class = "btn btn-block btn-primary" value = "View"> 				    			
 				    		 	</form>
 				    		</td>
-				    		<td class="col-md-2">
+				    		<td align="center" class="col-md-2">
 				    			<form action="Edit" method = "post">
 				    				<input type = "hidden" name = "action" value = "updateCv">
 				    				<input type = "hidden" name = "updateCvId" value = "${cv.idCv}" >
-				    				<input type = "submit" class = "btn btn-block btn-primary" value = "Düzenle">
+				    				<input type = "submit" class = "btn btn-block btn-primary" value = "Edit">
 				    			</form>
 				    		</td>
-				    		<td class="col-md-1">
+				    		<td align="center" class="col-md-1">
 				    			<form action="index.jsp" method = "get">
 				    				<input type = "hidden" name = "action" value = "deleteCv">
 				    				<input type = "hidden" name = "willDeletedCvId" value = "${cv.idCv}" >
-				    				<input type = "submit" class = "btn btn-block btn-danger" value = "Sil">
+				    				<input type = "submit" class = "btn btn-block btn-danger" value = "Delete">
 				    			</form>
 				    		</td>
 				    		
-				    		<td class="col-md-2"> ${cv.addDate}</td>
+				    		<td align="center" class="col-md-2"> ${cv.addDate}</td>
 
 				    	</tr>
 			   		</c:forEach>

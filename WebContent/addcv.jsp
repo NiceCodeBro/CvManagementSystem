@@ -175,7 +175,7 @@
 			           <!-- Photo upload section -->
 						 <!-- image-preview-filename input [CUT FROM HERE]-->
 			           <div class="form-group">
-			            <label class="control-label">Profil Resmi</label>
+			            <label class="control-label">Profil Picture</label>
 			            </br>
 			            	<div id="imagePreview"></div>
 			            

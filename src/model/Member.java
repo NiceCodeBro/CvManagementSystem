@@ -6,7 +6,8 @@ public class Member {
 	private String memberName;
 	private String memberPass;
 	private String role="";
-	private boolean status=false;
+//	private int numberOfCv;
+	private boolean status=false; // It is used when the login experiment is done.
 
 	public int getIdMember() {
 		return idMember;
@@ -40,6 +41,12 @@ public class Member {
 	}
 	
 	
+//	public int getNumberOfCv() {
+//		return numberOfCv;
+//	}
+//	public void setNumberOfCv(int numberOfCv) {
+//		this.numberOfCv = numberOfCv;
+//	}
 	public String toString()
 	{
 		return idMember + " " + memberName + " " + memberPass + " " + role;

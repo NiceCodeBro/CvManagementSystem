@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,7 +59,7 @@ public class PersonalCV extends HttpServlet {
 			}
 				RequestDispatcher view = request.getRequestDispatcher("cvpage.jsp");
 				view.forward(request, response);		
-			}
+		}
 		else
 		{
 			if(action.equals("deleteCv"))
@@ -74,6 +74,15 @@ public class PersonalCV extends HttpServlet {
 				CreatePdf.createPDF(facade.getCvContetn(idCv));
 				response.sendRedirect("index.jsp");
 			}
+//			else if (action.equals("listMembers"))
+//			{
+//				System.out.println("ttttttttttttt " + facade.getAllMembers().size());
+//				request.setAttribute("listOfMember", facade.getAllMembers());
+//			
+//				RequestDispatcher view = request.getRequestDispatcher("/listmembers.jsp");
+//				view.forward(request, response);	
+//			}
+			
 	
 		}
 

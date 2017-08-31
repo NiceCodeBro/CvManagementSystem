@@ -28,16 +28,21 @@
 <script src="js/jquery.dataTables.min.js"></script>
 
 <script src="js/dataTables.bootstrap.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
 
 
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/buttons.bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css"/>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $('#cvTable').DataTable();
 		} );
+
+
+		
 </script>
      <jsp:invoke fragment="head_area"/>
  </head>
@@ -55,20 +60,32 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.jsp">CV Yönetim</a>
+      <a class="navbar-brand" href="index.jsp"> Cv Management </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="addcv.jsp">Add CV</a></li>
+        
+               
+         <%
+
+	if(request.getSession().getAttribute("loggedMemberRole").equals("Manager")) {
+	%>
+		 <li><a href="MembersList">List Members</a></li>	<%
+	}
+	
+	%>
+	
+	
       </ul>
-      <form class="navbar-form navbar-left">
+  <!--      <form class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+      </form>-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">

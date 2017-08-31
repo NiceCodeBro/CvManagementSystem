@@ -48,22 +48,7 @@ public class CVDao extends DBUtil{
 			
 			con = getConnection();
 
-			System.out.println("DAO: Connection sağlandı.");
-			/*String query = "SELECT Title.title, Content.content from Content join Title on  cvId = ? and Title.idTitle = Content.titleId and Title.parentIdTitle = ?";
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
-			ps.setInt(1, 62);
-			ps.setInt(2, 1);
-
-			List<Pair> tempArr = new ArrayList<Pair>();
-
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				String title = rs.getString("title");
-				String content = rs.getString("content");
-				Pair tempEntry = new Pair(title,content);
-				tempArr.add(tempEntry);
-			}*/
-			
+			System.out.println("DAO: Connection sağlandı.");	
 			
 			String query = "SELECT Title.parentIdTitle, Title.title, Content.content from Content join Title on  cvId = ? and Title.idTitle = Content.titleId";
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
@@ -111,7 +96,8 @@ public class CVDao extends DBUtil{
 						personal.setPersonalCellPhone(content);
 					else if(allInf.get(i).getTitle().equals("Personal Info Title"))
 						personal.setPersonalTitle(content);
-			
+					else if(allInf.get(i).getTitle().equals("E-Mail Adress"))
+						personal.setPersonalMail(content);
 				}
 				else if(allInf.get(i).getParentId().equals("2"))
 				{

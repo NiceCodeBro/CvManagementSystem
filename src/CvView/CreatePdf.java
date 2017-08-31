@@ -79,7 +79,7 @@ public class CreatePdf {
 
 			table2.addCell(cell);
 
-			table2.addCell(personalInfo(content.getPersonal()));
+//			table2.addCell(personalInfo(content.getPersonal().));
 
 			document.add(table2);
 
@@ -257,9 +257,9 @@ public class CreatePdf {
 	private static PdfPCell personalInfo(Personal personal) throws DocumentException, IOException {
 
 		PdfPCell cell = new PdfPCell();
-		String[] titles = new String[] { "Date Of Birth", "Cell Phone", "Office Phone", "Adress", "Martial Status" };
+		String[] titles = new String[] { "Date Of Birth", "Cell Phone", "Office Phone", "E-Mail", "Adress", "Martial Status" };
 		String[] contents = new String[] { personal.getPersonalDateofBirth(), personal.getPersonalCellPhone(),
-				personal.getPersonalOfficePhone(), personal.getPersonalAddress(), personal.getPersonalMaritalStatus() };
+				personal.getPersonalOfficePhone(), personal.getPersonalMail(), personal.getPersonalAddress(), personal.getPersonalMaritalStatus() };
 
 		for (int i = 0; i < titles.length; ++i) {
 			if (!contents[i].equals("")) {

@@ -60,4 +60,21 @@ public class Facade {
 	{
 		return cvService.getCvContent(cvId);
 	}
+	
+	public List<Member> getAllMembers(){
+		return memberService.getAllMembers();
+	}
+	
+	public void deleteMember(int memberId )
+	{
+		memberService.deleteMember(memberId);
+	}
+	public void updateMember(Member member)
+	{
+		memberService.updateMember(member);
+	}
+	public void addNewMember(Member member) 
+	{
+		memberService.addNewMember(member);
+	}
 }
