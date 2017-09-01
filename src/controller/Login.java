@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,7 +48,10 @@ public class Login extends HttpServlet {
 		 String username = request.getParameter("LoginUsername");
          String pass = request.getParameter("LoginPassword");
 
-         Member member = facade.getMemberInf(username, pass);
+         Member member;
+		
+			member = facade.getMemberInf(username, pass);
+	
  		
          if(member.isStatus())
          {
@@ -67,10 +71,10 @@ public class Login extends HttpServlet {
          else
         	 System.out.println("giriş başarısız");
          
-         
+		} 
          
 
          
-	}
+	
 
 }

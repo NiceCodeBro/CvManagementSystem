@@ -36,15 +36,14 @@ public class CreatePdf {
 			img2.setAlignment(Image.MIDDLE);
 			document.add(img2);
 			document.add(new Paragraph(" "));
-			// document.add(new Paragraph(" "));
+
 			PdfPCell emptyCell = new PdfPCell();
 			emptyCell.setBorder(Rectangle.NO_BORDER);
 
 			// entry part - photo & name & objectives
-
 			
 			PdfPTable table = null;
-			try
+			try // if member dont use profil picture, column settings will change.
 			{
 				table = new PdfPTable(2);
 				table.setWidthPercentage(100);
@@ -79,7 +78,7 @@ public class CreatePdf {
 
 			table2.addCell(cell);
 
-//			table2.addCell(personalInfo(content.getPersonal().));
+			table2.addCell(personalInfo(content.getPersonal()));
 
 			document.add(table2);
 
@@ -105,8 +104,6 @@ public class CreatePdf {
 				document.add(new Chunk(new DottedLineSeparator()));
 			}
 
-			System.out.println(
-					"jop bitis - egitim baslangc " + w.getVerticalPosition(false) + " " + w.getVerticalPosition(true));
 
 			// education
 			if (content.getEducation().getEduSchoolName().size() > 0) {
@@ -122,14 +119,8 @@ public class CreatePdf {
 				document.add(table4);
 				document.add(new Chunk(new DottedLineSeparator()));
 			}
-			System.out.println("egitim bitis " + w.getVerticalPosition(false) + " " + w.getVerticalPosition(true));
 
-			// document.add(new Paragraph(" "));document.add(new Paragraph("
-			// "));
 
-			// document.add(new Paragraph(" "));
-
-			System.out.println("dil baslangc " + w.getVerticalPosition(false) + " " + w.getVerticalPosition(true));
 
 			// foreign language
 			if (content.getForeign().getForeignName().size() > 0) {
@@ -147,8 +138,6 @@ public class CreatePdf {
 
 			}
 
-			System.out.println(
-					"dil bitis + skil baslangıc " + w.getVerticalPosition(false) + " " + w.getVerticalPosition(true));
 
 			// Skills
 
@@ -165,9 +154,6 @@ public class CreatePdf {
 				document.add(new Chunk(new DottedLineSeparator()));
 
 			}
-
-			System.out.println(
-					"skill bitis + cource  start  " + w.getVerticalPosition(false) + " " + w.getVerticalPosition(true));
 
 			// cources and seminers
 
@@ -262,7 +248,7 @@ public class CreatePdf {
 				personal.getPersonalOfficePhone(), personal.getPersonalMail(), personal.getPersonalAddress(), personal.getPersonalMaritalStatus() };
 
 		for (int i = 0; i < titles.length; ++i) {
-			if (!contents[i].equals("")) {
+			if (contents[i]!=null && !contents[i].equals("")) {
 				Phrase phrase = new Phrase();
 				phrase.add(new Chunk(titles[i] + ": ", new Font(FontFamily.HELVETICA, 13, Font.BOLD)));
 				phrase.add(new Chunk(contents[i], new Font(FontFamily.HELVETICA, 13)));
@@ -281,7 +267,6 @@ public class CreatePdf {
 
 		PdfPCell cell = new PdfPCell();
 		for (int i = 0; i < jopEx.getJobCompanyName().size(); ++i) {
-			String[] titles = new String[] { "Company Name", "Jop Title", "Start Date", "End Date", "Jop Explanation" };
 			String[] contents = new String[] { jopEx.getJobCompanyName().get(i), jopEx.getJobTitle().get(i),
 					jopEx.getJobStartDate().get(i), jopEx.getJobStartDate().get(i), jopEx.getJobDescription().get(i) };
 			if (!contents[0].equals("")) {
@@ -304,7 +289,6 @@ public class CreatePdf {
 		PdfPCell cell = new PdfPCell();
 		for (int i = 0; i < edc.getEduSchoolName().size(); ++i) {
 
-			String[] titles = new String[] { "School Name", "Departman Name", "Start Date", "End Date", "Description" };
 			String[] contents = new String[] { edc.getEduSchoolName().get(i), edc.getEduSchoolDepartman().get(i),
 					edc.getEduStartDate().get(i), edc.getEduEndDate().get(i), edc.getEduDescription().get(i) };
 			Phrase phrase = new Phrase();
@@ -366,6 +350,7 @@ public class CreatePdf {
 		cell.addElement(phrase);
 		cell.addElement(new Paragraph(" "));
 		cell.setBorder(Rectangle.NO_BORDER);
+		
 		return cell;
 	}
 
@@ -381,6 +366,7 @@ public class CreatePdf {
 		cell.addElement(phrase);
 		cell.addElement(new Paragraph(" "));
 		cell.setBorder(Rectangle.NO_BORDER);
+		
 		return cell;
 
 	}
@@ -398,6 +384,7 @@ public class CreatePdf {
 		cell.addElement(phrase);
 		cell.addElement(new Paragraph(" "));
 		cell.setBorder(Rectangle.NO_BORDER);
+		
 		return cell;
 	}
 }

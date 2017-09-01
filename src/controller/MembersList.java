@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -39,19 +40,20 @@ public class MembersList extends HttpServlet {
 		String action = request.getParameter( "action" );
 
 
-		List<Member> member = facade.getAllMembers();
+		List<Member> member;
+		member = facade.getAllMembers();
+	
 		request.setAttribute("listOfMember", member);
 		
 		RequestDispatcher view = request.getRequestDispatcher("listmembers.jsp");
 		view.forward(request, response);		
-	
+		
 
 
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action = request.getParameter( "action" );
 		if(action == null)
 		{
@@ -67,7 +69,9 @@ public class MembersList extends HttpServlet {
 			m.setMemberPass((String)request.getParameter("memberPassword"));
 			m.setRole((String)request.getParameter("memberRole"));
 			
-		    facade.addNewMember(m);
+		    
+				facade.addNewMember(m);
+			
 			
 			List<Member> member = facade.getAllMembers();
 			request.setAttribute("listOfMember", member);
@@ -105,7 +109,7 @@ public class MembersList extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("listmembers.jsp");
 			view.forward(request, response);		
 		}
-
+		
 	}
 
 

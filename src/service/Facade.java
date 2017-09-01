@@ -2,6 +2,7 @@ package service;
 
 
 
+import java.sql.SQLException;
 import java.util.List;
 
 import dao.CVDao;
@@ -43,9 +44,10 @@ public class Facade {
 	public List<Cv> listCvbyManager(){
 		return cvService.listCvByManager();
 	}
-	public Member getMemberInf(String loginUserName, String loginPassword)
+	public Member getMemberInf(String loginUserName, String loginPassword) 
 	{
 		return memberService.getMemberInf(loginUserName, loginPassword) ;
+	
 	}
 
 	public void deleteCvByRole(int cvId, Member member)
@@ -61,19 +63,19 @@ public class Facade {
 		return cvService.getCvContent(cvId);
 	}
 	
-	public List<Member> getAllMembers(){
+	public List<Member> getAllMembers() {
 		return memberService.getAllMembers();
 	}
 	
-	public void deleteMember(int memberId )
+	public void deleteMember(int memberId ) 
 	{
 		memberService.deleteMember(memberId);
 	}
-	public void updateMember(Member member)
+	public void updateMember(Member member) 
 	{
 		memberService.updateMember(member);
 	}
-	public void addNewMember(Member member) 
+	public void addNewMember(Member member)  
 	{
 		memberService.addNewMember(member);
 	}

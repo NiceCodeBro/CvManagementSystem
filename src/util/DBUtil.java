@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import com.mysql.jdbc.PreparedStatement;
 
 
 public class DBUtil {
@@ -51,5 +54,23 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	
+	}
+	public void closePreparedSatement(PreparedStatement pre)
+	{
+		if( pre == null) return;
+		try{
+			pre.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	public void closeResultSet(ResultSet rs)
+	{
+		if( rs == null) return;
+		try{
+			rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
 	}
 }

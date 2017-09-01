@@ -3,6 +3,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -21,21 +22,21 @@ import util.DBUtil;
 
 public class CVDao extends DBUtil{
 	int cvId,loopSize;
-	Connection con = null;
-	PreparedStatement ps;
-	
+
 	Member member;
 	
 
-
+	/**
+	 * This method using when creating a cv as pdf
+	 * */
 	public CvView.CvContent getCvContent(int cvId)
 	{
 		CvView.CvContent cvContent = new CvView.CvContent();
 		Connection con = null;
-		
+		ResultSet rs = null;
+		PreparedStatement ps = null;
 		try
 		{
-//			int nOfJop=0, nOfEducation=0, nOfLanguage=0;
 			CvView.Personal personal = new CvView.Personal();
 			CvView.JobExperience jobExperience = new CvView.JobExperience();
 			CvView.Education education = new CvView.Education();
@@ -51,12 +52,12 @@ public class CVDao extends DBUtil{
 			System.out.println("DAO: Connection sağlandı.");	
 			
 			String query = "SELECT Title.parentIdTitle, Title.title, Content.content from Content join Title on  cvId = ? and Title.idTitle = Content.titleId";
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+			ps = (PreparedStatement) con.prepareStatement(query);
 			ps.setInt(1, cvId);
 
 			List<Information> allInf = new ArrayList<Information>();
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				String id = rs.getString("parentIdTitle");
 				String title = rs.getString("title");
@@ -64,10 +65,6 @@ public class CVDao extends DBUtil{
 				Information tempInf = new Information(id,title,content);
 				allInf.add(tempInf);
 				
-				
-//				if(title.equals("Company Name")) ++nOfJop;
-//				else if(title.equals("School Name")) ++nOfEducation;
-//				else if(title.equals("Name Of Language")) ++nOfLanguage;
 			}
 			
 	
@@ -170,14 +167,19 @@ public class CVDao extends DBUtil{
 			cvContent.setPublication(publication);
 			cvContent.setSkill(skill);
 			
-			closeConnection(con);
 
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
+		finally {
+
+			closeConnection(con);
+			closePreparedSatement(ps);
+			closeResultSet(rs);
+
+		}
 		
 		return cvContent;
 	}
@@ -213,26 +215,26 @@ public class CVDao extends DBUtil{
 			
 			
 			
-				rs.absolute(1);
-				per.setPersonalName(rs.getString("content"));
-				rs.absolute(2);
-				per.setPersonalTitle(rs.getString("content"));
-				rs.absolute(3);
-				per.setPersonalObjectives(rs.getString("content"));
-				rs.absolute(4);
-				per.setPersonalDateofBirth(rs.getString("content"));
-				rs.absolute(5);
-				per.setPersonalCellPhone(rs.getString("content"));
-				rs.absolute(6);
-				per.setPersonalOfficePhone(rs.getString("content"));
-				rs.absolute(7);
-				per.setPersonalAddress(rs.getString("content"));
-				rs.absolute(8);
-				per.setPersonalMaritalStatus(rs.getString("content"));
-				rs.absolute(9);
-				per.setPersonalPhoto(rs.getString("content"));
-				rs.absolute(10);
-				per.setPersonalMail(rs.getString("content"));
+			rs.absolute(1);
+			per.setPersonalName(rs.getString("content"));
+			rs.absolute(2);
+			per.setPersonalTitle(rs.getString("content"));
+			rs.absolute(3);
+			per.setPersonalObjectives(rs.getString("content"));
+			rs.absolute(4);
+			per.setPersonalDateofBirth(rs.getString("content"));
+			rs.absolute(5);
+			per.setPersonalCellPhone(rs.getString("content"));
+			rs.absolute(6);
+			per.setPersonalOfficePhone(rs.getString("content"));
+			rs.absolute(7);
+			per.setPersonalAddress(rs.getString("content"));
+			rs.absolute(8);
+			per.setPersonalMaritalStatus(rs.getString("content"));
+			rs.absolute(9);
+			per.setPersonalPhoto(rs.getString("content"));
+			rs.absolute(10);
+			per.setPersonalMail(rs.getString("content"));
 			
 			//Job Experiences End
 				
@@ -507,24 +509,28 @@ public class CVDao extends DBUtil{
 			c.setCertificate(cer);
 			c.setPublication(pub);
 			
-			
-			ps.close();
-			
+					
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		closeConnection(con);
-		System.out.println("DAO: Connection kapatıldı.");
+		finally {
+
+			closeConnection(con);
+			closePreparedSatement(ps);
+			closeResultSet(rs);
+
+		}
 		return c;
 		
 	}
 	
 	public boolean addCv(CvContent c,Member m){
 		Connection con = null;
-		
+		PreparedStatement ps = null;
 		
 		try{
 			con = getConnection();
+			con.setAutoCommit(false);
 			System.out.println("DAO: Connection sağlandı.");
 			
 			int memberId = m.getIdMember();
@@ -537,13 +543,13 @@ public class CVDao extends DBUtil{
 			
 			//Cv ekleme
 			String query = "INSERT INTO Cv(memberId,cvName,deletedCv,cvAddDate) VALUES(?,?,?,?)";
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+			ps = (PreparedStatement) con.prepareStatement(query);
 				ps.setInt(1, memberId);
 				ps.setString(2, c.getPersonal().getCvName());
 				ps.setInt(3, 0);
 				ps.setString(4, dtf.format(localDate));
-			int isInsert = ps.executeUpdate();
-			
+			ps.executeUpdate();
+			con.commit();
 			//Eklenen Cvnin ID si
 			cvId = (int) ps.getLastInsertID();
 			
@@ -628,16 +634,21 @@ public class CVDao extends DBUtil{
 			
 			System.out.println("DAO: Publication bilgisi Content tablosuna eklendi");
 			
-			ps.close();
-			closeConnection(con);
-			System.out.println("DAO: PreparedStatement kapatıldı");
-			
 			return true;
 			
 		}catch(Exception e){
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
-		closeConnection(con);
+		finally {
+
+			closeConnection(con);
+			closePreparedSatement(ps);
+		}
 		System.out.println("DAO: Connection kapatıldı.");
 		return false;
 		
@@ -646,30 +657,45 @@ public class CVDao extends DBUtil{
 	
 	//insert işlemlerinde kullanılmak üzere hazırlandı
 	public void insertContentDB(int cvId,int titleId,String c){
+		Connection con = null;
+		PreparedStatement ps = null;
 		try{
 			con = getConnection();
+			con.setAutoCommit(false);
 			String query = "INSERT INTO Content(cvId,titleId,content) VALUES(?,?,?)";
 			ps = (PreparedStatement) con.prepareStatement(query);
 				ps.setInt(1, cvId );
 				ps.setInt(2, titleId);
 				ps.setString(3, c);
 			ps.executeUpdate();
+			con.commit();
 		}catch(Exception e){
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
+		}
+		finally {
+			closeConnection(con);
+			closePreparedSatement(ps);
 		}
 		
 	}
 	
 	public List<Cv> listCvbyMember(Member member){
 		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		List<Cv> listCv = new ArrayList<Cv>();
 		try{
 			con = getConnection();
 			
 			String query = "SELECT Member.memberName,Member.role, Cv.cvName ,Cv.idCv,Cv.memberId, Cv.deletedCv, Cv.cvAddDate FROM Cv JOIN Member WHERE memberId = ? AND deletedCv = 0 and memberId = Member.idMember";
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+			ps = (PreparedStatement) con.prepareStatement(query);
 			ps.setInt(1, member.getIdMember());
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while(rs.next()){
 				Cv cv = new Cv();
 				cv.setOwnerUsername(rs.getString("memberName"));
@@ -681,27 +707,29 @@ public class CVDao extends DBUtil{
 				cv.setAddDate(rs.getString("cvAddDate"));
 					listCv.add(cv);
 			}
-			rs.close();
-			ps.close();
-			
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		closeConnection(con);
+		finally {
+			closeConnection(con);
+			closePreparedSatement(ps);
+			closeResultSet(rs);
+		}
 		return listCv;
 	}
 	
 	public List<Cv> listCvByManager(){
 		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
 		List<Cv> listCv = new ArrayList<Cv>();
 		try{
 			con = getConnection();
 			
-			//String query = "SELECT * FROM Cv";
 			String query = "SELECT Member.memberName,Member.role, Cv.cvName ,Cv.idCv,Cv.memberId,Cv.deletedCv, Cv.cvAddDate FROM CvSystem.Cv JOIN CvSystem.Member on Cv.memberId = Member.idMember";
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
-			ResultSet rs = ps.executeQuery();
+			ps = (PreparedStatement) con.prepareStatement(query);
+			rs = ps.executeQuery();
 			while(rs.next()){
 				Cv cv = new Cv();
 				cv.setOwnerUsername(rs.getString("memberName"));
@@ -713,36 +741,47 @@ public class CVDao extends DBUtil{
 				cv.setAddDate(rs.getString("cvAddDate"));
 					listCv.add(cv);
 			}
-			rs.close();
-			ps.close();
-			
-			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		closeConnection(con);
+		finally {
+
+			closeConnection(con);
+			closePreparedSatement(ps);
+			closeResultSet(rs);
+
+		}
 		return listCv;
 	}
 	
 	public void deleteCvByRole(int cvId, Member member)
 	{
 		Connection con = null;
-		
+		PreparedStatement ps = null;
 		if(member.getRole().equals("Member"))
 		{
 			try
 			{
 				con = getConnection();
+				con.setAutoCommit(false);
 				String query = "UPDATE Cv SET deletedCv = '1' WHERE idCv = ? ";
-				PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+				ps = (PreparedStatement) con.prepareStatement(query);
 				ps.setInt(1, cvId);
 				ps.executeUpdate();
-			    ps.close();
-
+				con.commit();
 			}
 			catch(Exception e)
 			{
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				e.printStackTrace();
+			}
+			finally {
+				closeConnection(con);
+				closePreparedSatement(ps);
 			}
 		}
 		else if(member.getRole().equals("Manager"))
@@ -750,15 +789,25 @@ public class CVDao extends DBUtil{
 			try
 			{
 				con = getConnection();
+				con.setAutoCommit(false);
 				String query = "DELETE FROM Cv WHERE idCv=?";
-				PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+				ps = (PreparedStatement) con.prepareStatement(query);
 				ps.setInt(1, cvId);
 				ps.executeUpdate();
-			    ps.close();
+				con.commit();
 			}
 			catch(Exception e)
 			{
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				e.printStackTrace();
+			}
+			finally {
+				closeConnection(con);
+				closePreparedSatement(ps);
 			}
 		}
 	}
@@ -767,17 +816,29 @@ public class CVDao extends DBUtil{
 	public boolean deleteCvforUpdate(int cvId)
 	{
 		Connection con = null;
+		PreparedStatement ps = null;
 		try{
 				con = getConnection();
+				con.setAutoCommit(false);
 				String query = "DELETE FROM Cv WHERE idCv=?";
-				PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+				ps = (PreparedStatement) con.prepareStatement(query);
 				ps.setInt(1, cvId);
 				ps.executeUpdate();
-			    ps.close();
+				con.commit();
 			    return true;
-			}catch(Exception e){
-				e.printStackTrace();
+		}catch(Exception e){
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
+			e.printStackTrace();
+		}
+		finally {
+			closeConnection(con);
+			closePreparedSatement(ps);
+
+		}
 		return false;
 		
 	}
