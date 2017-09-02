@@ -214,7 +214,7 @@
 			          
 			         <div class="form-group">
 			            <label class="control-label">Office Phone</label>
-			            <input name="personalOfficePhone" class="form-control" placeholder="Enter your office phone.">	
+			            <input name="personalOfficePhone" value="" 	 class="form-control" placeholder="Enter your office phone.">	
 			          </div>
 			          
 			           <div class="form-group">

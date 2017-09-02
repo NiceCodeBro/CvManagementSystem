@@ -232,9 +232,9 @@ public class CVDao extends DBUtil{
 			rs.absolute(8);
 			per.setPersonalMaritalStatus(rs.getString("content"));
 			rs.absolute(9);
-			per.setPersonalPhoto(rs.getString("content"));
-			rs.absolute(10);
 			per.setPersonalMail(rs.getString("content"));
+			rs.absolute(10);
+			per.setPersonalPhoto(rs.getString("content"));
 			
 			//Job Experiences End
 				
