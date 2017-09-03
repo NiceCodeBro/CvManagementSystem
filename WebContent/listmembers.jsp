@@ -133,7 +133,9 @@
 				    			<form action="MembersList" method = "post" >
 				    				<input type = "hidden" name = "action" value = "deleteUser">
 				    				<input type = "hidden" name = "willDeletedUserId" value = "${member.idMember}" >
-				    				<input type = "submit" class = "btn btn-block btn-danger" id = "deleteMember" value = "Delete" onclick="return confirm('Are you sure you want to delete all user information?')">	
+				    				<button type = "submit" class = "btn btn-block btn-danger" id = "deleteMember" value = "Delete" onclick="return confirm('Are you sure you want to delete all user information?')">
+				    					<span class="glyphicon glyphicon-trash"></span>
+				    				</button>	
 				    			</form>
 				    		</td> 
 				    		

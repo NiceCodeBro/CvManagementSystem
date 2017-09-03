@@ -79,7 +79,7 @@
 				    			<form action="index.jsp" method = "get">
 				    				<input type = "hidden" name = "action" value = "deleteCv">
 				    				<input type = "hidden" name = "willDeletedCvId" value = "${cv.idCv}" >
-				    				<button type = "submit" class = "btn btn-block btn-danger" value = "Delete">
+				    				<button type = "submit" class = "btn btn-block btn-danger" value = "Delete" onclick="return confirm('Are you sure you want to delete Cv?')">
 				    					 <span class="glyphicon glyphicon-trash"></span>
 				    				</button>
 				    			</form>
