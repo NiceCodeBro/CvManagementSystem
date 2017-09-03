@@ -8,11 +8,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.mysql.jdbc.PreparedStatement;
+
+import dao.CVDao;
 
 
 public class DBUtil {
 	private Connection con;
+	private static Logger logger = LogManager.getLogger(DBUtil.class);
 	public Connection getConnection(){
 		try {
 			if (con == null || con.isClosed()) {
@@ -30,16 +36,15 @@ public class DBUtil {
 					return con;
 					
 				}catch(IOException e){
-					e.printStackTrace();
+					logger.error("getConnection method |IOException: " + e.getMessage());
 				}catch(ClassNotFoundException e){
-					e.printStackTrace();
+					logger.error("getConnection method |ClassNotFoundException: " + e.getMessage());
 				}catch(SQLException e){
-					e.printStackTrace();
+					logger.error("getConnection method |SQLException: " + e.getMessage());
 				}
 			}
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
+			logger.error("getConnection method |SQLException: " + e.getMessage());
 		}
 		return con;
 		
@@ -51,7 +56,7 @@ public class DBUtil {
 		try{
 			con.close();
 		}catch(SQLException e){
-			e.printStackTrace();
+			logger.error("closeConnection method |SQLException: " + e.getMessage());
 		}
 	
 	}
@@ -61,7 +66,7 @@ public class DBUtil {
 		try{
 			pre.close();
 		}catch(SQLException e){
-			e.printStackTrace();
+			logger.error("closePreparedSatement method |SQLException: " + e.getMessage());
 		}
 	}
 	public void closeResultSet(ResultSet rs)
@@ -70,7 +75,7 @@ public class DBUtil {
 		try{
 			rs.close();
 		}catch(SQLException e){
-			e.printStackTrace();
+			logger.error("closeResultSet method |SQLException: " + e.getMessage());
 		}
 	}
 }

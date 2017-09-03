@@ -25,6 +25,8 @@ import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import model.Member;
 import modelContent.Certificate;
@@ -49,7 +51,7 @@ public class EditCv extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-  
+	private static Logger logger = LogManager.getLogger(EditCv.class);
 	private Facade facade = Facade.getInstance();
 	//private MemberSingleton member = MemberSingleton.getInstance();
 	
@@ -76,6 +78,7 @@ public class EditCv extends HttpServlet {
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+		logger.info("Servlet doPost method started.");
 		Member m = getLoggedMemberInf(request.getSession(true));
     	if(request.getParameter("action")!=null){
 			String cvId = request.getParameter("updateCvId");
@@ -85,11 +88,12 @@ public class EditCv extends HttpServlet {
 			c = facade.getCvforUpdate(Integer.valueOf(cvId));
 			request.setAttribute("cvContent", c);
 			request.setAttribute("cvNum", cvId);
+			logger.info("Servlet doPost method forwarded to editcv.jsp file.");
 			RequestDispatcher view = request.getRequestDispatcher("editcv.jsp");
 			view.forward(request, response);
      
     	}
-
+    	logger.info("Servlet doPost method ended.");
 	}
   
 }

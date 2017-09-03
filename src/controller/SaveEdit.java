@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import model.Member;
 import modelContent.Certificate;
 import modelContent.Courses;
@@ -38,12 +41,11 @@ public class SaveEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private Facade facade = Facade.getInstance();
-	//private MemberSingleton member = MemberSingleton.getInstance();
+	private static Logger logger = LogManager.getLogger(SaveEdit.class);
        
     
     public SaveEdit() {
         super();
-        // TODO Auto-generated constructor stub
     }
 	private Member getLoggedMemberInf(HttpSession session)
 	{
@@ -58,11 +60,14 @@ public class SaveEdit extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		logger.info("doGet method | started.");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		logger.info("doGet method | ended.");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.info("doPost method | started.");
+
 		request.setCharacterEncoding("UTF-8");	
     	
     	Member m = getLoggedMemberInf(request.getSession(true));
@@ -79,14 +84,16 @@ public class SaveEdit extends HttpServlet {
     	}catch(Exception e){
     		e.printStackTrace();
     	}
-    		response.sendRedirect("index.jsp");
+		response.sendRedirect("index.jsp");
 		
+		logger.info("doPost method | ended.");
+
 	}
 	
 	public CvContent setCv(HttpServletRequest request) throws IOException, IllegalStateException, ServletException{
+		logger.info("setCv method | started.");
     	request.setCharacterEncoding("UTF-8");
-    	System.out.println("Bilgiler servlete işlenmek üzere geldi");
-    //Personal Kısmı için veri çekimi
+    	//Personal Kısmı için veri çekimi
     	String cvName = request.getParameter("cvName");
     	String personalName = request.getParameter("personalName");
     	String personalTitle =  request.getParameter("personalTitle");
@@ -100,18 +107,15 @@ public class SaveEdit extends HttpServlet {
     	String personalPhoto = getValue(request);
 
     	
-    //Job Kısmı için veri çekimi
-    	
-    	//Kaç tane iş yeri girilmiş sayısını verir
-    	//System.out.println(jobCompanyName.length);
-    	
+    	//Job Kısmı için veri çekimi
+    	    	
     	String[] jobCompanyName = request.getParameterValues("jobCompanyName");
     	String[] jobTitle = request.getParameterValues("jobTitle");
     	String[] jobStartDate = request.getParameterValues("jobStartDate");
     	String[] jobEndDate = request.getParameterValues("jobEndDate");
     	String[] jobDescription = request.getParameterValues("jobDescription");
   
-    //Education Kısmı için veri çekimi
+    	//Education Kısmı için veri çekimi
     	
     	String[] eduSchoolName = request.getParameterValues("eduSchoolName");
     	String[] eduSchoolDepartman = request.getParameterValues("eduSchoolDepartman");
@@ -120,25 +124,25 @@ public class SaveEdit extends HttpServlet {
     	//String[] eduContinue = request.getParameterValues("eduContinue");
     	String[] eduDescription = request.getParameterValues("eduDescription");
     
-    //Projects kısmı için veri çekimi
+    	//Projects kısmı için veri çekimi
     	String projectDescription = request.getParameter("projectDescription");
     	
-    //Foreign Lang. kısmı için veri çekimi	
+    	//Foreign Lang. kısmı için veri çekimi	
     	String[] foreignName = request.getParameterValues("foreignName");
     	String[] foreignLevel = request.getParameterValues("foreignLevel");
     	
     	
-    //Skills kısmı için veri çekimi
+    	//Skills kısmı için veri çekimi
     	String skillDescription = request.getParameter("skillDescription");
     	
     
-    //Courses kısmı için veri çekimi
+    	//Courses kısmı için veri çekimi
     	String coursesDescription = request.getParameter("coursesDescription");
     	
-    //Certificate kısmı için veri çekimi
+    	//Certificate kısmı için veri çekimi
     	String certificateDescription = request.getParameter("certificateDescription");
     	
-    //Publication kısmı için veri çekimi
+    	//Publication kısmı için veri çekimi
     	String publicationDescription = request.getParameter("publicationDescription");
 
     	
@@ -193,9 +197,7 @@ public class SaveEdit extends HttpServlet {
     		per.setPersonalMail(personalMail);
     		
     	
-    	
-    		//Geri kalan bölümlerde aynı şekilde öncelikle modelContent altında class oluştulup öyle eklenecek.
-    	
+     	
     	
     	content.setPersonal(per);
     	content.setJobExperience(job);
@@ -207,7 +209,7 @@ public class SaveEdit extends HttpServlet {
     	content.setCertificate(cer);
     	content.setPublication(pub);
     	
-    	System.out.println("Bilgiler servlette işlendi DAO ya gönderildi");
+		logger.info("setCv method | ended. All informations sended to related dao.");
     	return content;
     	
     	
@@ -215,6 +217,8 @@ public class SaveEdit extends HttpServlet {
     
     //getParamterer yerine
     public String getValue(HttpServletRequest request) throws IllegalStateException, IOException, ServletException{
+		logger.info("getValue method | started.");
+
     	String name = null;
     	DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
@@ -238,11 +242,13 @@ public class SaveEdit extends HttpServlet {
     			}catch(Exception e){
     				e.printStackTrace();
     			}
+    		logger.info("getValue method | ended.");
     	    	return "profilePhoto" + File.separator + name;
 		}else{
+			logger.info("getValue method | ended.");
 			return oldPhoto;
 		}
-    	
+
 	}
     
 }

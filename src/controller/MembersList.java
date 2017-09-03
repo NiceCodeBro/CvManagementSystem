@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import model.Member;
 import service.Facade;
 
@@ -21,6 +24,8 @@ import service.Facade;
 public class MembersList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Facade facade = Facade.getInstance();
+	private static Logger logger = LogManager.getLogger(MembersList.class);
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,10 +41,7 @@ public class MembersList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String action = request.getParameter( "action" );
-
-
+		logger.info("doGet method | started.");
 		List<Member> member;
 		member = facade.getAllMembers();
 	
@@ -48,19 +50,20 @@ public class MembersList extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("listmembers.jsp");
 		view.forward(request, response);		
 		
-
-
+		logger.info("doGet method | ended and forwarded to listmembers.jsp page.");
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.info("doPost method | started.");
+
 		String action = request.getParameter( "action" );
 		if(action == null)
 		{
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			view.forward(request, response);
 		}
-		else if(action.equals("addNewMember")) //update user
+		else if(action.equals("addNewMember")) //add new member
 		{
 			
 			Member m = new Member();
@@ -98,7 +101,7 @@ public class MembersList extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("listmembers.jsp");
 			view.forward(request, response);		
 		}
-		else if(action.equals("deleteUser"))
+		else if(action.equals("deleteUser")) // delete user
 		{
 			int id = Integer.parseInt(request.getParameter("willDeletedUserId"));
 			facade.deleteMember(id);
@@ -109,6 +112,8 @@ public class MembersList extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("listmembers.jsp");
 			view.forward(request, response);		
 		}
+		
+		logger.info("doPost method | Ended. Forwarded to related jsp page by action's value.");
 		
 	}
 
