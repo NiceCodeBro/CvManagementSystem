@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import CvView.CreatePdf;
 import model.Member;
 
@@ -31,14 +28,14 @@ public class PersonalCV extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private Facade facade = Facade.getInstance();
-	private static Logger logger = LogManager.getLogger(PersonalCV.class);
+//	private MemberSingleton member = MemberSingleton.getInstance();
 	
     public PersonalCV() {
         super();
+        // TODO Auto-generated constructor stub
     }
 	private Member getLoggedMemberInf(HttpSession session)
 	{
-		logger.info("getLoggedMemberInf method | started.");
 		Member member = new Member();
 		if(session.getAttribute("isLoggedIn") == "true"){
 			
@@ -46,19 +43,18 @@ public class PersonalCV extends HttpServlet {
 			member.setMemberPass((String)session.getAttribute("loggedPassword"));
 			member.setRole((String)session.getAttribute("loggedMemberRole"));
 			member.setIdMember( (Integer)session.getAttribute("loggedMemberId"));
+	   	 System.out.println(member.getMemberName() + " " + member.getMemberPass() + " " + member.getRole());
 		}
-		logger.info("getLoggedMemberInf method | ended.");
-
 		return member;
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("doGet method | started.");
 		String action = request.getParameter( "action" );
 		Member member = getLoggedMemberInf(request.getSession(true));
 
 		if(action == null)
 		{	
+			
 			if(member.getRole().equals("Member"))
 			{
 				request.setAttribute("listOfCv", facade.listCvbyMember(member));
@@ -70,6 +66,7 @@ public class PersonalCV extends HttpServlet {
 			}
 				RequestDispatcher view = request.getRequestDispatcher("cvpage.jsp");
 				view.forward(request, response);
+				
 		}
 		else
 		{
@@ -89,28 +86,41 @@ public class PersonalCV extends HttpServlet {
 				response.setContentType ("application/pdf");
 				response.setHeader ("Content-Disposition", "attachment;filename="+member.getMemberName()+"_resume.pdf");
 			
-				InputStream in = new FileInputStream(f);
-				ServletOutputStream outs = response.getOutputStream();
-				
-				int bit = 256;
-				int i = 0;
-				try {
-					while ((bit) >= 0) {
-						bit = in.read();
-						outs.write(bit);
+					InputStream in = new FileInputStream(f);
+					ServletOutputStream outs = response.getOutputStream();
+					
+					
+					int bit = 256;
+					int i = 0;
+					try {
+						while ((bit) >= 0) {
+							bit = in.read();
+							outs.write(bit);
+						}
+						//System.out.println("" +bit);
+					} catch (IOException ioe) {
+						ioe.printStackTrace(System.out);
+					}finally{
+						f.delete();
 					}
-				} catch (IOException ioe) {
-					ioe.printStackTrace(System.out);
-				}finally{
-					f.delete();
-				}
-				outs.flush();
-				outs.close();
-				in.close();
-				
-			}			
+						//System.out.println( "\n" + i + " bytes sent.");
+						//System.out.println( "\n" + f.length() + " bytes sent.");
+					outs.flush();
+					outs.close();
+					in.close();
+					
+			}
+//			else if (action.equals("listMembers"))
+//			{
+//				System.out.println("ttttttttttttt " + facade.getAllMembers().size());
+//				request.setAttribute("listOfMember", facade.getAllMembers());
+//			
+//				RequestDispatcher view = request.getRequestDispatcher("/listmembers.jsp");
+//				view.forward(request, response);	
+//			}
+			
+	
 		}
-		logger.info("doGet method | ended and forwarded to related page by action's value.");
 
 	}
 

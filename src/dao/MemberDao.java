@@ -6,21 +6,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import com.mysql.jdbc.PreparedStatement;
 
 import model.Member;
 import util.DBUtil;
 
 public class MemberDao extends DBUtil{
-	private static Logger logger = LogManager.getLogger(MemberDao.class);
-
+	
 	public Member getMemberInf(String loginUserName, String loginPassword) 
 	{
-		logger.info("getMemberInf method | started. Someone is trying to login. login name:" + loginUserName + ".");
-		
 		Connection con = null;
 		PreparedStatement ps = null ;
 		ResultSet rs=null;
@@ -61,8 +55,7 @@ public class MemberDao extends DBUtil{
 		}
 		catch(Exception e)
 		{
-			logger.error("getMemberInf method | " + e.getMessage());
-
+			e.printStackTrace();
 			member.setStatus(false);
 		}
 		finally {
@@ -70,15 +63,11 @@ public class MemberDao extends DBUtil{
 			closePreparedSatement(ps);
 			closeResultSet(rs);
 		}
-		logger.info("getMemberInf method | ended.");
-
 		return member;
 	}
 	
 	public List<Member> getAllMembers() 
 	{
-		logger.info("getAllMembers method | started.");
-
 		Connection con = null;
 		PreparedStatement ps = null ;	
 		ResultSet rs = null;
@@ -106,22 +95,18 @@ public class MemberDao extends DBUtil{
 		}
 		catch(Exception e)
 		{
-			logger.info("getAllMembers method | " + e.getMessage());
+			e.printStackTrace();
 		}
 		finally {
 			closeConnection(con);
 			closePreparedSatement(ps);
 			closeResultSet(rs);
 		}
-		logger.info("getAllMembers method | ended.");
-
 		return member;
 	}
 	
 	public void deleteMember(int memberId) 
 	{
-		logger.info("deleteMember method | started. Member id:" + memberId  + ".");
-
 		Connection con = null;
 		PreparedStatement ps = null ;		
 		try
@@ -137,26 +122,24 @@ public class MemberDao extends DBUtil{
 		}
 		catch(Exception e)
 		{
-			logger.error("deleteMember method | " + e.getMessage());
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				logger.error("deleteMember method | Rollback error. SQLException: " + e1.getMessage());
+				e1.printStackTrace();
 			}
+			e.printStackTrace();
 		}
 		finally {
 			closeConnection(con);
 			closePreparedSatement(ps);
 		}
-		logger.info("deleteMember method | ended. Member id:" + memberId  + ".");
-
 	}
 	public void updateMember(Member member) 
 	{
-		logger.info("updateMember method | started. Member id:" + member.getIdMember()  + ".");
-
 		Connection con = null;
 		PreparedStatement ps = null ;
+
+		
 		try
 		{
 			
@@ -175,25 +158,21 @@ public class MemberDao extends DBUtil{
 		}
 		catch(Exception e)
 		{
-			logger.error("updateMember method | " + e.getMessage());
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				logger.error("updateMember method | Rollback error.SQLException:" + e1.getMessage());
+				e1.printStackTrace();
 			}
+			e.printStackTrace();
 		}
 		finally {
 			closeConnection(con);
 			closePreparedSatement(ps);
 		}
-		logger.info("updateMember method | started. Member id:" + member.getIdMember()  + ".");
-
 	}
 	
 	public void addNewMember(Member member) 
 	{
-		logger.info("addNewMember method | started. Member id:" + member.getIdMember()  + ".");
-
 		Connection con = null;
 		PreparedStatement ps = null ;
 
@@ -214,19 +193,17 @@ public class MemberDao extends DBUtil{
 		}
 		catch(Exception e)
 		{
-			logger.error("addNewMember method | " + e.getMessage());
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				logger.error("addNewMember method | Rollback error.SQLException:" + e1.getMessage());
+				e1.printStackTrace();
 			}
+			e.printStackTrace();
 		}
 		finally {
 			closeConnection(con);
 			closePreparedSatement(ps);
 
 		}
-		logger.info("addNewMember method | started. Member id:" + member.getIdMember()  + ".");
-
 	}
 }

@@ -25,8 +25,6 @@ import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import model.Member;
 import modelContent.Certificate;
@@ -53,7 +51,7 @@ public class FileUploadHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	private Facade facade = Facade.getInstance();
-	private static Logger logger = LogManager.getLogger(FileUploadHandler.class);
+	//private MemberSingleton member = MemberSingleton.getInstance();
 
 	private Member getLoggedMemberInf(HttpSession session)
 	{
@@ -70,24 +68,26 @@ public class FileUploadHandler extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	logger.info("DoPost method started.");
-  
     	request.setCharacterEncoding("UTF-8");	
+    	
     	Member m = getLoggedMemberInf(request.getSession(false));
+    	
+//    	m.setIdMember(member.getId());
+//    	m.setMemberName(member.getUsername());
+//    	m.setMemberPass(member.getPassword());
+//    	
     	CvContent c = setCv(request);
-		facade.addCv(c,m);
-		
-    	logger.info("DoPost method - Cv adding proccess has successfull. Redirected to index.jsp page.");
-    	response.sendRedirect("index.jsp");
+    		facade.addCv(c,m);
+    		System.out.println("Cv ekleme başarılı.");
+    response.sendRedirect("index.jsp");
      
     }
     
     
     public CvContent setCv(HttpServletRequest request) throws IOException, IllegalStateException, ServletException{
-    	logger.info("setCv Method  started. All informations that filled at cv adding page filling to related java classes.");
-
     	request.setCharacterEncoding("UTF-8");
-    	//Personal Kısmı için veri çekimi
+    	System.out.println("Bilgiler servlete işlenmek üzere geldi");
+    //Personal Kısmı için veri çekimi
     	String cvName = request.getParameter("cvName");
     	String personalName = request.getParameter("personalName");
     	String personalTitle =  request.getParameter("personalTitle");
@@ -98,7 +98,9 @@ public class FileUploadHandler extends HttpServlet {
     	String personalAddress = request.getParameter("personalAddress");
     	String personalMaritalStatus = request.getParameter("personalMaritalStatus");
     	String personalMail = request.getParameter("personalMail");
+    	System.out.println("xxx1");
     	String personalPhoto = getValue(request);
+    	System.out.println("xxx2");
     	
     //Job Kısmı için veri çekimi
     	
@@ -192,7 +194,10 @@ public class FileUploadHandler extends HttpServlet {
     		per.setPersonalPhoto(personalPhoto);
     		per.setPersonalMail(personalMail);
     		
-        	
+    	
+    	
+    		//Geri kalan bölümlerde aynı şekilde öncelikle modelContent altında class oluştulup öyle eklenecek.
+    	
     	
     	content.setPersonal(per);
     	content.setJobExperience(job);
@@ -204,8 +209,7 @@ public class FileUploadHandler extends HttpServlet {
     	content.setCertificate(cer);
     	content.setPublication(pub);
     	
-    	logger.info("Set cv method | All informations has filled to one java class named CvContent. And returned.");
-    	
+    	System.out.println("Bilgiler servlette işlendi DAO ya gönderildi");
     	return content;
     	
     	
@@ -213,7 +217,6 @@ public class FileUploadHandler extends HttpServlet {
     
     //getParamterer yerine
     public String getValue(HttpServletRequest request) throws IllegalStateException, IOException, ServletException{
-    	logger.info("getValue method | Started.");
     	String name = null;
     	DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
@@ -236,15 +239,14 @@ public class FileUploadHandler extends HttpServlet {
 			    	
 			    	Files.copy(fileContent, file.toPath());
 		    	
-			    	logger.info("getValue method | File path is returned and method ended.");
+		    	
 			}catch(Exception e){
-				logger.error("getValue method | Error occured." + e.getMessage());
 				e.printStackTrace();
 			}
 		}else{
-			logger.info("getValue method | Ended.");
 			return "";
 		}
+    	System.out.println(request.getRealPath("")+"/profilePhoto" + File.separator + name);
     	return "profilePhoto" + File.separator + name;
     }
     

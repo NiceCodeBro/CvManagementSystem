@@ -46,13 +46,6 @@
 	        <label>Password</label>
 	        <div class="bar"></div>
 	      </div>
-	      <% if(request.getAttribute("invalidLogin")!= null )
-	    	  {%>
-	      <div align="center">
-	          	<label style="color:red;">Invalid Username or Password.</label>
-	      </div>
-	      <%  } %>
-	  
 	      <div class="button-container" style="padding-top: 10px;">
 	        <button type="submit" ><span>Go</span></button>
 	      </div>

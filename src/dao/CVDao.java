@@ -11,12 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import com.mysql.jdbc.PreparedStatement;
 
-import controller.EditCv;
 import model.Cv;
 import model.Information;
 import model.Member;
@@ -28,15 +24,13 @@ public class CVDao extends DBUtil{
 	int cvId,loopSize;
 
 	Member member;
-	private static Logger logger = LogManager.getLogger(CVDao.class);
-
+	
 
 	/**
 	 * This method using when creating a cv as pdf
 	 * */
 	public CvView.CvContent getCvContent(int cvId)
 	{
-		logger.info("getCvContent method | started.");
 		CvView.CvContent cvContent = new CvView.CvContent();
 		Connection con = null;
 		ResultSet rs = null;
@@ -177,23 +171,21 @@ public class CVDao extends DBUtil{
 		}
 		catch(Exception e)
 		{
-			logger.error("getCvContent method | " + e.getMessage() );
+			e.printStackTrace();
 		}
 		finally {
 
 			closeConnection(con);
 			closePreparedSatement(ps);
 			closeResultSet(rs);
-		}
-		logger.info("getCvContent method | ended.");
 
+		}
+		
 		return cvContent;
 	}
 	
 	
 	public CvContent getCvforUpdate(int cvId){
-		logger.info("getCvforUpdate method | started. CvId " + cvId);
-
 		Connection con = null;
 		CvContent c = new CvContent();
 		String query="";
@@ -519,7 +511,7 @@ public class CVDao extends DBUtil{
 			
 					
 		}catch(Exception e){
-			logger.info("getCvforUpdate method | started. " + e.getMessage());
+			e.printStackTrace();
 		}
 		finally {
 
@@ -528,15 +520,11 @@ public class CVDao extends DBUtil{
 			closeResultSet(rs);
 
 		}
-		logger.info("getCvforUpdate method | ended. CvId " + cvId);
-
 		return c;
 		
 	}
 	
-	public boolean addCv(CvContent c, Member m){
-		logger.info("addCv method | started. Cv name:" + c.getPersonal().getCvName());
-
+	public boolean addCv(CvContent c,Member m){
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -649,28 +637,26 @@ public class CVDao extends DBUtil{
 			return true;
 			
 		}catch(Exception e){
-			logger.error("addCv method | " + e.getMessage());
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				logger.error("addCv method | Rollback error: " + e1.getMessage());
-
+				e1.printStackTrace();
 			}
+			e.printStackTrace();
 		}
 		finally {
 
 			closeConnection(con);
 			closePreparedSatement(ps);
 		}
-		logger.info("addCv method | ended. Cv name:" + c.getPersonal().getCvName());
+		System.out.println("DAO: Connection kapatıldı.");
 		return false;
 		
 		
 	}
 	
-	// method using when data inserting to content table in database.
+	//insert işlemlerinde kullanılmak üzere hazırlandı
 	public void insertContentDB(int cvId,int titleId,String c){
-		logger.info("insertContentDB method | started. Cv id: " + cvId + " ,Title id: " + titleId + "." );
 		Connection con = null;
 		PreparedStatement ps = null;
 		try{
@@ -684,25 +670,20 @@ public class CVDao extends DBUtil{
 			ps.executeUpdate();
 			con.commit();
 		}catch(Exception e){
-			logger.error("insertContentDB method | " + e.getMessage());
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				logger.error("insertContentDB method | Rollback error: " + e1.getMessage());
+				e1.printStackTrace();
 			}
+			e.printStackTrace();
 		}
 		finally {
 			closePreparedSatement(ps);
-			logger.info("insertContentDB method | ended. Cv id: " + cvId + " ,Title id: " + titleId + "." );
-
 		}
 		
 	}
 	
 	public List<Cv> listCvbyMember(Member member){
-		logger.info("listCvbyMember method | started. Member name: " + member.getMemberName() + ".");
-
-		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -727,21 +708,17 @@ public class CVDao extends DBUtil{
 			}
 			
 		}catch(Exception e){
-			logger.error("listCvbyMember method | Error when getting data from database: " + e.getMessage() + ".");
+			e.printStackTrace();
 		}
 		finally {
 			closeConnection(con);
 			closePreparedSatement(ps);
 			closeResultSet(rs);
 		}
-		logger.info("listCvbyMember method | ended. Member name: " + member.getMemberName() + ".");
-
 		return listCv;
 	}
 	
 	public List<Cv> listCvByManager(){
-		logger.info("listCvByManager method | started.");
-
 		Connection con = null;
 		ResultSet rs = null;
 		PreparedStatement ps = null;
@@ -764,7 +741,7 @@ public class CVDao extends DBUtil{
 					listCv.add(cv);
 			}
 		}catch(Exception e){
-			logger.error("listCvByManager method | Error when getting data from database: " + e.getMessage() + ".");
+			e.printStackTrace();
 		}
 		finally {
 
@@ -773,15 +750,11 @@ public class CVDao extends DBUtil{
 			closeResultSet(rs);
 
 		}
-		logger.info("listCvByManager method | ended.");
-
 		return listCv;
 	}
 	
 	public void deleteCvByRole(int cvId, Member member)
 	{
-		logger.info("deleteCvByRole method | started. Cv id: " + cvId + ".");
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		if(member.getRole().equals("Member"))
@@ -798,13 +771,12 @@ public class CVDao extends DBUtil{
 			}
 			catch(Exception e)
 			{
-				logger.error("deleteCvByRole method | Error when delete cv. Cv id: " + cvId + " Exception message: " + e.getMessage());
 				try {
 					con.rollback();
 				} catch (SQLException e1) {
-					logger.error("deleteCvByRole method | Cv delete rollback error.. Cv id: " + cvId + " Exception message: " + e1.getMessage());
-
+					e1.printStackTrace();
 				}
+				e.printStackTrace();
 			}
 			finally {
 				closeConnection(con);
@@ -825,28 +797,23 @@ public class CVDao extends DBUtil{
 			}
 			catch(Exception e)
 			{
-				logger.error("deleteCvByRole method | Error when delete cv. Cv id: " + cvId + " Exception message: " + e.getMessage());
 				try {
 					con.rollback();
 				} catch (SQLException e1) {
-					logger.error("deleteCvByRole method | Cv delete rollback error.. Cv id: " + cvId + " Exception message: " + e1.getMessage());
-
+					e1.printStackTrace();
 				}
+				e.printStackTrace();
 			}
 			finally {
 				closeConnection(con);
 				closePreparedSatement(ps);
 			}
 		}
-		logger.info("deleteCvByRole method | ended. Cv id: " + cvId + ".");
-
 	}
 	
 	
 	public boolean deleteCvforUpdate(int cvId)
 	{
-		logger.info("deleteCvforUpdate method | started. Cv id: " + cvId + ".");
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		try{
@@ -858,23 +825,19 @@ public class CVDao extends DBUtil{
 				ps.executeUpdate();
 				con.commit();
 			    return true;
-		}
-		catch(Exception e)
-		{
-			logger.error("deleteCvforUpdate method | Exception message: " + e.getMessage());
+		}catch(Exception e){
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				logger.error("deleteCvforUpdate method |  Exception message: " + e1.getMessage());
+				e1.printStackTrace();
 			}
+			e.printStackTrace();
 		}
 		finally {
 			closeConnection(con);
 			closePreparedSatement(ps);
 
 		}
-		logger.info("deleteCvforUpdate method | ended. Cv id: " + cvId + ".");
-
 		return false;
 		
 	}

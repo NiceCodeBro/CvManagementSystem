@@ -1,7 +1,6 @@
 package CvView;
 
 import CvView.*;
-import controller.Login;
 import model.Member;
 
 import java.io.File;
@@ -9,9 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -30,14 +26,14 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 
 public class CreatePdf {
-	private static Logger logger = LogManager.getLogger(CreatePdf.class);
 
 	public static void createPDF(CvView.CvContent content,HttpServletRequest req,Member m)
+
 	{
-		logger.info("createPDF method | started.");
+
 		Document document = new Document(PageSize.A4);
 		try {
-			File f = new File(req.getRealPath("")+"/" + content.getPersonal().getPersonalName().replaceAll("\\s+","") + "_resume.pdf");
+			File f = new File(req.getRealPath("")+"/"+m.getMemberName()+"_resume.pdf");
 			if(!f.exists()){
 				
 				 System.out.println("is Created PDF File : "+f.createNewFile());
@@ -49,7 +45,7 @@ public class CreatePdf {
 			
 			   
 			document.open();
-
+			System.out.println(w.getVerticalPosition(false) + " " + w.getVerticalPosition(true));
 			Image img2 = Image.getInstance("32bitResume3.png");
 			img2.scaleAbsolute(180f, 32f);
 			img2.setAlignment(Image.MIDDLE);
@@ -221,30 +217,26 @@ public class CreatePdf {
 
 			}
 			document.close();
- 		} catch (Exception e) {
-			
-			logger.error("createPDF method | error occured : " + e.getMessage());
-		}
-		logger.info("createPDF method | ended. Cv created successfully.");
+			System.out.println("Done");
+		} catch (Exception e) {
 
+			e.printStackTrace();
+
+		}
 
 	}
 
 	private static PdfPCell createImageCell(String path) throws DocumentException, IOException {
-		logger.info("createImageCell method | Started.");
 
 		Image img = Image.getInstance(path);
 
 		PdfPCell cell = new PdfPCell(img, true);
 		cell.setFixedHeight(125);
 		cell.setBorder(Rectangle.NO_BORDER);
-		
-		logger.info("createImageCell method | ended.");
 		return cell;
 	}
 
 	private static PdfPCell textOfEntryPart(Personal personal) throws DocumentException, IOException {
-		logger.info("textOfEntryPart method | Started.");
 
 		PdfPCell cell = new PdfPCell();
 		Paragraph p = new Paragraph(personal.getPersonalName(), new Font(FontFamily.HELVETICA, 22, Font.BOLD));
@@ -259,13 +251,11 @@ public class CreatePdf {
 		cell.addElement(p3);
 		cell.setVerticalAlignment(Element.ALIGN_TOP);
 		cell.setBorder(Rectangle.NO_BORDER);
-		
-		logger.info("textOfEntryPart method | ended.");
+
 		return cell;
 	}
 
 	private static PdfPCell personalInfo(Personal personal) throws DocumentException, IOException {
-		logger.info("personalInfo method | Started.");
 
 		PdfPCell cell = new PdfPCell();
 		String[] titles = new String[] { "Date Of Birth", "Cell Phone", "Office Phone", "E-Mail", "Adress", "Martial Status" };
@@ -283,14 +273,12 @@ public class CreatePdf {
 		}
 
 		cell.setBorder(Rectangle.NO_BORDER);
-		
-		logger.info("personalInfo method | ended.");
+
 		return cell;
 	}
 
 
 	private static PdfPCell jopExperience(JobExperience jopEx) throws DocumentException, IOException {
-		logger.info("jopExperience method | Started.");
 
 		PdfPCell cell = new PdfPCell();
 		for (int i = 0; i < jopEx.getJobCompanyName().size(); ++i) {
@@ -308,13 +296,10 @@ public class CreatePdf {
 		}
 
 		cell.setBorder(Rectangle.NO_BORDER);
-		
-		logger.info("jopExperience method | ended.");
 		return cell;
 	}
 
 	private static PdfPCell education(Education edc) throws DocumentException, IOException {
-		logger.info("education method | Started.");
 
 		PdfPCell cell = new PdfPCell();
 		for (int i = 0; i < edc.getEduSchoolName().size(); ++i) {
@@ -330,14 +315,10 @@ public class CreatePdf {
 			cell.addElement(new Paragraph(" "));
 		}
 		cell.setBorder(Rectangle.NO_BORDER);
-		
-		logger.info("education method | ended.");
 		return cell;
 	}
 
 	private static PdfPCell foreignLanguage(ForeignLanguage fLang) throws DocumentException, IOException {
-		logger.info("foreignLanguage method | Started.");
-
 		PdfPCell cell = new PdfPCell();
 		for (int i = 0; i < fLang.getForeignName().size(); ++i) {
 			String[] titles = new String[] { "Name Of Language", "Language Level" };
@@ -349,13 +330,10 @@ public class CreatePdf {
 			cell.addElement(phrase);
 		}
 		cell.setBorder(Rectangle.NO_BORDER);
-		
-		logger.info("foreignLanguage method | ended.");
 		return cell;
 	}
 
 	private static PdfPCell skills(Skill skill) throws DocumentException, IOException {
-		logger.info("skills method | Started.");
 
 		PdfPCell cell = new PdfPCell();
 		String temp = skill.getSkillDescription();
@@ -368,14 +346,11 @@ public class CreatePdf {
 		cell.addElement(phrase);
 		cell.addElement(new Paragraph(" "));
 		cell.setBorder(Rectangle.NO_BORDER);
-		
-		logger.info("skills method | ended.");
 
 		return cell;
 	}
 
 	private static PdfPCell coursesAndSeminars(Courses courAndSem) throws DocumentException, IOException {
-		logger.info("coursesAndSeminars method | Started.");
 
 		PdfPCell cell = new PdfPCell();
 		String temp = courAndSem.getCoursesDescription();
@@ -391,13 +366,10 @@ public class CreatePdf {
 		cell.addElement(new Paragraph(" "));
 		cell.setBorder(Rectangle.NO_BORDER);
 		
-		logger.info("coursesAndSeminars method | ended.");
 		return cell;
 	}
 
 	private static PdfPCell certificate(Certificate certificate) throws DocumentException, IOException {
-		logger.info("certificate method | Started.");
-
 		PdfPCell cell = new PdfPCell();
 		String temp = certificate.getCertificateDescription();
 		String[] allCertificate = temp.split("\\r?\\n");
@@ -410,13 +382,11 @@ public class CreatePdf {
 		cell.addElement(new Paragraph(" "));
 		cell.setBorder(Rectangle.NO_BORDER);
 		
-		logger.info("certificate method | ended.");
 		return cell;
 
 	}
 
 	private static PdfPCell publications(Publication publication) throws DocumentException, IOException {
-		logger.info("publications method | Started.");
 
 		PdfPCell cell = new PdfPCell();
 		String temp = publication.getPublicationDescription();
@@ -430,7 +400,6 @@ public class CreatePdf {
 		cell.addElement(new Paragraph(" "));
 		cell.setBorder(Rectangle.NO_BORDER);
 		
-		logger.info("publications method | ended.");
 		return cell;
 	}
 }

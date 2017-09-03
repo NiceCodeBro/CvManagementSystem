@@ -7,17 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 /**
  * Servlet implementation class Logout
  */
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LogManager.getLogger(Logout.class);
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,10 +26,9 @@ public class Logout extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("doGet method | started.");
+		
 		request.getSession(true).invalidate();
 		response.sendRedirect("index.jsp");
-		logger.info("doGet method | Ended. Session is terminated and redirected to index.jsp page.");
 	}
 
 	/**

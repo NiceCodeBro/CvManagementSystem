@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import CvView.CreatePdf;
 import model.Member;
 import service.Facade;
 
@@ -26,7 +22,7 @@ import service.Facade;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Facade facade = Facade.getInstance(); 
-	private static Logger logger = LogManager.getLogger(Login.class);
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,11 +44,14 @@ public class Login extends HttpServlet {
 	 */
 	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("doPost method | Someone is trying to login.");
+		// TODO Auto-generated method stub
 		 String username = request.getParameter("LoginUsername");
          String pass = request.getParameter("LoginPassword");
 
-         Member member = facade.getMemberInf(username, pass);
+         Member member;
+		
+			member = facade.getMemberInf(username, pass);
+	
  		
          if(member.isStatus())
          {
@@ -64,19 +63,14 @@ public class Login extends HttpServlet {
         	 sesion.setAttribute("loggedMemberRole", member.getRole());
         	 
         	// sesion.setMaxInactiveInterval(20*60);
-        	 
-        	 logger.info("doPost method | Login procces is successfull. Member (" + member.getMemberName() + ") redirec to home page." );
+        	 System.out.println(member.getMemberName() + " " + member.getMemberPass() + " " + member.getRole());
+        	 System.out.println("giriş başarılı");
+        	// System.out.println(MemberSingleton.getInstance().getId() + " " + MemberSingleton.getInstance().getUsername() + " " +  MemberSingleton.getInstance().getPassword() + " " + MemberSingleton.getInstance().getRole() ) ;
      		request.getRequestDispatcher("login.jsp").forward(request, response);
          }
          else
-         {
-        	 logger.info("doPost method | Login procces is unsuccessfull." );
-        	 request.setAttribute("invalidLogin", "true");
-        	 request.getRequestDispatcher("login.jsp").forward(request, response);
-         }
-        	 
-  			
-
+        	 System.out.println("giriş başarısız");
+         
 		} 
          
 
