@@ -25,51 +25,63 @@
 			<table  id="cvTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
 				<thead>
 					<tr>
-					<td align="center">Owner</td>
-					<td align="center">Owner Role</td>
+					<c:if test="${role != null}">
+						<td align="center">Owner</td>
+						<td align="center">Role</td>
+					</c:if>
 					<td align="center">Cv Name</td>
-					<td align="center">View Cv</td>
-					<td align="center">Edit Cv</td>
-					<td align="center">Delete Cv</td>
-					<td align="center">Cv Add or Update Date </td>
+					<td align="center">Download</td>
+					<td align="center">Edit</td>
+					<td align="center">Delete</td>
+					<td align="center">Last Edit Date</td>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
-					<td align="center">Owner</td>
-					<td align="center">Owner Role</td>
-					<td align="center">Cv Name</td>
-					<td align="center">View Cv</td>
-					<td align="center">Edit Cv</td>
-					<td align="center">Delete Cv</td>
-					<td align="center">Cv Add or Update Date </td>
+					<c:if test="${role != null}">
+						<td align="center">Owner</td>
+						<td align="center">Owner Role</td>
+					</c:if>
+					<td align="center">Name</td>
+					<td align="center">Download</td>
+					<td align="center">Edit</td>
+					<td align="center">Delete</td>
+					<td align="center">Last Edit Date</td>
 					</tr>
 				</tfoot>
 				<tbody>
 			    	<c:forEach items="${listOfCv}" var="cv">
 				    	<tr>
+				    	<c:if test="${role != null}">
 				    		<td align="center" class="col-md-2"> ${cv.ownerUsername}</td>
-				    		<td align="center" class="col-md-1"> ${cv.ownerRole}</td>
-				    		<td align="center" class="col-md-2"> ${cv.cvName}</td>
-				    		<td align="center" class="col-md-2">
+				    		<td align="center" class="col-md-2"> ${cv.ownerRole}</td>
+				    	</c:if>
+				    		<td align="center" class="col-md-3"> ${cv.cvName}</td>
+				    		<td align="center" class="col-md-1">
 				    			 <form action="index.jsp" method = "get"> 
 				    				 <input type = "hidden" name = "action" value = "viewCv">
 				    				<input type = "hidden" name = "willViewedCvId" value = "${cv.idCv}" >
-				    				<input type = "submit" class = "btn btn-block btn-primary" value = "View"> 				    			
+				    				<button type = "submit" class = "btn btn-block btn-success" value = "Edit">
+				    					 <span class="glyphicon glyphicon-download"></span>
+				    				</button>				    			
 				    		 	</form>
 				    		</td>
-				    		<td align="center" class="col-md-2">
+				    		<td align="center" class="col-md-1">
 				    			<form action="Edit" method = "post">
 				    				<input type = "hidden" name = "action" value = "updateCv">
 				    				<input type = "hidden" name = "updateCvId" value = "${cv.idCv}" >
-				    				<input type = "submit" class = "btn btn-block btn-primary" value = "Edit">
+				    				<button type = "submit" class = "btn btn-block btn-info" value = "Edit">
+				    					 <span class="glyphicon glyphicon-edit"></span>
+				    				</button>
 				    			</form>
 				    		</td>
 				    		<td align="center" class="col-md-1">
 				    			<form action="index.jsp" method = "get">
 				    				<input type = "hidden" name = "action" value = "deleteCv">
 				    				<input type = "hidden" name = "willDeletedCvId" value = "${cv.idCv}" >
-				    				<input type = "submit" class = "btn btn-block btn-danger" value = "Delete">
+				    				<button type = "submit" class = "btn btn-block btn-danger" value = "Delete">
+				    					 <span class="glyphicon glyphicon-trash"></span>
+				    				</button>
 				    			</form>
 				    		</td>
 				    		
@@ -83,6 +95,8 @@
 		<div class="col-md-2 col-lg-2"></div>
 	</div>
 </div>
+
+
 
 
 

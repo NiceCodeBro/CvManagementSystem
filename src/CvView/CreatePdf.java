@@ -1,9 +1,14 @@
 package CvView;
 
 import CvView.*;
+import model.Member;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -22,13 +27,23 @@ import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 
 public class CreatePdf {
 
-	public static void createPDF(CvView.CvContent content)
+	public static void createPDF(CvView.CvContent content,HttpServletRequest req,Member m)
 
 	{
 
 		Document document = new Document(PageSize.A4);
 		try {
-			PdfWriter w = PdfWriter.getInstance(document, new FileOutputStream("Desktop/sample1.pdf"));
+			File f = new File(req.getRealPath("")+"/"+m.getMemberName()+"_resume.pdf");
+			if(!f.exists()){
+				
+				 System.out.println("is Created PDF File : "+f.createNewFile());
+			}else{
+				System.out.println("Aynı PDF dosyasından var");
+			}
+			
+			PdfWriter w = PdfWriter.getInstance(document, new FileOutputStream(f));
+			
+			   
 			document.open();
 			System.out.println(w.getVerticalPosition(false) + " " + w.getVerticalPosition(true));
 			Image img2 = Image.getInstance("32bitResume3.png");

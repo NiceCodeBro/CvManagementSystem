@@ -678,7 +678,6 @@ public class CVDao extends DBUtil{
 			e.printStackTrace();
 		}
 		finally {
-			closeConnection(con);
 			closePreparedSatement(ps);
 		}
 		

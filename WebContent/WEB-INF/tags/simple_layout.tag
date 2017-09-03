@@ -66,14 +66,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="addcv.jsp">Add CV</a></li>
+        <li><a href="addcv.jsp"><span class="glyphicon glyphicon-plus"></span> Add CV</a></li>
         
                
          <%
 
 	if(request.getSession().getAttribute("loggedMemberRole").equals("Manager")) {
 	%>
-		 <li><a href="MembersList">List Members</a></li>	<%
+		 <li><a href="MembersList"><span class="glyphicon glyphicon-th-list"></span> List Members</a></li>	<%
 	}
 	
 	%>
@@ -87,17 +87,8 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>-->
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="Logout">Log out</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+          <li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>	
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
