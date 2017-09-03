@@ -37,7 +37,7 @@ public class CreatePdf {
 		logger.info("createPDF method | started.");
 		Document document = new Document(PageSize.A4);
 		try {
-			File f = new File(req.getRealPath("")+"/" + content.getPersonal().getPersonalName().replaceAll("\\s+","") + "_resume.pdf");
+			File f = new File(req.getRealPath("")+"/" + content.getPersonal().getPersonalName().replaceAll(" ", "") + "_resume.pdf");
 			if(!f.exists()){
 				
 				 System.out.println("is Created PDF File : "+f.createNewFile());

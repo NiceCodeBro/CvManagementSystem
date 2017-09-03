@@ -83,11 +83,12 @@ public class PersonalCV extends HttpServlet {
 			{
 				int idCv = Integer.parseInt(request.getParameter("willViewedCvId"));
 				//CV create
-				CreatePdf.createPDF(facade.getCvContetn(idCv),request,member);
+				CvView.CvContent cvcontent = facade.getCvContetn(idCv);
+				CreatePdf.createPDF(cvcontent,request,member);
 				//Download Cv
-				File f = new File (request.getRealPath("")+"/"+member.getMemberName()+"_resume.pdf");
+				File f = new File (request.getRealPath("")+"/" + cvcontent.getPersonal().getPersonalName().replaceAll(" ", "") + "_resume.pdf");
 				response.setContentType ("application/pdf");
-				response.setHeader ("Content-Disposition", "attachment;filename="+member.getMemberName()+"_resume.pdf");
+				response.setHeader ("Content-Disposition", "attachment;filename="+ cvcontent.getPersonal().getPersonalName().replaceAll(" ", "") +"_resume.pdf");
 			
 				InputStream in = new FileInputStream(f);
 				ServletOutputStream outs = response.getOutputStream();
