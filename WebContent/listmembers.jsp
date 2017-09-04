@@ -16,7 +16,7 @@
 <div class="container">
 	<div class="row">
 
-		<div class="col-md-2 col-lg-2"></div>
+		<div class="col-md-4 col-lg-4"></div>
 		
 		<div class="col-md-2 col-md-2">
 			<form action = "MembersList" method = "post"> 	
@@ -103,6 +103,8 @@
 
 	</div>
 	<div class="row">	
+			<div class="col-md-2 col-lg-2"></div>
+	
 		<div class="col-md-8 col-lg-8">
 			<table  id="cvTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
 				<thead>

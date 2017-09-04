@@ -107,7 +107,7 @@ public class CreatePdf {
 
 			// job experience
 
-			if (content.getJobExperience().getJobCompanyName().size() > 0)
+			if (content.getJobExperience().getJobCompanyName().size() > 0 && !content.getJobExperience().getJobCompanyName().get(0).equals(""))
 
 			{
 				PdfPTable table3 = new PdfPTable(2);

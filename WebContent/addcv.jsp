@@ -45,12 +45,12 @@
 	            var checkCount = 1;
 	            $("#addCheckboxJob").click(function (e) {
 	                e.preventDefault();
-	                $("#ayracJob").append('<div class="row"> <div class="col-md-12"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> <div id="isDeneyimi"> <div class="form-group"> <label class="control-label">Company Name</label> <input name="jobCompanyName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">Title</label> <input name="jobTitle" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Working Date</label> <div class="input-group input-daterange"> <input name="jobStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="jobEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="jobDescription" class="form-control" placeholder="Açıklama" ></textarea> </div> </div> </div> </div>');
+	                $("#ayracJob").append('<div class="row"> <div class="col-md-12"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> <div id="isDeneyimi"> <div class="form-group"> <label class="control-label">Company Name</label> <input name="jobCompanyName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">Title</label> <input name="jobTitle" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Working Date</label> <div class="input-group input-daterange"> <input name="jobStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="jobEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="jobDescription" class="form-control" placeholder="Description" ></textarea> </div> </div> </div> </div>');
 	            });
 
 	            $("#addCheckboxEdu").click(function (e) {
 	                e.preventDefault();
-	                $("#ayracEdu").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <div id="educationInf"> <div class="form-group"> <label class="control-label">School Name</label> <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">School Departman</label> <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Education Date</label> <div class="input-group input-daterange"> <input name="eduStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="eduEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea> </div> </div> </div> </div> <div id="ayracEdu"></div>');  });
+	                $("#ayracEdu").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <div id="educationInf"> <div class="form-group"> <label class="control-label">School Name</label> <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter School Name" /> </div> <div class="form-group"> <label class="control-label">School Departman</label> <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Education Date</label> <div class="input-group input-daterange"> <input name="eduStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="eduEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea> </div> </div> </div> </div> <div id="ayracEdu"></div>');  });
 	            $("#addCheckboxForeign").click(function (e) {
 	                e.preventDefault();
 	                $("#ayracForeign").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <!-- ekleme butonu --> <div class="col-md-6"> <div class="form-group"> <input name="foreignName" maxlength="45" type="text" class="form-control" placeholder="Enter language you know." /> </div> </div> <div class="col-md-6"> <select class="form-control" name="foreignLevel"> <option>Beginning</option> <option>Intermediate</option> <option>Good</option> <option>Advanced</option> </select> </div> </div> </div> <div id="ayracForeign"></div>'); });
@@ -274,7 +274,7 @@
 		          
 		          <div class="form-group">
 		            <label class="control-label">Description</label>
-		            <textarea name="jobDescription" class="form-control" placeholder="Açıklama" ></textarea>
+		            <textarea name="jobDescription" class="form-control" placeholder="Description." ></textarea>
 		          </div>
 	          </div>					
 	        </div>
@@ -304,7 +304,7 @@
 	          <div id="educationInf">
 		          <div class="form-group">
 		            <label class="control-label">School Name</label>
-		            <input name="eduSchoolName" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
+		            <input name="eduSchoolName" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter School Name" />
 		          </div>
 		          
 		          <div class="form-group">

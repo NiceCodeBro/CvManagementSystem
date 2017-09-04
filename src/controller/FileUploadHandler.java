@@ -220,31 +220,38 @@ public class FileUploadHandler extends HttpServlet {
 		Member member = getLoggedMemberInf(request.getSession(false));
 		
 		Part part = request.getPart("file");
-		
-		if(part.getContentType().contains("image")){
-			try{
-		    	
-		    		InputStream fileContent = part.getInputStream();
+		try
+		{
+			if(part.getContentType().contains("image") ){
+				try{
 			    	
-			    	name = String.valueOf(member.getIdMember())+dateFormat.format(date)+"."+part.getContentType().substring(6);
+			    		InputStream fileContent = part.getInputStream();
+				    	
+				    	name = String.valueOf(member.getIdMember())+dateFormat.format(date)+"."+part.getContentType().substring(6);
+				    	
+				    	File dir = new File(request.getRealPath("")+"/profilePhoto");
+				    	if(!dir.exists()){
+				    		dir.mkdir();
+				    	}
+				    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
+				    	
+				    	Files.copy(fileContent, file.toPath());
 			    	
-			    	File dir = new File(request.getRealPath("")+"/profilePhoto");
-			    	if(!dir.exists()){
-			    		dir.mkdir();
-			    	}
-			    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
-			    	
-			    	Files.copy(fileContent, file.toPath());
-		    	
-			    	logger.info("getValue method | File path is returned and method ended.");
-			}catch(Exception e){
-				logger.error("getValue method | Error occured." + e.getMessage());
-				e.printStackTrace();
+				    	logger.info("getValue method | File path is returned and method ended.");
+				}catch(Exception e){
+					logger.error("getValue method | Error occured." + e.getMessage());
+					e.printStackTrace();
+				}
+			}else{
+				logger.info("getValue method | Ended.");
+				return "";
 			}
-		}else{
-			logger.info("getValue method | Ended.");
+		}
+		catch(Exception e)
+		{
 			return "";
 		}
+
     	return "profilePhoto" + File.separator + name;
     }
     

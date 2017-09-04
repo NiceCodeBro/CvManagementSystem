@@ -60,7 +60,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.jsp"> Cv Management </a>
+      <a class="navbar-brand" href="index.jsp"><img src="images/32bitHomeBanner.png"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -87,7 +87,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>-->
       <ul class="nav navbar-nav navbar-right">
-         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+         <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li> -->
           <li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>	
       </ul>
     </div><!-- /.navbar-collapse -->
