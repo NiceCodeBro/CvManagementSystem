@@ -203,7 +203,7 @@
       <div class="col-xs-6 col-md-offset-3" id="jobExperience">
       <h3>Job Experience</h3>
         <div class="form-group">
-      		<button id="addCheckboxJob" class="btn btn-success">+</button>
+      		<button id="addCheckboxJob" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
       	</div>
         
 <c:forEach items="${cvContent.jobExperiences}" var="job">

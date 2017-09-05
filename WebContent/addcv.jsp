@@ -238,7 +238,7 @@
     
 	<!-- EDUCATION START -->
 	<div class="row setup-content" id="step-4">
-      <div class="col-xs-6 col-md-offset-3">
+      <div class="col-xs-6 col-md-offset-3 Edu">
       <h3>Education </h3>
       <div class="form-group">
       	<button id="addCheckboxEdu" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
