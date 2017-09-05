@@ -27,7 +27,7 @@
 
 	<div class="pen-title">
 	
-		<img src="images/32bit2.png">
+		<img src="images/32bit2.png" style="max-width: 600px">
 	</div>
 	
 	<div class="container">
@@ -42,7 +42,7 @@
 	      </div>
 	   
 	      <div class="input-container">
-	        <input type="text" name="LoginPassword" required="required"/>
+	        <input type="password" name="LoginPassword" required="required"/>
 	        <label>Password</label>
 	        <div class="bar"></div>
 	      </div>

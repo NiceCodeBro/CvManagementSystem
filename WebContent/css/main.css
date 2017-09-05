@@ -63,3 +63,8 @@
     margin-left:2px;
 }
 
+.required-star:after{
+	content: "*";
+	color:red;
+	font-size: 10px;
+}

@@ -22,62 +22,6 @@
     display: inline-block;
 }
 </style>
-
-		
-		<script>
-			$(function() {
-				$("#datepicker").datepicker({
-					autoclose : true,
-					todayHighlight : true
-				}).datepicker('update', new Date());
-				;
-			});
-
-			$(function() {
-				$(".input-daterange input").datepicker({
-					autoclose : true,
-					todayHighlight : true
-				}).datepicker('update', new Date());
-				;
-			});
-			
-			$(document).ready(function () {
-	            var checkCount = 1;
-	            $("#addCheckboxJob").click(function (e) {
-	                e.preventDefault();
-	                $("#ayracJob").append('<div class="row"> <div class="col-md-12"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> <div id="isDeneyimi"> <div class="form-group"> <label class="control-label">Company Name</label> <input name="jobCompanyName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">Title</label> <input name="jobTitle" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Working Date</label> <div class="input-group input-daterange"> <input name="jobStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="jobEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="jobDescription" class="form-control" placeholder="Description" ></textarea> </div> </div> </div> </div>');
-	            });
-
-	            $("#addCheckboxEdu").click(function (e) {
-	                e.preventDefault();
-	                $("#ayracEdu").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <div id="educationInf"> <div class="form-group"> <label class="control-label">School Name</label> <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter School Name" /> </div> <div class="form-group"> <label class="control-label">School Departman</label> <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Education Date</label> <div class="input-group input-daterange"> <input name="eduStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="eduEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea> </div> </div> </div> </div> <div id="ayracEdu"></div>');  });
-	            $("#addCheckboxForeign").click(function (e) {
-	                e.preventDefault();
-	                $("#ayracForeign").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <!-- ekleme butonu --> <div class="col-md-6"> <div class="form-group"> <input name="foreignName" maxlength="45" type="text" class="form-control" placeholder="Enter language you know." /> </div> </div> <div class="col-md-6"> <select class="form-control" name="foreignLevel"> <option>Beginning</option> <option>Intermediate</option> <option>Good</option> <option>Advanced</option> </select> </div> </div> </div> <div id="ayracForeign"></div>'); });
-	            $('body').on('click', '.remove', function(){
-	                $(this).closest('.col-md-12').remove();
-	            });
-
-	            $("#checkList").on("click", "#removeCheckbox", function (e) { 
-	                e.preventDefault();
-	                $(this).parent('div').remove();
-	                checkCount--;
-	            });
-	            
-	        });
-
-
-			$('#tokenfield').tokenfield({
-				  autocomplete: {
-				    source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
-				    delay: 100
-				  },
-				  showAutocompleteOnFocus: true
-				});
-
-			
-		</script>
-		
 	
 
 </jsp:attribute>
@@ -158,7 +102,7 @@
 			        <div class="col-md-12">
 			          <h3>CV</h3>
 			           <div class="form-group">
-			            <label class="control-label">CV Name</label>
+			            <label class="control-label">CV Name <span class="required-star"></span></label>
 			            <input name="cvName" required maxlength="45" type="text" class="form-control" placeholder="Enter CV Name" /> 
 			          </div>
 			          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
@@ -172,44 +116,41 @@
 			      <div class="col-xs-6 col-md-offset-3">
 			        <div class="col-md-12">
 			          <h3> Personal Info</h3>
-			           <!-- Photo upload section -->
-						 <!-- image-preview-filename input [CUT FROM HERE]-->
 			           <div class="form-group">
 			            <label class="control-label">Profil Picture</label>
 			            </br>
-			            	<div id="imagePreview"></div>
-			            
+			            <div id="imagePreview"></div>
 			             <input type="file" id="file" name="file" class="form-control" value="" />
 			          </div>
 			          
 			          <div class="form-group">
-			            <label class="control-label">Name</label>
-			            <input name="personalName" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Name" /> 
+			            <label class="control-label">Name <span class="required-star"></span></label>
+			            <input name="personalName" required maxlength="45" type="text" class="form-control" placeholder="Enter Name" /> 
 			          </div>
 			          <div class="form-group">
-			            <label class="control-label">Mail</label>
-			            <input name="personalMail" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Mail Adress" /> 
+			            <label class="control-label">Mail <span class="required-star"></span></label>
+			            <input name="personalMail" required maxlength="45" type="text" class="form-control" placeholder="Enter Mail Adress" /> 
 			          </div>
 			            <div class="form-group">
-			              <label class="control-label">Title</label>
-			            <input name="personalTitle" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Your Title. (Like Software Developer)" /> 
+			              <label class="control-label">Title <span class="required-star"></span></label>
+			            <input name="personalTitle" required maxlength="45" type="text" class="form-control" placeholder="Enter Your Title. (Like Software Developer)" /> 
 			          </div>
 			          <div class="form-group">
-			            <label class="control-label">Objectives</label>
-			            <textarea name="personalObjectives" required="required" class="form-control" placeholder="An objective is a short statement that clarifies your goals."></textarea>
+			            <label class="control-label">Objectives <span class="required-star"></span></label>
+			            <textarea name="personalObjectives" maxlength="300" class="form-control" placeholder="An objective is a short statement that clarifies your goals." required></textarea>
 			          </div>
 			          
 			           <div class="form-group">
-			              <label class="control-label">Date Of Birth</label>
+			              <label class="control-label">Date Of Birth <span class="required-star"></span></label>
 			            	<div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-					    		<input name="personalDateofBirth" required="required" class="form-control" type="text" maxlength="10" />
+					    		<input name="personalDateofBirth" required class="form-control" type="text" maxlength="10" />
 					    		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 			          </div>
 			          
 			          <div class="form-group">
-			            <label class="control-label">Cell Phone</label>
-			            <input name="personalCellPhone" required="required" max="11" type="text" class="form-control" placeholder="Enter your cell phone.">
+			            <label class="control-label">Cell Phone <span class="required-star"></span></label>
+			            <input name="personalCellPhone" required max="11" type="text" class="form-control" placeholder="Enter your cell phone.">
 			          </div>
 			          
 			         <div class="form-group">
@@ -218,11 +159,11 @@
 			          </div>
 			          
 			           <div class="form-group">
-			            <label class="control-label">Adress</label>
-			            <textarea name="personalAddress" required="required" class="form-control" placeholder="Enter your adress."></textarea>
+			            <label class="control-label">Adress <span class="required-star"></span></label>
+			            <textarea name="personalAddress" maxlength="300" class="form-control" placeholder="Enter your adress." required></textarea>
 			          </div>
 			          	<div> 
-			          	<label class="control-label">Marital Status</label>
+			          	<label class="control-label">Marital Status <span class="required-star"></span></label>
 							<label class="custom-control radio active">
 						  <input checked="" id="radio1" value="Single" name="personalMaritalStatus" type="radio" class="custom-control-input">
 						  <span class="custom-control-indicator"></span>
@@ -245,16 +186,20 @@
     
     <div class="row setup-content" id="step-3">
       <div class="col-xs-6 col-md-offset-3" id="jobExperience">
-	<!-- ekleme butonu -->
+        <h3>Job Experience</h3>
         <div class="form-group">
-      		<button id="addCheckboxJob" class="btn btn-success">+</button>
+      		<button id="addCheckboxJob" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
       	</div>
         <div class="row">
 	        <div class="col-md-12">  
-	            
+	            <div class="form-group">
+			        <div class="col-md-offset-11">
+			        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+			        </div> 
+		        </div>
 	          <div id="isDeneyimi">
 		          <div class="form-group">
-		            <label class="control-label">Company Name</label>
+		            <label class="control-label">Company Name </label>
 		            <input name="jobCompanyName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
 		          </div>
 		          
@@ -265,10 +210,10 @@
 		          
 		           <div class="form-group">
 		            <label class="control-label">Working Date</label>							
-					<div class="input-group input-daterange">
-					    <input name="jobStartDate" type="text" class="form-control" value="2012-04-05">
+					<div class="input-group">
+					    <input name="jobStartDate" type="text" class="form-control" value="">
 					    <div class="input-group-addon">to</div>
-					    <input name="jobEndDate" type="text" class="form-control" value="2012-04-19">
+					    <input name="jobEndDate" type="text" class="form-control" value="">
 					</div>												
 		          </div>
 		          
@@ -281,11 +226,12 @@
        </div>
         <div id="ayracJob"></div>
         
-         <div class="col-md-12">
-         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-         </div>
+         <div class="row">
+         	<div class="col-md-12">
+         	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+         	</div>
+         </div> 
       </div>
-      
     </div>
        <!-- JOB EXPERIENCE END -->
         	
@@ -293,45 +239,51 @@
 	<!-- EDUCATION START -->
 	<div class="row setup-content" id="step-4">
       <div class="col-xs-6 col-md-offset-3">
-      
-      	<!-- ekleme butonu -->
-      <h3> Education </h3>
+      <h3>Education </h3>
       <div class="form-group">
-      	<button id="addCheckboxEdu" class="btn btn-success">+</button>
+      	<button id="addCheckboxEdu" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
       </div>
          <div class="row">
-		      <div class="col-md-12">  
+		      <div class="col-md-12"> 
+		     	<div class="form-group">
+			        <div class="col-md-offset-11">
+			        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+			        </div> 
+		        </div>
 	          <div id="educationInf">
 		          <div class="form-group">
-		            <label class="control-label">School Name</label>
-		            <input name="eduSchoolName" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter School Name" />
+		            <label class="control-label">School Name <span class="required-star"></span></label>
+		            <input name="eduSchoolName" required maxlength="45" type="text" class="form-control" placeholder="Enter School Name" />
 		          </div>
 		          
 		          <div class="form-group">
-		            <label class="control-label">School Departman</label>
-		            <input name="eduSchoolDepartman" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
+		            <label class="control-label">School Departman <span class="required-star"></span></label>
+		            <input name="eduSchoolDepartman" required maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
 		          </div>
 		          
 		           <div class="form-group">
-		            <label class="control-label">Education Date</label>							
-					<div class="input-group input-daterange">
-					    <input name="eduStartDate" required="required" type="text" class="form-control" value="2012-04-05">
+		            <label class="control-label">Education Date <span class="required-star"></span></label>							
+					<div class="input-group">
+					    <input name="eduStartDate" required type="text" class="form-control" value="">
 					    <div class="input-group-addon">to</div>
-					    <input name="eduEndDate" required="required" type="text" class="form-control" value="2012-04-19">
+					    <input name="eduEndDate" required type="text" class="form-control" value="">
 					</div>												
 		          </div>
 		          
 		          <div class="form-group">
-		            <label class="control-label">Description</label>
-		            <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea>
+		            <label class="control-label">Description <span class="required-star"></span></label>
+		            <textarea name="eduDescription" required class="form-control" placeholder="Enter description" ></textarea>
 		          </div>
 	          </div>					
 	        </div>
 	      </div>
         <div id="ayracEdu"></div>
          
-
-         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button> 
+		<div class="row">
+         	<div class="col-md-12">
+         	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+         	</div>
+         </div> 
 
         </div>
       </div>
@@ -374,27 +326,36 @@
     <!-- Foreign Lang START -->
 	   <div class="row setup-content" id="step-6">
       <div class="col-xs-6 col-md-offset-3">
+      <h3> Foreign Languages </h3>
 	       <div class="form-group">
-	        	<button id="addCheckboxForeign" class="btn btn-success">+</button>
+	        	<button id="addCheckboxForeign" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
 	        </div>
 	        <div class="row">
-		      <div class="col-md-12">  
+		      <div class="col-md-12">
+		      <div class="form-group">
+			        <div class="col-md-offset-11">
+			        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+			        </div> 
+		        </div> 
 		          	<!-- ekleme butonu -->
 		          <div class="col-md-6">
 			          <div class="form-group">
-			            <input name="foreignName" required="required" maxlength="45" type="text" class="form-control"
+			          <label class="control-label">Language <span class="required-star"></span></label>
+			            <input name="foreignName"  required maxlength="45" type="text" class="form-control"
 												placeholder="Enter language you know." />
 			          </div>
 			      </div>
 			      <div class="col-md-6">
-			         <select class="form-control" required="required" name="foreignLevel">
+			      <div class="form-group">
+			       <label class="control-label">Level <span class="required-star"></span></label>
+			         <select class="form-control" required name="foreignLevel">
 						  <option>Beginning</option>
 						  <option>Intermediate</option>
 						  <option>Good</option>
 						  <option>Advanced</option>
 					</select>
 		          </div>
-		
+				</div>		
 				</div> 
 			</div>
 			<div id="ayracForeign"></div>    
@@ -414,7 +375,7 @@
         <div class="col-md-12">
           <h3> Skills </h3>
   		
-  		<input type="text" name="skillDescription" required="required" value="" data-role="tagsinput" />
+  		<input type="text" name="skillDescription" value="Write and Press 'COMMA' Button" data-role="tagsinput" />
         </div>
         <button style="margin-top:15px;" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
       </div>
@@ -522,7 +483,7 @@ $(function() {
     });
 });
 </script>
-
+<script src="js/main.js"></script>
 <script src="js/jquery-easywizard.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/bootstrap-tagsinput.js"></script>

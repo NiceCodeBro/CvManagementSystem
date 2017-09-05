@@ -24,61 +24,6 @@
 }
 </style>
 
-		
-		<script type="text/javascript">
-			$(function() {
-				$("#datepicker").datepicker({
-					autoclose : true,
-					todayHighlight : true
-				}).datepicker('update', new Date());
-				;
-			});
-
-			$(function() {
-				$(".input-daterange input").datepicker({
-					autoclose : true,
-					todayHighlight : true
-				}).datepicker('update', new Date());
-				;
-			});
-			
-			$(document).ready(function () {
-	            var checkCount = 1;
-	            $("#addCheckboxJob").click(function (e) {
-	                e.preventDefault();
-	                $("#ayracJob").append('<div class="row"> <div class="col-md-12"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> <div id="isDeneyimi"> <div class="form-group"> <label class="control-label">Company Name</label> <input name="jobCompanyName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">Title</label> <input name="jobTitle" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Working Date</label> <div class="input-group input-daterange"> <input name="jobStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="jobEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="jobDescription" class="form-control" placeholder="Açıklama" ></textarea> </div> </div> </div> </div>');
-	            });
-
-	            $("#addCheckboxEdu").click(function (e) {
-	                e.preventDefault();
-	                $("#ayracEdu").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <div id="educationInf"> <div class="form-group"> <label class="control-label">School Name</label> <input name="eduSchoolName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" /> </div> <div class="form-group"> <label class="control-label">School Departman</label> <input name="eduSchoolDepartman" maxlength="45" type="text" class="form-control" placeholder="Enter Title" /> </div> <div class="form-group"> <label class="control-label">Education Date</label> <div class="input-group input-daterange"> <input name="eduStartDate" type="text" class="form-control" value="2012-04-05"> <div class="input-group-addon">to</div> <input name="eduEndDate" type="text" class="form-control" value="2012-04-19"> </div> </div> <div class="form-group"> <label class="control-label">Description</label> <textarea name="eduDescription" class="form-control" placeholder="Enter description" ></textarea> </div> </div> </div> </div> <div id="ayracEdu"></div>');  });
-	            $("#addCheckboxForeign").click(function (e) {
-	                e.preventDefault();
-	                $("#ayracForeign").append('<div class="row"> <div class="col-md-12"> <div class="form-group"> <div class="col-md-offset-11"><button href="javascript:;" class="remove btn btn-danger">-</button></div> </div> <!-- ekleme butonu --> <div class="col-md-6"> <div class="form-group"> <input name="foreignName" maxlength="45" type="text" class="form-control" placeholder="Enter language you know." /> </div> </div> <div class="col-md-6"> <select class="form-control" name="foreignLevel"> <option>Beginning</option> <option>Intermediate</option> <option>Good</option> <option>Advanced</option> </select> </div> </div> </div> <div id="ayracForeign"></div>'); });
-	            $('body').on('click', '.remove', function(){
-	                $(this).closest('.col-md-12').remove();
-	            });
-
-	            $("#checkList").on("click", "#removeCheckbox", function (e) { 
-	                e.preventDefault();
-	                $(this).parent('div').remove();
-	                checkCount--;
-	            });
-	            
-	        });
-	        
-
-
-			$('#tokenfield').tokenfield({
-				  autocomplete: {
-				    source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
-				    delay: 100
-				  },
-				  showAutocompleteOnFocus: true
-				});
-
-			
-		</script>
 
 </jsp:attribute>
 
@@ -158,8 +103,8 @@
 			        <div class="col-md-12">
 			          <h3>CV</h3>
 			           <div class="form-group">
-			            <label class="control-label">CV Name</label>
-			            <input name="cvName" value="${cvContent.personal.cvName}" required="required" maxlength="45" type="text" class="form-control" placeholder="Enter CV Name"  /> 
+			            <label class="control-label">CV Name <span class="required-star"></span></label>
+			            <input name="cvName" value="${cvContent.personal.cvName}" required maxlength="45" type="text" class="form-control" placeholder="Enter CV Name"  /> 
 			            <input name="cvNum" type="hidden" value="${cvNum}" class="form-control" />
 			          </div>
 			          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
@@ -173,44 +118,41 @@
 			      <div class="col-xs-6 col-md-offset-3">
 			        <div class="col-md-12">
 			          <h3> Personal Info</h3>
-			          
-			           <!-- Photo upload section -->
-					 <!-- image-preview-filename input [CUT FROM HERE]-->
 			           <div class="form-group">
-			            <label class="control-label">Profil Resmi</label>
+			            <label class="control-label">Profil Picture</label>
 			            </br>
 			             <div id="imagePreview" class="img-responsive" alt="profile photo">.</div> 
 			             <input type="hidden" name="oldPhoto" value="${cvContent.personal.personalPhoto}">
 			             <input type="file" id="file" name="file" class="form-control" />
 			          </div>
 			          <div class="form-group">
-			            <label class="control-label">Name</label>
-			            <input name="personalName" value="${cvContent.personal.personalName}" maxlength="45" type="text" class="form-control" placeholder="Enter Name" /> 
+			            <label class="control-label">Name <span class="required-star"></span></label>
+			            <input name="personalName" required value="${cvContent.personal.personalName}" maxlength="45" type="text" class="form-control" placeholder="Enter Name" /> 
 			          </div>
 			          <div class="form-group">
-			            <label class="control-label">Mail</label>
-			            <input name="personalMail" value="${cvContent.personal.personalMail}" maxlength="45" type="text" class="form-control" placeholder="Enter Mail Adress" /> 
+			            <label class="control-label">Mail <span class="required-star"></span></label>
+			            <input name="personalMail" required value="${cvContent.personal.personalMail}" maxlength="45" type="text" class="form-control" placeholder="Enter Mail Adress" /> 
 			          </div>
 			            <div class="form-group">
-			              <label class="control-label">Title</label>
-			            <input name="personalTitle" value="${cvContent.personal.personalTitle}" maxlength="45" type="text" class="form-control" placeholder="Enter Your Title. (Like Software Developer)" /> 
+			              <label class="control-label">Title <span class="required-star"></span></label>
+			            <input name="personalTitle" required value="${cvContent.personal.personalTitle}" maxlength="45" type="text" class="form-control" placeholder="Enter Your Title. (Like Software Developer)" /> 
 			          </div>
 			          <div class="form-group">
-			            <label class="control-label">Objectives</label>
-			            <textarea name="personalObjectives" class="form-control" placeholder="An objective is a short statement that clarifies your goals."> ${cvContent.personal.personalObjectives}</textarea>
+			            <label class="control-label">Objectives <span class="required-star"></span></label>
+			            <textarea name="personalObjectives" required class="form-control" placeholder="An objective is a short statement that clarifies your goals."> ${cvContent.personal.personalObjectives}</textarea>
 			          </div>
 			          
 			           <div class="form-group">
-			              <label class="control-label">Date Of Birth</label>
+			              <label class="control-label">Date Of Birth <span class="required-star"></span></label>
 			            	<div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-					    		<input name="personalDateofBirth" value="${cvContent.personal.personalDateofBirth}" class="form-control" type="text" maxlength="10" />
+					    		<input name="personalDateofBirth" required value="${cvContent.personal.personalDateofBirth}" class="form-control" type="text" maxlength="10" />
 					    		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 			          </div>
 			          
 			          <div class="form-group">
-			            <label class="control-label">Cell Phone</label>
-			            <input name="personalCellPhone" value="${cvContent.personal.personalCellPhone}" max="11" type="text" class="form-control" placeholder="Enter your cell phone.">
+			            <label class="control-label">Cell Phone <span class="required-star"></span></label>
+			            <input name="personalCellPhone" required value="${cvContent.personal.personalCellPhone}" max="11" type="text" class="form-control" placeholder="Enter your cell phone.">
 			          </div>
 			          
 			         <div class="form-group">
@@ -219,11 +161,11 @@
 			          </div>
 			          
 			           <div class="form-group">
-			            <label class="control-label">Adress</label>
-			            <textarea name="personalAddress" class="form-control" placeholder="Enter your adress.">${cvContent.personal.personalAddress}</textarea>
+			            <label class="control-label">Adress <span class="required-star"></span></label>
+			            <textarea name="personalAddress" required class="form-control" placeholder="Enter your adress.">${cvContent.personal.personalAddress}</textarea>
 			          </div>
 			          	<div> 
-			          	<label class="control-label">Marital Status</label>
+			          	<label class="control-label">Marital Status <span class="required-star"></span></label>
 							<label class="custom-control radio active">
 						  <input 
 						  <c:if test ="${ cvContent.personal.personalMaritalStatus == 'Single'}">
@@ -259,7 +201,7 @@
     
     <div class="row setup-content" id="step-3">
       <div class="col-xs-6 col-md-offset-3" id="jobExperience">
-	<!-- ekleme butonu -->
+      <h3>Job Experience</h3>
         <div class="form-group">
       		<button id="addCheckboxJob" class="btn btn-success">+</button>
       	</div>
@@ -269,8 +211,8 @@
 	        <div class="col-md-12">  
 	            <div class="form-group">
 			        <div class="col-md-offset-11">
-			        	<button href="javascript:;" class="remove btn btn-danger">-</button>
-			        </div> 
+			        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+			        </div>  
 		        </div>
 	          <div id="isDeneyimi">
 	          <div class="form-group">
@@ -285,10 +227,10 @@
 	          
 	           <div class="form-group">
 	            <label class="control-label">Working Date</label>							
-				<div class="input-group input-daterange">
-				    <input name="jobStartDate" value="${job.jobStartDate}" type="text" class="form-control" value="2012-04-05">
+				<div class="input-group">
+				    <input name="jobStartDate" value="${job.jobStartDate}" type="text" class="form-control"/>
 				    <div class="input-group-addon">to</div>
-				    <input name="jobEndDate" value="${job.jobEndDate}"  type="text" class="form-control" value="2012-04-19">
+				    <input name="jobEndDate" value="${job.jobEndDate}"  type="text" class="form-control"/>
 				</div>												
 	          </div>
 	          
@@ -302,9 +244,11 @@
         <div id="ayracJob"></div>
 </c:forEach>
         
-         <div class="col-md-12">
-         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-         </div>
+         <div class="row">
+         	<div class="col-md-12">
+         	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+         	</div>
+         </div> 
       </div>
       
     </div>
@@ -314,44 +258,42 @@
 	<!-- EDUCATION START -->
 	<div class="row setup-content" id="step-4">
       <div class="col-xs-6 col-md-offset-3">
-      
-      	<!-- ekleme butonu -->
       <h3> Education </h3>
        <div class="form-group">
-      	<button id="addCheckboxEdu" class="btn btn-success">+</button>
+      	<button id="addCheckboxEdu" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
       </div>
         <c:forEach items="${cvContent.educations}" var="edu">
 	        <div class="row">
 		      <div class="col-md-12">  
-		      <div class="form-group">
-			        <div class="col-md-offset-11">
-			        	<button href="javascript:;" class="remove btn btn-danger">-</button>
-			        </div> 
-		        </div>
+			      <div class="form-group">
+				        <div class="col-md-offset-11">
+				        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+				        </div> 
+			        </div>
 	          <div id="educationInf">
 		          <div class="form-group">
-		            <label class="control-label">School Name</label>
-		            <input name="eduSchoolName" value="${edu.eduSchoolName}" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
+		            <label class="control-label">School Name <span class="required-star"></span></label>
+		            <input name="eduSchoolName" required value="${edu.eduSchoolName}" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
 		          </div>
 		          
 		          <div class="form-group">
-		            <label class="control-label">School Departman</label>
-		            <input name="eduSchoolDepartman" value="${edu.eduSchoolDepartman}" maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
+		            <label class="control-label">School Departman <span class="required-star"></span></label>
+		            <input name="eduSchoolDepartman" required value="${edu.eduSchoolDepartman}" maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
 		          </div>
 		          
 		           <div class="form-group">
-		            <label class="control-label">Education Date</label>							
-					<div class="input-group input-daterange">
-					    <input name="eduStartDate"  value="${edu.eduStartDate}" type="text" class="form-control" value="2012-04-05">
+		            <label class="control-label">Education Date <span class="required-star"></span></label>							
+					<div class="input-group">
+					    <input name="eduStartDate" required value="${edu.eduStartDate}" type="text" class="form-control" />
 					    <div class="input-group-addon">to</div>
-					    <input name="eduEndDate" value="${edu.eduEndDate}" type="text" class="form-control" value="2012-04-19">
+					    <input name="eduEndDate" required value="${edu.eduEndDate}" type="text" class="form-control" />
 					</div>												
 		          </div>
 	<!-- 	          <input  type="checkbox" name="eduContinue"> Continues <br> -->
 		          
 		          <div class="form-group">
-		            <label class="control-label">Description</label>
-		            <textarea name="eduDescription" class="form-control" placeholder="Enter description" >${edu.eduDescription}</textarea>
+		            <label class="control-label">Description <span class="required-star"></span></label>
+		            <textarea name="eduDescription" required class="form-control" placeholder="Enter description" >${edu.eduDescription}</textarea>
 		         </div>
 	          </div>					
 	        </div>
@@ -359,7 +301,11 @@
         <div id="ayracEdu"></div>
          </c:forEach>
 
-         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button> 
+         <div class="row">
+         	<div class="col-md-12">
+         	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+         	</div>
+         </div> 
 
         </div>
       </div>
@@ -404,23 +350,26 @@
       <div class="col-xs-6 col-md-offset-3">
       <h3> Foreign Languages </h3>
 	       <div class="form-group">
-	        	<button id="addCheckboxForeign" class="btn btn-success">+</button>
+	        	<button id="addCheckboxForeign" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
 	        </div>
 	      <c:forEach items="${cvContent.foreigns}" var="foreign">
 	         <div class="row">
 		      <div class="col-md-12">  
-		       <div class="form-group">
-			        <div class="col-md-offset-11">
-			        	<button href="javascript:;" class="remove btn btn-danger">-</button>
+			       <div class="form-group">
+				        <div class="col-md-offset-11">
+				        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+				        </div> 
 			        </div> 
-		        </div>
 	          <div class="col-md-6">
 		          <div class="form-group">
-		            <input name="foreignName" value="${foreign.foreignName}" maxlength="45" type="text" class="form-control"
+		          	 <label class="control-label">Language <span class="required-star"></span></label>
+		            <input name="foreignName" required value="${foreign.foreignName}" maxlength="45" type="text" class="form-control"
 											placeholder="Enter language you know." />
 		          </div>
 		      </div>
 		      <div class="col-md-6">
+		      <div class="form-group">
+		       <label class="control-label">Level <span class="required-star"></span></label>
 		         <select class="form-control" name="foreignLevel">
 					  <option 
 					   <c:if test ="${foreign.foreignLevel == 'Beginning'}">
@@ -444,7 +393,7 @@
 					  >Advanced</option>
 				</select>
 	          </div>
-		
+			</div>
 				</div> 
 			</div>
 			<div id="ayracForeign"></div>     
@@ -464,7 +413,7 @@
         <div class="col-md-12">
           <h3> Skills </h3>
   		
-  		<input type="text" value="${cvContent.skill.skillDescription}" name="skillDescription" value="" data-role="tagsinput" />
+  		<input type="text" value="${cvContent.skill.skillDescription}" name="skillDescription" data-role="tagsinput" />
         </div>
         <button style="margin-top:15px;" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
       </div>
@@ -572,7 +521,7 @@ $(function() {
     });
 });
 </script>
-
+<script src="js/main.js"></script>
 <script src="js/jquery-easywizard.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/bootstrap-tagsinput.js"></script>

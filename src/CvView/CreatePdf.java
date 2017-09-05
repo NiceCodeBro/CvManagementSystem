@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -46,11 +47,9 @@ public class CreatePdf {
 			}
 			
 			PdfWriter w = PdfWriter.getInstance(document, new FileOutputStream(f));
-			
-			   
+		
 			document.open();
-
-			Image img2 = Image.getInstance("32bitResume3.png");
+			Image img2 = Image.getInstance(req.getServletContext().getResource("images/32bitResume3.png"));
 			img2.scaleAbsolute(180f, 32f);
 			img2.setAlignment(Image.MIDDLE);
 			document.add(img2);

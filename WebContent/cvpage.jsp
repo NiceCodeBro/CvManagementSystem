@@ -31,7 +31,7 @@
 					</c:if>
 					<td align="center">Cv Name</td>
 					<td align="center">Download</td>
-					<td align="center">Edit</td>
+					<td align="center">Show & Edit</td>
 					<td align="center">Delete</td>
 					<td align="center">Last Edit Date</td>
 					</tr>
@@ -44,7 +44,7 @@
 					</c:if>
 					<td align="center">Name</td>
 					<td align="center">Download</td>
-					<td align="center">Edit</td>
+					<td align="center">Show & Edit</td>
 					<td align="center">Delete</td>
 					<td align="center">Last Edit Date</td>
 					</tr>
@@ -71,7 +71,7 @@
 				    				<input type = "hidden" name = "action" value = "updateCv">
 				    				<input type = "hidden" name = "updateCvId" value = "${cv.idCv}" >
 				    				<button type = "submit" class = "btn btn-block btn-info" value = "Edit">
-				    					 <span class="glyphicon glyphicon-edit"></span>
+				    					 <span class="glyphicon glyphicon-eye-open"></span>
 				    				</button>
 				    			</form>
 				    		</td>
