@@ -28,7 +28,11 @@ $(document).ready(function () {
 		;
 	});*/
 
-	$('form input').on('keypress', function(e) {
-		return e.which !== 13;
-	});
+	$('html').bind('keypress', function(e)
+			{
+			   if(e.keyCode == 13)
+			   {
+			      return false;
+			   }
+			});
 });			
