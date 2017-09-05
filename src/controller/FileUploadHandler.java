@@ -229,11 +229,11 @@ public class FileUploadHandler extends HttpServlet {
 				    	
 				    	name = String.valueOf(member.getIdMember())+dateFormat.format(date)+"."+part.getContentType().substring(6);
 				    	
-				    	File dir = new File(request.getRealPath("")+"/profilePhoto");
+				    	File dir = new File(request.getContextPath()+"/profilePhoto");
 				    	if(!dir.exists()){
 				    		dir.mkdir();
 				    	}
-				    	File file = new File(new File(request.getRealPath("")+"/profilePhoto"), name);
+				    	File file = new File(new File(request.getContextPath()+"/profilePhoto"), name);
 				    	
 				    	Files.copy(fileContent, file.toPath());
 			    	
