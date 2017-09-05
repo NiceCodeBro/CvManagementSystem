@@ -449,7 +449,6 @@
 
 		
 </div>
-
 <script type="text/javascript">
 $(function() {
     $("#file").on("change", function()
@@ -467,7 +466,10 @@ $(function() {
         }
     });
 });
+		
+
 </script>
+
 <script src="js/main.js"></script>
 <script src="js/jquery-easywizard.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>

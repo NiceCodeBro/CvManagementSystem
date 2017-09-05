@@ -28,11 +28,8 @@ $(document).ready(function () {
 		;
 	});*/
 
-	$('html').bind('keypress', function(e)
-			{
-			   if(e.keyCode == 13)
-			   {
-			      return false;
-			   }
-			});
+	$(document).on("keypress", ":input:not(textarea)", function(event) {
+	    return event.keyCode != 13;
+	});
+	
 });			
