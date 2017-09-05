@@ -192,34 +192,29 @@
       	</div>
         <div class="row">
 	        <div class="col-md-12">  
-	            <div class="form-group">
-			        <div class="col-md-offset-11">
-			        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
-			        </div> 
-		        </div>
 	          <div id="isDeneyimi">
 		          <div class="form-group">
-		            <label class="control-label">Company Name </label>
-		            <input name="jobCompanyName" maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
+		            <label class="control-label">Company Name <span class="required-star"></span></label>
+		            <input name="jobCompanyName" required maxlength="45" type="text" class="form-control" placeholder="Enter Company Name" />
 		          </div>
 		          
 		          <div class="form-group">
-		            <label class="control-label">Title</label>
-		            <input name="jobTitle" maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
+		            <label class="control-label">Title <span class="required-star"></span></label>
+		            <input name="jobTitle" required maxlength="45" type="text" class="form-control" placeholder="Enter Title" />
 		          </div>
 		          
 		           <div class="form-group">
-		            <label class="control-label">Working Date</label>							
+		            <label class="control-label">Working Date <span class="required-star"></span></label>							
 					<div class="input-group">
-					    <input name="jobStartDate" type="text" class="form-control" value="">
+					    <input name="jobStartDate" required type="text" class="form-control" value="">
 					    <div class="input-group-addon">to</div>
-					    <input name="jobEndDate" type="text" class="form-control" value="">
+					    <input name="jobEndDate"  required type="text" class="form-control" value="">
 					</div>												
 		          </div>
 		          
 		          <div class="form-group">
-		            <label class="control-label">Description</label>
-		            <textarea name="jobDescription" class="form-control" placeholder="Description." ></textarea>
+		            <label class="control-label">Description <span class="required-star"></span></label>
+		            <textarea name="jobDescription" required class="form-control" placeholder="Description." ></textarea>
 		          </div>
 	          </div>					
 	        </div>
@@ -245,11 +240,6 @@
       </div>
          <div class="row">
 		      <div class="col-md-12"> 
-		     	<div class="form-group">
-			        <div class="col-md-offset-11">
-			        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
-			        </div> 
-		        </div>
 	          <div id="educationInf">
 		          <div class="form-group">
 		            <label class="control-label">School Name <span class="required-star"></span></label>

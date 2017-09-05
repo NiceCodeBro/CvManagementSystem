@@ -294,7 +294,7 @@ public class CreatePdf {
 		PdfPCell cell = new PdfPCell();
 		for (int i = 0; i < jopEx.getJobCompanyName().size(); ++i) {
 			String[] contents = new String[] { jopEx.getJobCompanyName().get(i), jopEx.getJobTitle().get(i),
-					jopEx.getJobStartDate().get(i), jopEx.getJobStartDate().get(i), jopEx.getJobDescription().get(i) };
+					jopEx.getJobStartDate().get(i), jopEx.getJobEndDate().get(i), jopEx.getJobDescription().get(i) };
 			if (!contents[0].equals("")) {
 				Phrase phrase = new Phrase();
 				phrase.add(new Chunk(contents[0], new Font(FontFamily.HELVETICA, 14, Font.BOLD)));

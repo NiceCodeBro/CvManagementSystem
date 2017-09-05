@@ -354,12 +354,7 @@
 	        </div>
 	      <c:forEach items="${cvContent.foreigns}" var="foreign">
 	         <div class="row">
-		      <div class="col-md-12">  
-			       <div class="form-group">
-				        <div class="col-md-offset-11">
-				        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
-				        </div> 
-			        </div> 
+		      <div class="col-md-12">       
 	          <div class="col-md-6">
 		          <div class="form-group">
 		          	 <label class="control-label">Language <span class="required-star"></span></label>
