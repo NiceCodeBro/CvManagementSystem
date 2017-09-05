@@ -322,11 +322,6 @@
 	        </div>
 	        <div class="row">
 		      <div class="col-md-12">
-		      <div class="form-group">
-			        <div class="col-md-offset-11">
-			        	<button href="javascript:;" class="remove btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
-			        </div> 
-		        </div> 
 		          	<!-- ekleme butonu -->
 		          <div class="col-md-6">
 			          <div class="form-group">
