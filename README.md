@@ -1,6 +1,6 @@
 # CvManagementSystem
 
-Project was completed as a internship graduate project.
+Project was completed as a internship graduate project. MySql Workbench sql data is included.
 
 A video about how is project work: https://www.youtube.com/watch?v=YKz4rPpyMW8
 
